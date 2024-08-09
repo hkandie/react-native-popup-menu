@@ -1,4 +1,5 @@
-import { iterator2array } from './helpers';
+import { StyleProp, ViewStyle } from "react-native";
+import { iterator2array } from "./helpers";
 
 /**
  * Registry to subscribe, unsubscribe and update data of menus.
@@ -9,16 +10,17 @@ import { iterator2array } from './helpers';
  *   optionsLayout: Object - layout of menu options if known
  *   optionsCustomStyles: Object - custom styles of options
  * }
-*/
+ */
 export default function makeMenuRegistry(menus = new Map()) {
-
   /**
    * Subscribes menu instance.
    */
-  function subscribe(instance) {
-    const name = instance.getName()
+  function subscribe(instance: { getName: () => any }) {
+    const name = instance.getName();
     if (menus.get(name)) {
-      console.warn(`incorrect usage of popup menu - menu with name ${name} already exists`);
+      console.warn(
+        `incorrect usage of popup menu - menu with name ${name} already exists`
+      );
     }
     menus.set(name, { name, instance });
   }
@@ -26,28 +28,34 @@ export default function makeMenuRegistry(menus = new Map()) {
   /**
    * Unsubscribes menu instance.
    */
-  function unsubscribe(instance) {
+  function unsubscribe(instance: { getName: () => any }) {
     menus.delete(instance.getName());
   }
 
   /**
    * Updates layout infomration.
    */
-  function updateLayoutInfo(name, layouts = {}) {
+  function updateLayoutInfo(
+    name: string,
+    layouts = { triggerLayout: () => "", optionsLayout: () => "" }
+  ) {
     if (!menus.has(name)) {
       return;
     }
-    const menu = Object.assign({}, menus.get(name));
-    if (layouts.hasOwnProperty('triggerLayout')) {
+    const menu = { ...menus.get(name)};
+    if (layouts.hasOwnProperty("triggerLayout")) {
       menu.triggerLayout = layouts.triggerLayout;
     }
-    if (layouts.hasOwnProperty('optionsLayout')) {
+    if (layouts.hasOwnProperty("optionsLayout")) {
       menu.optionsLayout = layouts.optionsLayout;
     }
     menus.set(name, menu);
   }
 
-  function setOptionsCustomStyles(name, optionsCustomStyles) {
+  function setOptionsCustomStyles(
+    name: any,
+    optionsCustomStyles: StyleProp<ViewStyle>
+  ) {
     if (!menus.has(name)) {
       return;
     }
@@ -58,7 +66,7 @@ export default function makeMenuRegistry(menus = new Map()) {
   /**
    * Get `menu data` by name.
    */
-  function getMenu(name) {
+  function getMenu(name: string) {
     return menus.get(name);
   }
 
@@ -69,5 +77,12 @@ export default function makeMenuRegistry(menus = new Map()) {
     return iterator2array(menus.values());
   }
 
-  return { subscribe, unsubscribe, updateLayoutInfo, getMenu, getAll, setOptionsCustomStyles };
+  return {
+    subscribe,
+    unsubscribe,
+    updateLayoutInfo,
+    getMenu,
+    getAll,
+    setOptionsCustomStyles,
+  };
 }
