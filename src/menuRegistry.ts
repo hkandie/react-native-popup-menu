@@ -1,5 +1,5 @@
-import { StyleProp, ViewStyle } from "react-native";
-import { iterator2array } from "./helpers";
+import { StyleProp, ViewStyle } from 'react-native';
+import { iterator2array } from './helpers';
 
 /**
  * Registry to subscribe, unsubscribe and update data of menus.
@@ -12,77 +12,69 @@ import { iterator2array } from "./helpers";
  * }
  */
 export default function makeMenuRegistry(menus = new Map()) {
-  /**
-   * Subscribes menu instance.
-   */
-  function subscribe(instance: { getName: () => any }) {
-    const name = instance.getName();
-    if (menus.get(name)) {
-      console.warn(
-        `incorrect usage of popup menu - menu with name ${name} already exists`
-      );
+    /**
+     * Subscribes menu instance.
+     */
+    function subscribe(instance: { getName: () => any }) {
+        const name = instance.getName();
+        if (menus.get(name)) {
+            console.warn(`incorrect usage of popup menu - menu with name ${name} already exists`);
+        }
+        menus.set(name, { name, instance });
     }
-    menus.set(name, { name, instance });
-  }
 
-  /**
-   * Unsubscribes menu instance.
-   */
-  function unsubscribe(instance: { getName: () => any }) {
-    menus.delete(instance.getName());
-  }
-
-  /**
-   * Updates layout infomration.
-   */
-  function updateLayoutInfo(
-    name: string,
-    layouts = { triggerLayout: () => "", optionsLayout: () => "" }
-  ) {
-    if (!menus.has(name)) {
-      return;
+    /**
+     * Unsubscribes menu instance.
+     */
+    function unsubscribe(instance: { getName: () => any }) {
+        menus.delete(instance.getName());
     }
-    const menu = { ...menus.get(name)};
-    if (layouts.hasOwnProperty("triggerLayout")) {
-      menu.triggerLayout = layouts.triggerLayout;
+
+    /**
+     * Updates layout infomration.
+     */
+    function updateLayoutInfo(name: string, layouts = { triggerLayout: () => '', optionsLayout: () => '' }) {
+        if (!menus.has(name)) {
+            return;
+        }
+        const menu = { ...menus.get(name) };
+        if (layouts.hasOwnProperty('triggerLayout')) {
+            menu.triggerLayout = layouts.triggerLayout;
+        }
+        if (layouts.hasOwnProperty('optionsLayout')) {
+            menu.optionsLayout = layouts.optionsLayout;
+        }
+        menus.set(name, menu);
     }
-    if (layouts.hasOwnProperty("optionsLayout")) {
-      menu.optionsLayout = layouts.optionsLayout;
+
+    function setOptionsCustomStyles(name: any, optionsCustomStyles: StyleProp<ViewStyle>) {
+        if (!menus.has(name)) {
+            return;
+        }
+        const menu = { ...menus.get(name), optionsCustomStyles };
+        menus.set(name, menu);
     }
-    menus.set(name, menu);
-  }
 
-  function setOptionsCustomStyles(
-    name: any,
-    optionsCustomStyles: StyleProp<ViewStyle>
-  ) {
-    if (!menus.has(name)) {
-      return;
+    /**
+     * Get `menu data` by name.
+     */
+    function getMenu(name: string) {
+        return menus.get(name);
     }
-    const menu = { ...menus.get(name), optionsCustomStyles };
-    menus.set(name, menu);
-  }
 
-  /**
-   * Get `menu data` by name.
-   */
-  function getMenu(name: string) {
-    return menus.get(name);
-  }
+    /**
+     * Returns all subscribed menus as array of `menu data`
+     */
+    function getAll() {
+        return iterator2array(menus.values());
+    }
 
-  /**
-   * Returns all subscribed menus as array of `menu data`
-   */
-  function getAll() {
-    return iterator2array(menus.values());
-  }
-
-  return {
-    subscribe,
-    unsubscribe,
-    updateLayoutInfo,
-    getMenu,
-    getAll,
-    setOptionsCustomStyles,
-  };
+    return {
+        subscribe,
+        unsubscribe,
+        updateLayoutInfo,
+        getMenu,
+        getAll,
+        setOptionsCustomStyles,
+    };
 }

@@ -2,5 +2,5 @@
 import { Platform } from 'react-native';
 
 if (!Platform.select) {
-  Platform.select = (obj) => obj[Platform.OS];
+    Platform.select = (obj) => obj[Platform.OS];
 }

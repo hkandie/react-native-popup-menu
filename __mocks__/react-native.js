@@ -2,40 +2,40 @@ const React = require('react');
 const ReactNative = React;
 
 ReactNative.StyleSheet = {
-  create: function create(styles) {
-      return styles;
-  },
+    create: function create(styles) {
+        return styles;
+    },
 };
 
 class View extends React.Component {
-  render() { return false; }
+    render() {
+        return false;
+    }
 }
 
 View.propTypes = {
-  style: () => null,
+    style: () => null,
 };
 
 class ListView extends React.Component {
-  static DataSource() {
-  }
+    static DataSource() {}
 }
 
 class AppRegistry {
-  static registerComponent () {
-  }
+    static registerComponent() {}
 }
 
 const Animated = {
-  timing: () => ({ start: () => undefined }),
-  Value: () => ({ interpolate: () => false }),
-  View: View,
+    timing: () => ({ start: () => undefined }),
+    Value: () => ({ interpolate: () => false }),
+    View: View,
 };
 
 const I18nManager = {
-  isRTL: false,
+    isRTL: false,
 };
 
-const Text = () => "Text";
+const Text = () => 'Text';
 const TouchableHighlight = () => false;
 const TouchableWithoutFeedback = () => false;
 const TouchableNativeFeedback = () => false;
@@ -44,15 +44,15 @@ const ToolbarAndroid = () => false;
 const Image = () => false;
 const ScrollView = () => false;
 const Platform = {
-  select: jest.fn(o => o.ios),
+    select: jest.fn((o) => o.ios),
 };
 const PixelRatio = {
-  roundToNearestPixel: n => n,
-}
+    roundToNearestPixel: (n) => n,
+};
 const BackHandler = {
-  addEventListener: jest.fn(),
-  removeEventListener: jest.fn(),
-}
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+};
 
 ReactNative.View = View;
 ReactNative.ScrollView = ScrollView;
