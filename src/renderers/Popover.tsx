@@ -354,3 +354,5 @@ const getContainerStyle = ({ placement, isRTL }: { placement: string; isRTL: boo
     };
     return start[placement];
 };
+
+export default Popover;

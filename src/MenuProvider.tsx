@@ -365,3 +365,5 @@ Compares states of opened menu to determine if rerender is needed.
         </PopupMenuContext.Provider>
     );
 };
+
+export default MenuProvider;

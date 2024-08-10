@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
-import Menu from 'react-native-popup-menu';
+import Menu from '@shared/Menu';
 
 import Example from './Example';
 import BasicExample from './BasicExample';
@@ -15,6 +15,7 @@ import CloseOnBackExample from './CloseOnBackExample';
 import FlatListExample from './FlatListExample';
 import InFlatListExample from './InFlatListExample';
 import PopoverExample from './PopoverExample';
+
 
 const demos = [
     { Component: BasicExample, name: 'Basic example' },
@@ -54,7 +55,7 @@ const Demo = () => {
     if (selected) {
         return <selected.selected />;
     }
-    const renderDemo = (demo, idx) => {
+    const renderDemo = (demo: { name: string; Component: any }, idx: string) => {
         const type = idx + '. ' + demo.name;
         return (
             <Pressable
@@ -72,7 +73,7 @@ const Demo = () => {
         <View style={styles.container}>
             <View>
                 <Text>Select example:</Text>
-                {demos.map(renderDemo, this)}
+                {demos.map(renderDemo,)}
             </View>
         </View>
     );

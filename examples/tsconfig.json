@@ -1,4 +1,14 @@
 {
-    "compilerOptions": {},
+    "compilerOptions": {
+        "module": "commonjs",
+        "lib": ["ESNext"],
+        "outDir": "build",
+        "strict": true,
+        "paths": {
+            "@shared/*": ["../src/index.ts"]
+        },
+        "esModuleInterop": true,
+        "skipLibCheck": true
+    },
     "extends": "expo/tsconfig.base"
 }

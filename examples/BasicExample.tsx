@@ -1,11 +1,11 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { Menu, MenuProvider, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
+import { Menu, MenuOption, MenuOptions, MenuProvider, MenuTrigger } from '@shared/index';
 
-const BasicExample = () => (
+const BasicExample = (): React.ReactNode => (
     <MenuProvider style={{ flexDirection: 'column', padding: 30 }}>
         <Text>Hello world!</Text>
-        <Menu onSelect={(value) => alert(`Selected number: ${value}`)}>
+        <Menu onSelect={(value: any) => alert(`Selected number: ${value}`)}>
             <MenuTrigger text='Select option' />
             <MenuOptions>
                 <MenuOption

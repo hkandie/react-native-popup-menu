@@ -1,12 +1,20 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-export const computePosition = ({ windowLayout }) => ({
+export const computePosition = ({ windowLayout }: { windowLayout: any }) => ({
     top: windowLayout.height,
     left: windowLayout.width,
 });
 
-const MenuOutside = (props) => {
+type MenuOutsideProps = {
+    style?: any;
+    children?: any;
+    layouts: {
+        windowLayout: any;
+    };
+};
+
+const MenuOutside = (props: MenuOutsideProps) => {
     const { style, children, layouts, ...other } = props;
     const position = computePosition(layouts);
     return (
