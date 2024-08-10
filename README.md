@@ -1,100 +1,50 @@
-# react-native-popup-menu
+# Welcome to your Expo app 👋
 
-[![](https://img.shields.io/npm/dm/react-native-popup-menu.svg?style=flat-square)](https://www.npmjs.com/package/react-native-popup-menu)
+This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
-Extensible popup menu component for React Native for Android, iOS and (unofficially) UWP and react-native-web.
+## Get started
 
-Features:
+1. Install dependencies
 
--   Simple to use popup/context menu
--   Multiple modes: animated, not animated, slide in from bottom or popover
--   By default opening and closing animations
--   Optional back button handling
--   Easy styling
--   Customizable on various levels - menu options, positioning, animations
--   Can work as controlled as well as uncontrolled component
--   Different lifecycle hooks
--   RTL layout support
+   ```bash
+   npm install
+   ```
 
-Community driven features:
+2. Start the app
 
--   Support for UWP, react-native-web and react-native-desktop
--   Typescript definitions
+   ```bash
+    npx expo start
+   ```
 
-We thank our community for maintaining features that goes over our scope.
+In the output, you'll find options to open the app in a
 
-| Context Menu, Slide-in Menu            | Popover                                        |
-| -------------------------------------- | ---------------------------------------------- |
-| ![Popup menu demo](./android.demo.gif) | ![Popup menu demo](./android.demo-popover.gif) |
+- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
+- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
-## Installation
+You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-```
-npm install react-native-popup-menu --save
-```
+## Get a fresh project
 
-If you are using **older RN versions** check our compatibility table.
+When you're ready, run:
 
-## Basic Usage
-
-Wrap your application inside `MenuProvider` and then simply use `Menu` component where you need it. Below you can find a simple example.
-
-For more detailed documentation check [API](./doc/api.md).
-
-```js
-// your entry point
-import { MenuProvider } from 'react-native-popup-menu';
-
-export const App = () => (
-    <MenuProvider>
-        <YourApp />
-    </MenuProvider>
-);
-
-// somewhere in your app
-import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
-
-export const YourComponent = () => (
-    <View>
-        <Text>Hello world!</Text>
-        <Menu>
-            <MenuTrigger text='Select action' />
-            <MenuOptions>
-                <MenuOption
-                    onSelect={() => alert(`Save`)}
-                    text='Save'
-                />
-                <MenuOption onSelect={() => alert(`Delete`)}>
-                    <Text style={{ color: 'red' }}>Delete</Text>
-                </MenuOption>
-                <MenuOption
-                    onSelect={() => alert(`Not called`)}
-                    disabled={true}
-                    text='Disabled'
-                />
-            </MenuOptions>
-        </Menu>
-    </View>
-);
+```bash
+npm run reset-project
 ```
 
-## Documentation
+This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
--   [Examples](doc/examples.md)
--   [API](doc/api.md)
--   [Extension points](doc/extensions.md)
+## Learn more
 
-## Contributing
+To learn more about developing your project with Expo, look at the following resources:
 
-Contributions are welcome! Just open an issues with any idea or pull-request if it is no-brainer. Make sure all tests and linting rules pass.
+- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
+- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
-## React Native Compatibility
+## Join the community
 
-We keep compatibility on best effort basis.
+Join our community of developers creating universal apps.
 
-| popup-menu version | min RN (React) version |
-| ------------------ | ---------------------- |
-| 0.13               | 0.55 (16.3.1)          |
-| 0.9                | 0.40                   |
-| 0.8                | 0.38                   |
-| 0.7                | 0.18                   |
+- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
+- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
