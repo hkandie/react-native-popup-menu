@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import 'react-native-reanimated';
 
 import BasicExample from './BasicExample';
+import { Button } from 'react-native';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -14,7 +15,7 @@ const demos = [{ Component: BasicExample, name: 'Basic example' }];
 
 export default function RootLayout() {
     const [loaded] = useFonts({
-        SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+        SpaceMono: require('../../assets/fonts/SpaceMono-Regular.ttf'),
     });
 
     useEffect(() => {
@@ -31,13 +32,22 @@ export default function RootLayout() {
         <ThemeProvider value={DefaultTheme}>
             <Stack>
                 <Stack.Screen
-                    name='demo'
-                    options={{ headerShown: false }}
+                    name='index'
+                    options={{ headerShown: true, title: 'Examples' }}
                 />
                 {demos.map((demo) => (
                     <Stack.Screen
                         key={demo.name}
-                        name={demo.name.toLowerCase().replace(' ', '-')}
+                        name={demo.Component.name.replace(' ', '')}
+                        options={{
+                            headerTitle: demo.name,
+                            headerRight: () => (
+                                <Button
+                                    onPress={() => console.log('Update count')}
+                                    title='Update count'
+                                />
+                            ),
+                        }}
                     />
                 ))}
                 <Stack.Screen name='+not-found' />
