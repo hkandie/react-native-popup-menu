@@ -1,4 +1,4 @@
-import { useContext } from "react";
-import { MenuContext } from "../molecules/MenuProvider";
+import { useContext } from 'react';
+import { PopupMenuContext } from '../molecules/MenuProvider';
 
-export const useMenuContext = () => useContext(MenuContext);
+export const useMenuContext = () => useContext(PopupMenuContext);

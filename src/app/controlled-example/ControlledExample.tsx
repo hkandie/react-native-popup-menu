@@ -1,9 +1,7 @@
-
 import React, { Component } from 'react';
 
 import { Text } from 'react-native';
 import Menu, { MenuOption, MenuOptions, MenuProvider, MenuTrigger } from '../../molecules';
-
 
 export default class ControlledExample extends Component {
   setState: any;
@@ -29,33 +27,36 @@ export default class ControlledExample extends Component {
 
   render() {
     const { opened } = this.state;
-    console.log('ControlledExample - opened', opened)
+    console.log('ControlledExample - opened', opened);
     return (
-      
-      <MenuProvider
-        style={{flexDirection: 'column', padding: 30}}>
-        
+      <MenuProvider style={{ flexDirection: 'column', padding: 30 }}>
         <Text>Hello world!</Text>
-        
+
         <Menu
           opened={opened}
           onBackdropPress={() => this.onBackdropPress()}
-          onSelect={(value: any) => this.onOptionSelect(value)}>
-          
+          onSelect={(value: any) => this.onOptionSelect(value)}
+        >
           <MenuTrigger
             onPress={() => this.onTriggerPress()}
-            text='Select option'/>
-          
+            text='Select option'
+          />
+
           <MenuOptions>
-            
-            <MenuOption value={1} text='One' />
-            
+            <MenuOption
+              value={1}
+              text='One'
+            />
+
             <MenuOption value={2}>
-              
-              <Text style={{color: 'red'}}>Two</Text>
+              <Text style={{ color: 'red' }}>Two</Text>
             </MenuOption>
-            
-            <MenuOption value={3} disabled={true} text='Three' />
+
+            <MenuOption
+              value={3}
+              disabled={true}
+              text='Three'
+            />
           </MenuOptions>
         </Menu>
       </MenuProvider>

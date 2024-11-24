@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
@@ -32,8 +31,8 @@ export class Menu extends Component {
     this._name = this.props.name || makeName();
     this._forceClose = false;
     const { ctx } = props;
-    if(!(ctx && ctx.menuActions)) {
-      throw new Error("Menu component must be ancestor of MenuProvider");
+    if (!(ctx && ctx.menuActions)) {
+      throw new Error('Menu component must be ancestor of MenuProvider');
     }
   }
 
@@ -87,22 +86,19 @@ export class Menu extends Component {
   render() {
     const { style } = this.props;
     const children = this._reduceChildren();
-    return (
-      
-      <View style={style}>
-        {children}
-      </View>
-    );
+    return <View style={style}>{children}</View>;
   }
 
   _reduceChildren() {
     return React.Children.toArray(this.props.children).reduce((r: any, child: any) => {
       if (isTrigger(child)) {
-        r.push(React.cloneElement(child, {
-          key: null,
-          menuName: this._name,
-          onRef: ((t: any) => this._trigger = t),
-        }));
+        r.push(
+          React.cloneElement(child, {
+            key: null,
+            menuName: this._name,
+            onRef: (t: any) => (this._trigger = t)
+          })
+        );
       }
       if (isRegularComponent(child)) {
         r.push(child);
@@ -141,7 +137,6 @@ export class Menu extends Component {
   }
 }
 
-
 Menu.propTypes = {
   name: PropTypes.string,
   renderer: PropTypes.func,
@@ -150,9 +145,8 @@ Menu.propTypes = {
   onOpen: PropTypes.func,
   onClose: PropTypes.func,
   opened: PropTypes.bool,
-  onBackdropPress: PropTypes.func,
+  onBackdropPress: PropTypes.func
 };
-
 
 Menu.defaultProps = {
   renderer: ContextMenu,
@@ -160,21 +154,22 @@ Menu.defaultProps = {
   onSelect: () => {},
   onOpen: () => {},
   onClose: () => {},
-  onBackdropPress: () => {},
+  onBackdropPress: () => {}
 };
 
 const MenuExternal = withCtx(Menu);
-Object.defineProperty(MenuExternal, 'debug', 
-    { 
-      get: function() { return CFG.debug }, 
-      set: function(val) { CFG.debug = val }, 
-    });
+Object.defineProperty(MenuExternal, 'debug', {
+  get: function () {
+    return CFG.debug;
+  },
+  set: function (val) {
+    CFG.debug = val;
+  }
+});
 MenuExternal.setDefaultRenderer = (renderer: any) => {
-  
   Menu.defaultProps.renderer = renderer;
-}
+};
 MenuExternal.setDefaultRendererProps = (rendererProps: any) => {
-  
   Menu.defaultProps.rendererProps = rendererProps;
-}
+};
 export default MenuExternal;

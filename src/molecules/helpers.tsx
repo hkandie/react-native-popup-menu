@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 import { Platform, TouchableHighlight, TouchableNativeFeedback } from 'react-native';
@@ -6,19 +5,22 @@ import { Platform, TouchableHighlight, TouchableNativeFeedback } from 'react-nat
 /**
  * Promisifies measure's callback function and returns layout object.
  */
-export const measure = (ref: any) => new Promise((resolve) => {
-  ref.measure((x: any, y: any, width: any, height: any, pageX: any, pageY: any) => {
-    resolve({
-      x: pageX, y: pageY,
-      width, height,
-    })
+export const measure = (ref: any) =>
+  new Promise((resolve) => {
+    ref.measure((x: any, y: any, width: any, height: any, pageX: any, pageY: any) => {
+      resolve({
+        x: pageX,
+        y: pageY,
+        width,
+        height
+      });
+    });
   });
-});
 
 /**
  * Create unique menu name across all menu instances.
  */
-export const makeName = (function() {
+export const makeName = (function () {
   let nextID = 1;
   return () => `menu-${nextID++}`;
 })();
@@ -28,11 +30,13 @@ export const makeName = (function() {
  * It also returns default props for specific touchable types.
  */
 export function makeTouchable(TouchableComponent: any) {
-  const Touchable = TouchableComponent || Platform.select({
-    android: TouchableNativeFeedback,
-    ios: TouchableHighlight,
-    default: TouchableHighlight,
-  });
+  const Touchable =
+    TouchableComponent ||
+    Platform.select({
+      android: TouchableNativeFeedback,
+      ios: TouchableHighlight,
+      default: TouchableHighlight
+    });
   let defaultTouchableProps = {};
   if (Touchable === TouchableHighlight) {
     defaultTouchableProps = { underlayColor: 'rgba(0, 0, 0, 0.1)' };
@@ -58,7 +62,6 @@ export function lo(object: any, ...excluding: any[]) {
     for (var property in obj) {
       if (obj.hasOwnProperty(property)) {
         if (!property.startsWith('_') && !includes(exc, property)) {
-          
           res[property] = withoutPrivate(obj[property]);
         }
       }
@@ -97,19 +100,23 @@ export function deprecatedComponent(message: any, methods = []) {
       ref: any;
       constructor(...args: any[]) {
         super(...args);
-        methods.forEach(name => {
+        methods.forEach((name) => {
           // delegate methods to the component
-          
-          this[name] = (...args: any[]) => this.ref && this.ref[name](...args)
+
+          this[name] = (...args: any[]) => this.ref && this.ref[name](...args);
         });
       }
 
       render() {
-        
-        return <Component {...this.props} ref={this.onRef} />
+        return (
+          <Component
+            {...this.props}
+            ref={this.onRef}
+          />
+        );
       }
 
-      onRef = (ref: any) => this.ref = ref;
+      onRef = (ref: any) => (this.ref = ref);
 
       componentDidMount() {
         console.warn(message);

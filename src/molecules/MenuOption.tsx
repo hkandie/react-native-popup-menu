@@ -1,7 +1,6 @@
-
 import React, { Component } from 'react';
 
-import PropTypes from 'prop-types';
+import PropTypes, { func } from 'prop-types';
 
 import { View, StyleSheet, Text } from 'react-native';
 import { debug } from './logger';
@@ -9,106 +8,90 @@ import { debug } from './logger';
 import { makeTouchable } from './helpers';
 
 import { withCtx } from './MenuProvider';
+import { useMenuContext } from '../hooks/useMenuContext';
 
+type MenuOptionProps = {
+  disabled: boolean;
+  disableTouchable: boolean;
+  onSelect: () => void;
+  text: string;
+  value: any;
+  customStyles: any;
+  testID: string;
+  style: any;
+  children: any;
+};
 
-export class MenuOption extends Component {
-  props: any;
+const MenuOption = ({ disabled = false, disableTouchable = false, ...props }) => {
+  const ctx = useMenuContext();
 
-  _onSelect() {
-    const { value } = this.props;
-    const onSelect = this.props.onSelect || this._getMenusOnSelect()
+  function onSelect() {
+    const { value } = props;
+    const onSelect = props.onSelect || getMenusOnSelect();
     const shouldClose = onSelect(value) !== false;
     debug('select option', value, shouldClose);
     if (shouldClose) {
-        this.props.ctx.menuActions.closeMenu();
+      ctx.menuActions.closeMenu();
     }
   }
 
-  _getMenusOnSelect() {
-    const menu = this.props.ctx.menuActions._getOpenedMenu();
+  function getMenusOnSelect() {
+    const menu = ctx.menuActions._getOpenedMenu();
     return menu.instance.props.onSelect;
   }
 
-  _getCustomStyles() {
-    // FIXME react 16.3 workaround for ControlledExample!
-    const menu = this.props.ctx.menuActions._getOpenedMenu() || {}
+  function getCustomStyles() {
+    const menu = ctx.menuActions._getOpenedMenu() || {};
     const { optionsCustomStyles } = menu;
     return {
       ...optionsCustomStyles,
-      ...this.props.customStyles,
-    }
+      ...props.customStyles
+    };
   }
 
-  render() {
-    const { text, disabled, disableTouchable, children, style, testID } = this.props;
-    const customStyles = this._getCustomStyles()
-    if (text && React.Children.count(children) > 0) {
-      console.warn("MenuOption: Please don't use text property together with explicit children. Children are ignored.");
-    }
-    if (disabled) {
-      const disabledStyles = [defaultStyles.optionTextDisabled, customStyles.optionText];
-      return (
-        
-        <View style={[defaultStyles.option, customStyles.optionWrapper, style]}>
-          
-          {text ? <Text style={disabledStyles}>{text}</Text> : children}
-        </View>
-      );
-    }
-    const rendered = (
-      
+  const { text, children, style, testID } = props;
+  const customStyles = getCustomStyles();
+  if (text && React.Children.count(children) > 0) {
+    console.warn("MenuOption: Please don't use text property together with explicit children. Children are ignored.");
+  }
+  if (disabled) {
+    const disabledStyles = [defaultStyles.optionTextDisabled, customStyles.optionText];
+    return (
       <View style={[defaultStyles.option, customStyles.optionWrapper, style]}>
-        
-        {text ? <Text style={customStyles.optionText}>{text}</Text> : children}
+        {text ? <Text style={disabledStyles}>{text}</Text> : children}
       </View>
     );
-    if (disableTouchable) {
-      return rendered;
-    }
-    else {
-      const { Touchable, defaultTouchableProps } = makeTouchable(customStyles.OptionTouchableComponent);
-      return (
-        
-        <Touchable
-          testID={testID}
-          onPress={() => this._onSelect()}
-          {...defaultTouchableProps}
-          {...customStyles.optionTouchable}
-        >
-          {rendered}
-        </Touchable>
-      );
-    }
   }
-}
-
-
-MenuOption.propTypes = {
-  disabled: PropTypes.bool,
-  disableTouchable: PropTypes.bool,
-  onSelect: PropTypes.func,
-  text: PropTypes.string,
-  value: PropTypes.any,
-  customStyles: PropTypes.object,
-  testID: PropTypes.string,
-};
-
-
-MenuOption.defaultProps = {
-  disabled: false,
-  disableTouchable: false,
-  customStyles: {},
-  testID: undefined,
+  const rendered = (
+    <View style={[defaultStyles.option, customStyles.optionWrapper, style]}>
+      {text ? <Text style={customStyles.optionText}>{text}</Text> : children}
+    </View>
+  );
+  if (disableTouchable) {
+    return rendered;
+  } else {
+    const { Touchable, defaultTouchableProps } = makeTouchable(customStyles.OptionTouchableComponent);
+    return (
+      <Touchable
+        testID={testID}
+        onPress={() => onSelect()}
+        {...defaultTouchableProps}
+        {...customStyles.optionTouchable}
+      >
+        {rendered}
+      </Touchable>
+    );
+  }
 };
 
 const defaultStyles = StyleSheet.create({
   option: {
     padding: 5,
-    backgroundColor: 'transparent',
+    backgroundColor: 'transparent'
   },
   optionTextDisabled: {
-    color: '#ccc',
-  },
+    color: '#ccc'
+  }
 });
 
 export default withCtx(MenuOption);

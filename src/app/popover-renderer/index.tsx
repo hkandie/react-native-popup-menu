@@ -1,69 +1,61 @@
-import {
-  Menu,
-  MenuProvider,
-  MenuOptions,
-  MenuTrigger,
-  renderers,
-} from '../../molecules';
+import { Menu, MenuProvider, MenuOptions, MenuTrigger, renderers } from '../../molecules';
 
 import { Text, View, StyleSheet } from 'react-native';
 
 import React from 'react';
 
-const { Popover } = renderers
+const { Popover } = renderers;
 
 const MyPopover = () => (
-  
-  <Menu renderer={Popover} rendererProps={{ preferredPlacement: 'bottom' }}>
-    
-    <MenuTrigger style={styles.menuTrigger} >
-      
+  <Menu
+    renderer={Popover}
+    rendererProps={{ preferredPlacement: 'bottom' }}
+  >
+    <MenuTrigger style={styles.menuTrigger}>
       <Text style={styles.triggerText}>{'\u263A'}</Text>
     </MenuTrigger>
-    
+
     <MenuOptions style={styles.menuOptions}>
-      
       <Text style={styles.contentText}>Hello world!</Text>
     </MenuOptions>
   </Menu>
-)
+);
 
 const Row = () => (
-  
   <View style={styles.row}>
-    
     <MyPopover />
-    
+
     <MyPopover />
-    
+
     <MyPopover />
-    
+
     <MyPopover />
-    
+
     <MyPopover />
-    
+
     <MyPopover />
   </View>
-)
+);
 
 const PopoverExample = () => (
-  
-  <MenuProvider style={styles.container} customStyles={{ backdrop: styles.backdrop }}>
-    
+  <MenuProvider
+    style={styles.container}
+    customStyles={{ backdrop: styles.backdrop }}
+  >
     <Row />
-    
+
     <Row />
-    
+
     <Row />
-    
+
     <Row />
-    
+
     <Row />
-    
+
     <Row />
-    
+
     <Row />
-    
+
     <Row />
   </MenuProvider>
 );
@@ -73,26 +65,25 @@ const styles = StyleSheet.create({
     padding: 10,
     flexDirection: 'column',
     justifyContent: 'space-between',
-    backgroundColor: 'rgba(0, 0, 0, 0.05)',
+    backgroundColor: 'rgba(0, 0, 0, 0.05)'
   },
   row: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
-  backdrop: {
-  },
+  backdrop: {},
   menuOptions: {
-    padding: 50,
+    padding: 50
   },
   menuTrigger: {
-    padding: 5,
+    padding: 5
   },
   triggerText: {
-    fontSize: 20,
+    fontSize: 20
   },
   contentText: {
-    fontSize: 18,
-  },
-})
+    fontSize: 18
+  }
+});
 
 export default PopoverExample;

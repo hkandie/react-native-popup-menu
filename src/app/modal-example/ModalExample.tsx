@@ -1,13 +1,7 @@
-
 import React, { Component } from 'react';
 
 import { Text, Modal } from 'react-native';
-import Menu, {
-  MenuProvider,
-  MenuOptions,
-  MenuOption,
-  MenuTrigger,
-} from '../../molecules';
+import Menu, { MenuProvider, MenuOptions, MenuOption, MenuTrigger } from '../../molecules';
 
 class ModalExample extends Component {
   setState: any;
@@ -20,38 +14,48 @@ class ModalExample extends Component {
 
   render() {
     return (
-      
-      <MenuProvider style={{flexDirection: 'column', padding: 30}}>
-        
+      <MenuProvider style={{ flexDirection: 'column', padding: 30 }}>
         <Text>Main window:</Text>
-        
+
         <Menu>
-          
           <MenuTrigger text='Select option' />
-          
+
           <MenuOptions>
-            
-            <MenuOption onSelect={() => this.setState({ visible: true })} text='Open modal' />
+            <MenuOption
+              onSelect={() => this.setState({ visible: true })}
+              text='Open modal'
+            />
           </MenuOptions>
         </Menu>
-        
-        <Modal visible={this.state.visible} onRequestClose={() => this.setState({ visible: false })}>
-          
-          <MenuProvider skipInstanceCheck style={{flexDirection: 'column', padding: 30, backgroundColor: 'white'}}>
-            
+
+        <Modal
+          visible={this.state.visible}
+          onRequestClose={() => this.setState({ visible: false })}
+        >
+          <MenuProvider
+            skipInstanceCheck
+            style={{ flexDirection: 'column', padding: 30, backgroundColor: 'white' }}
+          >
             <Text>Modal window:</Text>
-            
+
             <Menu onSelect={(value: any) => alert(`Selected number: ${value}`)}>
-              
               <MenuTrigger text='Select option' />
-              
+
               <MenuOptions>
-                
-                <MenuOption value={1} text='One' />
-                
-                <MenuOption value={2} text='Two' />
-                
-                <MenuOption onSelect={() => this.setState({ visible: false })} text='Close modal' />
+                <MenuOption
+                  value={1}
+                  text='One'
+                />
+
+                <MenuOption
+                  value={2}
+                  text='Two'
+                />
+
+                <MenuOption
+                  onSelect={() => this.setState({ visible: false })}
+                  text='Close modal'
+                />
               </MenuOptions>
             </Menu>
           </MenuProvider>

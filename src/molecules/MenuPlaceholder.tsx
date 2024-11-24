@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 
 import { View, StyleSheet } from 'react-native';
@@ -10,11 +9,12 @@ export default class MenuPlaceholder extends Component {
   props: any;
   state: any;
   constructor(props: any) {
-    super(props)
+    super(props);
     this.state = {};
   }
 
   shouldComponentUpdate() {
+    console.log('MenuPlaceholder shouldComponentUpdate', this.props.ctx._isMenuClosing);
     // don't terminate closing animation
     return !this.props.ctx._isMenuClosing;
   }
@@ -27,17 +27,13 @@ export default class MenuPlaceholder extends Component {
       return null;
     }
     return (
-      
       <View style={styles.placeholder}>
-        
         <Backdrop
           onPress={ctx._onBackdropPress}
           style={backdropStyles}
           ref={ctx.onBackdropRef}
         />
-        {
-          ctx._makeOptions()
-        }
+        {ctx._makeOptions()}
       </View>
     );
   }
@@ -50,6 +46,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    overflow: 'hidden',
-  },
+    overflow: 'hidden'
+  }
 });

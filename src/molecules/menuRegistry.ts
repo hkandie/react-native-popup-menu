@@ -1,4 +1,3 @@
-
 import { iterator2array } from './helpers';
 
 /**
@@ -10,14 +9,13 @@ import { iterator2array } from './helpers';
  *   optionsLayout: Object - layout of menu options if known
  *   optionsCustomStyles: Object - custom styles of options
  * }
-*/
+ */
 export default function makeMenuRegistry(menus = new Map()) {
-
   /**
    * Subscribes menu instance.
    */
   function subscribe(instance: any) {
-    const name = instance.getName()
+    const name = instance.getName();
     if (menus.get(name)) {
       console.warn(`incorrect usage of popup menu - menu with name ${name} already exists`);
     }
@@ -40,11 +38,9 @@ export default function makeMenuRegistry(menus = new Map()) {
     }
     const menu = Object.assign({}, menus.get(name));
     if (layouts.hasOwnProperty('triggerLayout')) {
-      
       menu.triggerLayout = layouts.triggerLayout;
     }
     if (layouts.hasOwnProperty('optionsLayout')) {
-      
       menu.optionsLayout = layouts.optionsLayout;
     }
     menus.set(name, menu);
