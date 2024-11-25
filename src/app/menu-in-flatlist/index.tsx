@@ -5,40 +5,40 @@ import { MenuProvider, Menu, MenuTrigger, MenuOptions, MenuOption } from '../../
 
 const data = new Array(100).fill(0).map((a, i) => ({ key: '' + i, value: 'item' + i }));
 
-export default class App extends Component {
-  render() {
-    return (
-      <MenuProvider style={styles.container}>
-        <FlatList
-          data={data}
-          renderItem={({ item }: any) => (
-            <Menu onSelect={(value: any) => Alert.alert(value)}>
-              <MenuTrigger text={'Select option ' + item.value} />
+const MenuInFlatlist = () => {
+  return (
+    <MenuProvider style={styles.container}>
+      <FlatList
+        data={data}
+        renderItem={({ item }: any) => (
+          <Menu onSelect={(value: any) => Alert.alert(value)}>
+            <MenuTrigger text={'Select option ' + item.value} />
 
-              <MenuOptions>
-                <MenuOption
-                  value='A'
-                  text='A'
-                />
+            <MenuOptions>
+              <MenuOption
+                value='A'
+                text='A'
+              />
 
-                <MenuOption
-                  value='B'
-                  text='B'
-                />
+              <MenuOption
+                value='B'
+                text='B'
+              />
 
-                <MenuOption
-                  value='C'
-                  text='C'
-                />
-              </MenuOptions>
-            </Menu>
-          )}
-          style={{ height: 200 }}
-        />
-      </MenuProvider>
-    );
-  }
-}
+              <MenuOption
+                value='C'
+                text='C'
+              />
+            </MenuOptions>
+          </Menu>
+        )}
+        style={{ height: 200 }}
+      />
+    </MenuProvider>
+  );
+};
+
+export default MenuInFlatlist;
 
 const styles = StyleSheet.create({
   container: {

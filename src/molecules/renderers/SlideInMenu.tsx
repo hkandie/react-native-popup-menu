@@ -52,6 +52,7 @@ const SlideInMenu = (props: any) => {
 };
 
 export default SlideInMenu;
+
 const styles = StyleSheet.create({
   options: {
     position: 'absolute',
