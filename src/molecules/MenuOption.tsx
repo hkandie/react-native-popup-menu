@@ -1,6 +1,4 @@
-import React, { Component } from 'react';
-
-import PropTypes, { func } from 'prop-types';
+import React from 'react';
 
 import { View, StyleSheet, Text } from 'react-native';
 import { debug } from './logger';

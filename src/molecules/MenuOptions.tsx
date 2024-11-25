@@ -24,7 +24,7 @@ const MenuOptions = (props: MenuOptionsProps) => {
 
   useEffect(() => {
     updateCustomStyles(props);
-  }, [props]);
+  }, []);
 
   const {
     customStyles = {
