@@ -2,8 +2,6 @@ import { I18nManager, Animated, Easing, StyleSheet, View, ViewStyle, StyleProp }
 
 import React, { useEffect, useRef } from 'react';
 
-import PropTypes from 'prop-types';
-
 import { OPEN_ANIM_DURATION, CLOSE_ANIM_DURATION, USE_NATIVE_DRIVER } from '../constants';
 
 const popoverPadding = 7;
