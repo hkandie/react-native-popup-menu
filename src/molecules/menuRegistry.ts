@@ -11,19 +11,30 @@ interface TriggerLayoutType {
   width?: number;
   height?: number;
 }
+interface WindowLayoutType {
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+}
 
 interface OptionsLayoutType {
   width?: number;
   height?: number;
 }
 
-interface MenuEntry {
+export interface MenuLayout {
+  windowLayout: WindowLayoutType;
+  triggerLayout: TriggerLayoutType;
+  optionsLayout: OptionsLayoutType;
+}
+
+interface MenuEntry extends MenuLayout {
   name: string;
   instance: Menu;
-  triggerLayout?: TriggerLayoutType;
-  optionsLayout?: OptionsLayoutType;
   optionsCustomStyles?: MenuOptionsCustomStyle;
 }
+
 interface MenuOptionCustomStyle {
   optionWrapper?: StyleProp<ViewStyle>;
   optionText?: StyleProp<TextStyle>;
@@ -73,10 +84,10 @@ export default function makeMenuRegistry(menus = new Map()) {
     }
     const menu: MenuEntry = Object.assign({}, menus.get(name));
     if (layouts.hasOwnProperty('triggerLayout')) {
-      menu.triggerLayout = layouts.triggerLayout;
+      menu.triggerLayout = layouts.triggerLayout!;
     }
     if (layouts.hasOwnProperty('optionsLayout')) {
-      menu.optionsLayout = layouts.optionsLayout;
+      menu.optionsLayout = layouts.optionsLayout!;
     }
     menus.set(name, menu);
   }

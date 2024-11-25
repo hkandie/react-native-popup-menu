@@ -1,3 +1,5 @@
+import { MenuLayout } from "./menuRegistry";
+
 const axisPosition = (oDim: number, wDim: number, tPos: number, tDim: number) => {
   // if options are bigger than window dimension, then render at 0
   if (oDim > wDim) {
@@ -61,19 +63,15 @@ export const fitPositionIntoSafeArea = (
 };
 
 export const computePosition = (
-  layouts: {
-    windowLayout: { x: number; y: number; width: number; height: number };
-    triggerLayout: { x: number; y: number; height: number; width: number };
-    optionsLayout: { height: number; width: number };
-  },
+  layouts: MenuLayout,
   isRTL?: boolean
 ) => {
   const { windowLayout, triggerLayout, optionsLayout } = layouts;
   const { x: wX, y: wY, width: wWidth, height: wHeight } = windowLayout;
   const { x: tX, y: tY, height: tHeight, width: tWidth } = triggerLayout;
   const { height: oHeight, width: oWidth } = optionsLayout;
-  const top = axisPosition(oHeight, wHeight, tY - wY, tHeight);
-  const left = axisPosition(oWidth, wWidth, tX - wX, tWidth);
+  const top = axisPosition(oHeight!, wHeight!, tY! - wY!, tHeight!);
+  const left = axisPosition(oWidth!, wWidth!, tX! - wX!, tWidth!);
   const start = isRTL ? 'right' : 'left';
   const position = { top, [start]: left };
   return fitPositionIntoSafeArea(position, layouts);

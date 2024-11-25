@@ -1,18 +1,19 @@
 import React from 'react';
 
-import { I18nManager, View } from 'react-native';
+import { I18nManager, StyleProp, View, ViewStyle } from 'react-native';
 
 import { styles } from './ContextMenu';
 import { computePosition } from '../position';
+import { MenuLayout } from '../menuRegistry';
 
 /**
 Simplified version of ContextMenu without animation.
 */
 
 type NotAnimatedContextMenuProps = {
-  style: any;
-  children: any;
-  layouts: any;
+  style: StyleProp<ViewStyle>;
+  children: React.ReactNode;
+  layouts: MenuLayout;
 };
 const NotAnimatedContextMenu = (props: NotAnimatedContextMenuProps) => {
   const { style, children, layouts, ...other } = props;
