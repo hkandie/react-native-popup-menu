@@ -1,4 +1,16 @@
+import { StyleProp, ViewStyle } from 'react-native';
 import { iterator2array } from './helpers';
+
+type MenuInstance = {
+  getName: () => string;
+};
+
+type MenuData = {
+  instance: MenuInstance;
+  triggerLayout?: any;
+  optionsLayout?: any;
+  optionsCustomStyles?: StyleProp<ViewStyle>;
+};
 
 /**
  * Registry to subscribe, unsubscribe and update data of menus.
@@ -14,7 +26,7 @@ export default function makeMenuRegistry(menus = new Map()) {
   /**
    * Subscribes menu instance.
    */
-  function subscribe(instance: any) {
+  function subscribe(instance: { getName: () => string }) {
     const name = instance.getName();
     if (menus.get(name)) {
       console.warn(`incorrect usage of popup menu - menu with name ${name} already exists`);
@@ -25,18 +37,18 @@ export default function makeMenuRegistry(menus = new Map()) {
   /**
    * Unsubscribes menu instance.
    */
-  function unsubscribe(instance: any) {
+  function unsubscribe(instance: MenuData['instance']) {
     menus.delete(instance.getName());
   }
 
   /**
    * Updates layout infomration.
    */
-  function updateLayoutInfo(name: any, layouts = {}) {
+  function updateLayoutInfo(name: string, layouts: Partial<MenuData> = {}) {
     if (!menus.has(name)) {
       return;
     }
-    const menu = Object.assign({}, menus.get(name));
+    const menu: MenuData = Object.assign({}, menus.get(name));
     if (layouts.hasOwnProperty('triggerLayout')) {
       menu.triggerLayout = layouts.triggerLayout;
     }
@@ -46,7 +58,7 @@ export default function makeMenuRegistry(menus = new Map()) {
     menus.set(name, menu);
   }
 
-  function setOptionsCustomStyles(name: any, optionsCustomStyles: any) {
+  function setOptionsCustomStyles(name: string, optionsCustomStyles: StyleProp<ViewStyle>) {
     if (!menus.has(name)) {
       return;
     }
@@ -57,7 +69,7 @@ export default function makeMenuRegistry(menus = new Map()) {
   /**
    * Get `menu data` by name.
    */
-  function getMenu(name: any) {
+  function getMenu(name: string) {
     return menus.get(name);
   }
 
