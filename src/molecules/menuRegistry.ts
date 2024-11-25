@@ -6,27 +6,44 @@ import { Menu } from './Menu';
  * Types for MenuRegistry (which isn't exported)
  */
 interface TriggerLayoutType {
-  x?: number;
-  y?: number;
-  width?: number;
-  height?: number;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
 }
 interface WindowLayoutType {
-  x?: number;
-  y?: number;
-  width?: number;
-  height?: number;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  left: number;
+  top: number;
 }
 
 interface OptionsLayoutType {
-  width?: number;
-  height?: number;
+  width: number;
+  height: number;
+  x: number;
+  y: number;
+  left: number;
+  top: number;
+  isOutside?: boolean;
+}
+interface SafeAreLayoutType {
+  width: number;
+  height: number;
+  x: number;
+  y: number;
+  left: number;
+  top: number;
+  isOutside?: boolean;
 }
 
 export interface MenuLayout {
   windowLayout: WindowLayoutType;
   triggerLayout: TriggerLayoutType;
   optionsLayout: OptionsLayoutType;
+  safeAreaLayout: SafeAreLayoutType;
 }
 
 interface MenuEntry extends MenuLayout {

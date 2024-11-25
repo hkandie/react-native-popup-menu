@@ -1,4 +1,4 @@
-import { MenuLayout } from "./menuRegistry";
+import { MenuLayout } from './menuRegistry';
 
 const axisPosition = (oDim: number, wDim: number, tPos: number, tDim: number) => {
   // if options are bigger than window dimension, then render at 0
@@ -27,7 +27,7 @@ const axisPosition = (oDim: number, wDim: number, tPos: number, tDim: number) =>
   return pos;
 };
 
-function fit(pos: number, len: number, minPos: number, maxPos: number) {
+function fit(pos: number | undefined, len: number, minPos: number, maxPos: number) {
   if (pos === undefined) {
     return undefined;
   }
@@ -46,7 +46,7 @@ export const fitPositionIntoSafeArea = (
     left?: number;
     right?: number;
   },
-  layouts: any
+  layouts: MenuLayout
 ) => {
   const { windowLayout, safeAreaLayout, optionsLayout } = layouts;
   if (!safeAreaLayout) {
@@ -56,22 +56,19 @@ export const fitPositionIntoSafeArea = (
   const { height: oHeight, width: oWidth } = optionsLayout;
   const { width: wWidth } = windowLayout;
   let { top, left, right } = position;
-  top = fit(top!, oHeight, saY, saY + saHeight);
-  left = fit(left!, oWidth, saX, saX + saWidth);
-  right = fit(right!, oWidth, wWidth - saX - saWidth, saX);
+  top = fit(top, oHeight, saY, saY + saHeight);
+  left = fit(left, oWidth, saX, saX + saWidth);
+  right = fit(right, oWidth, wWidth - saX - saWidth, saX);
   return { top, left, right };
 };
 
-export const computePosition = (
-  layouts: MenuLayout,
-  isRTL?: boolean
-) => {
+export const computePosition = (layouts: MenuLayout, isRTL?: boolean) => {
   const { windowLayout, triggerLayout, optionsLayout } = layouts;
   const { x: wX, y: wY, width: wWidth, height: wHeight } = windowLayout;
   const { x: tX, y: tY, height: tHeight, width: tWidth } = triggerLayout;
   const { height: oHeight, width: oWidth } = optionsLayout;
-  const top = axisPosition(oHeight!, wHeight!, tY! - wY!, tHeight!);
-  const left = axisPosition(oWidth!, wWidth!, tX! - wX!, tWidth!);
+  const top = axisPosition(oHeight, wHeight, tY - wY, tHeight);
+  const left = axisPosition(oWidth!, wWidth, tX - wX, tWidth);
   const start = isRTL ? 'right' : 'left';
   const position = { top, [start]: left };
   return fitPositionIntoSafeArea(position, layouts);
