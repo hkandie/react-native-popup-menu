@@ -6,184 +6,182 @@ import Menu, { MenuProvider, MenuTrigger, MenuOptions, MenuOption, renderers } f
 let unique = 0;
 const { SlideInMenu } = renderers;
 
-export default class Example extends Component {
-  setState: any;
-  state: any;
+const Example = () => {
+  const [logs, setLogs] = React.useState<
+    {
+      value: string;
+      id: number;
+      highlighted?: boolean;
+    }[]
+  >([]);
 
-  constructor(props: any, ctx: any) {
-    super(props, ctx);
-    this.state = { log: [] };
+  function selectNumber(value: string) {
+    addLog(`selecting number: ${value}`);
   }
 
-  selectNumber(value: any) {
-    this.addLog(`selecting number: ${value}`);
-  }
-
-  selectOptionType(value: any) {
+  function selectOptionType(value: string) {
     const v = typeof value === 'object' ? JSON.stringify(value) : value;
-    this.addLog(`selecting type: ${v}`);
+    addLog(`selecting type: ${v}`);
     return value !== 'Do not close';
   }
 
-  addLog(value: any) {
-    this.setState({
-      log: [
-        ...this.state.log,
-        {
-          value,
-          id: ++unique
-        }
-      ]
-    });
+  function addLog(value: string) {
+    setLogs([
+      ...logs,
+      {
+        value,
+        id: ++unique
+      }
+    ]);
   }
 
-  toggleHighlight(id: any) {
-    const log = this.state.log.map((l: any) => {
+  function toggleHighlight(id: any) {
+    const log = logs.map((l: any) => {
       if (l.id === id) {
         return Object.assign({}, l, { highlighted: !l.highlighted });
       }
       return l;
     });
-    this.setState({ log });
+    setLogs(log);
   }
 
-  deleteLogItem(id: any) {
-    const log = this.state.log.filter((l: any) => l.id !== id);
-    this.setState({ log });
+  function deleteLogItem(id: any) {
+    const log = logs.filter((l: any) => l.id !== id);
+    setLogs(log);
   }
 
-  render() {
-    return (
-      <MenuProvider style={{ flex: 1 }}>
-        <View style={styles.container}>
-          <View style={styles.topbar}>
-            <Menu
-              name='numbers'
-              renderer={SlideInMenu}
-              onSelect={(value: any) => this.selectNumber(value)}
+  return (
+    <MenuProvider style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <View style={styles.topbar}>
+          <Menu
+            name='numbers'
+            renderer={SlideInMenu}
+            onSelect={(value: string) => selectNumber(value)}
+          >
+            <MenuTrigger style={styles.trigger}>
+              <Text style={[styles.text, styles.triggerText]}>Slide-in menu...</Text>
+            </MenuTrigger>
+
+            <MenuOptions customStyles={{ optionText: [styles.text, styles.slideInOption] }}>
+              <MenuOption
+                value={1}
+                text='Option one'
+              />
+
+              <MenuOption
+                value={2}
+                text='Option two'
+              />
+
+              <MenuOption
+                value={3}
+                text='Option three'
+              />
+
+              <MenuOption
+                value={4}
+                text='Option four'
+              />
+              {null /* conditional not rendered option */}
+
+              <MenuOption
+                value={5}
+                text='Option five'
+              />
+            </MenuOptions>
+          </Menu>
+
+          <View style={{ flex: 1 }}></View>
+
+          <Menu
+            name='types'
+            onSelect={(value: any) => selectOptionType(value)}
+            onBackdropPress={() => addLog('menu will be closed by backdrop')}
+            onOpen={() => addLog('menu is opening')}
+            onClose={() => addLog('menu is closing')}
+          >
+            <MenuTrigger
+              onAlternativeAction={() => addLog('trigger longpressed')}
+              style={styles.trigger}
             >
-              <MenuTrigger style={styles.trigger}>
-                <Text style={[styles.text, styles.triggerText]}>Slide-in menu...</Text>
-              </MenuTrigger>
+              <Text style={[styles.text, styles.triggerText]}>Context menu...</Text>
+            </MenuTrigger>
 
-              <MenuOptions customStyles={{ optionText: [styles.text, styles.slideInOption] }}>
-                <MenuOption
-                  value={1}
-                  text='Option one'
-                />
+            <MenuOptions customStyles={{ optionText: styles.text }}>
+              <MenuOption
+                value='Normal'
+                text='Normal'
+              />
 
-                <MenuOption
-                  value={2}
-                  text='Option two'
-                />
+              <MenuOption
+                value='N/A'
+                disabled={true}
+                text='Disabled'
+              />
 
-                <MenuOption
-                  value={3}
-                  text='Option three'
-                />
+              <MenuOption
+                value='N/A'
+                disableTouchable={true}
+                text='Non-selectable'
+              />
 
-                <MenuOption
-                  value={4}
-                  text='Option four'
-                />
-                {null /* conditional not rendered option */}
+              <MenuOption
+                value='Do not close'
+                text='Do not close'
+              />
 
-                <MenuOption
-                  value={5}
-                  text='Option five'
-                />
-              </MenuOptions>
-            </Menu>
+              <View style={styles.divider} />
 
-            <View style={{ flex: 1 }}></View>
+              <MenuOption
+                value={{ text: 'Hello world!' }}
+                text='Object as value'
+              />
+            </MenuOptions>
+          </Menu>
+        </View>
 
-            <Menu
-              name='types'
-              onSelect={(value: any) => this.selectOptionType(value)}
-              onBackdropPress={() => this.addLog('menu will be closed by backdrop')}
-              onOpen={() => this.addLog('menu is opening')}
-              onClose={() => this.addLog('menu is closing')}
-            >
-              <MenuTrigger
-                onAlternativeAction={() => this.addLog('trigger longpressed')}
-                style={styles.trigger}
+        <ScrollView style={styles.logView}>
+          {logs.map((l: any, i: any) => {
+            const wrapperStyle = { backgroundColor: i % 2 ? 'white' : 'whitesmoke' };
+            const textStyle = { color: l.highlighted ? 'red' : 'gray' };
+            return (
+              <View
+                style={[styles.logItem, wrapperStyle]}
+                key={l.id}
               >
-                <Text style={[styles.text, styles.triggerText]}>Context menu...</Text>
-              </MenuTrigger>
+                <Text style={[styles.text, textStyle]}>{l.value}</Text>
 
-              <MenuOptions customStyles={{ optionText: styles.text }}>
-                <MenuOption
-                  value='Normal'
-                  text='Normal'
-                />
+                <View style={{ flex: 1 }}></View>
 
-                <MenuOption
-                  value='N/A'
-                  disabled={true}
-                  text='Disabled'
-                />
+                <Menu>
+                  <MenuTrigger
+                    text='edit'
+                    customStyles={{ triggerText: styles.text }}
+                  />
 
-                <MenuOption
-                  value='N/A'
-                  disableTouchable={true}
-                  text='Non-selectable'
-                />
-
-                <MenuOption
-                  value='Do not close'
-                  text='Do not close'
-                />
-
-                <View style={styles.divider} />
-
-                <MenuOption
-                  value={{ text: 'Hello world!' }}
-                  text='Object as value'
-                />
-              </MenuOptions>
-            </Menu>
-          </View>
-
-          <ScrollView style={styles.logView}>
-            {this.state.log.map((l: any, i: any) => {
-              const wrapperStyle = { backgroundColor: i % 2 ? 'white' : 'whitesmoke' };
-              const textStyle = { color: l.highlighted ? 'red' : 'gray' };
-              return (
-                <View
-                  style={[styles.logItem, wrapperStyle]}
-                  key={l.id}
-                >
-                  <Text style={[styles.text, textStyle]}>{l.value}</Text>
-
-                  <View style={{ flex: 1 }}></View>
-
-                  <Menu>
-                    <MenuTrigger
-                      text='edit'
-                      customStyles={{ triggerText: styles.text }}
+                  <MenuOptions customStyles={{ optionText: styles.text }}>
+                    <MenuOption
+                      onSelect={() => toggleHighlight(l.id)}
+                      text={l.highlighted ? 'Unhighlight' : 'Highlight'}
                     />
 
-                    <MenuOptions customStyles={{ optionText: styles.text }}>
-                      <MenuOption
-                        onSelect={() => this.toggleHighlight(l.id)}
-                        text={l.highlighted ? 'Unhighlight' : 'Highlight'}
-                      />
+                    <MenuOption
+                      onSelect={() => deleteLogItem(l.id)}
+                      text='Delete'
+                    />
+                  </MenuOptions>
+                </Menu>
+              </View>
+            );
+          })}
+        </ScrollView>
+      </View>
+    </MenuProvider>
+  );
+};
 
-                      <MenuOption
-                        onSelect={() => this.deleteLogItem(l.id)}
-                        text='Delete'
-                      />
-                    </MenuOptions>
-                  </Menu>
-                </View>
-              );
-            })}
-          </ScrollView>
-        </View>
-      </MenuProvider>
-    );
-  }
-}
+export default Example;
 
 const styles = StyleSheet.create({
   container: {

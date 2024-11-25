@@ -151,16 +151,11 @@ declare module 'react-native-popup-menu' {
     optionsCustomStyles?: MenuOptionsCustomStyle;
   }
 
+  
   interface MenuRegistry {
     subscribe: (instance: Menu) => void;
     unsubscribe: (instance: Menu) => void;
-    updateLayoutInfo: (
-      name: string,
-      layouts?: {
-        triggerLayout?: TriggerLayoutType;
-        optionsLayout?: OptionsLayoutType;
-      }
-    ) => void;
+    updateLayoutInfo: (name: string, layouts?: MenuLayout) => void;
     setOptionsCustomStyles: (name: string, optionsCustomStyles: MenuOptionsCustomStyle) => void;
     getMenu: (name: string) => MenuEntry;
     getAll: () => MenuEntry[];

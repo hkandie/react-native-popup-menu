@@ -8,7 +8,7 @@ type BackdropProps = {
   style?: StyleProp<ViewStyle>;
 };
 
-const Backdrop = ({ onPress, style }: BackdropProps) => {
+const Backdrop = React.forwardRef(({ onPress, style }: BackdropProps, ref: any) => {
   const fadeAnim = useRef(new Animated.Value(0.001)).current;
 
   return (
@@ -18,7 +18,7 @@ const Backdrop = ({ onPress, style }: BackdropProps) => {
       </Animated.View>
     </TouchableWithoutFeedback>
   );
-};
+});
 
 const styles = StyleSheet.create({
   fullscreen: {
