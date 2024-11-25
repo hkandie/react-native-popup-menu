@@ -1,8 +1,7 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Pressable } from 'react-native';
 import { Link } from 'expo-router';
 
 const demos = [
-  'Example',
   'Basic example',
   'Advanced example',
   'Controlled example',
@@ -19,24 +18,19 @@ const demos = [
 ];
 
 export default function Page() {
-  const b = demos.map((demo) => {
-    const type = demo.toLowerCase().replaceAll(' ', '-');
-    return type;
-  });
-  console.log(b.join(' '));
+ 
   return (
     <View style={styles.container}>
-      <Text>Select example:</Text>
+      <Text>{'Select example:'}</Text>
       <View>
         {demos.map((demo) => {
-          console.log(`demo: ${demo}`);
           const type = demo.toLowerCase().replaceAll(' ', '-');
           return (
             <Link
               href={type}
               key={type}
             >
-              {demo}
+              <Pressable><Text>{demo}</Text></Pressable>
             </Link>
           );
         })}
