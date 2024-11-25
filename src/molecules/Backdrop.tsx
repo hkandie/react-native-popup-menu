@@ -1,13 +1,14 @@
 import React, { useRef } from 'react';
 
 import { View, StyleSheet, TouchableWithoutFeedback, Animated, StyleProp, ViewStyle } from 'react-native';
+import { OPEN_ANIM_DURATION, CLOSE_ANIM_DURATION, USE_NATIVE_DRIVER } from './constants';
 
 type BackdropProps = {
   onPress: () => void;
   style?: StyleProp<ViewStyle>;
 };
 
-const Backdrop = ({ onPress, style }: any) => {
+const Backdrop = ({ onPress, style }: BackdropProps) => {
   const fadeAnim = useRef(new Animated.Value(0.001)).current;
 
   return (

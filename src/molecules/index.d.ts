@@ -70,29 +70,6 @@ declare module 'react-native-popup-menu' {
     open(): Promise<void>;
   }
 
-  /**
-   * MenuTrigger
-   * @see https://github.com/instea/react-native-popup-menu/blob/master/doc/api.md#menutrigger
-   */
-  interface MenuTriggerProps {
-    disabled?: boolean;
-    text?: string;
-    customStyles?: {
-      triggerOuterWrapper?: StyleProp<ViewStyle>;
-      triggerWrapper?: StyleProp<ViewStyle>;
-      triggerText?: StyleProp<TextStyle>;
-      TriggerTouchableComponent?: Function;
-      triggerTouchable?: {};
-    };
-    testID?: string;
-    triggerOnLongPress?: boolean;
-
-    onPress?(): void;
-    onAlternativeAction?(): void;
-    children?: React.ReactNode;
-    style?: StyleProp<ViewStyle>;
-  }
-
   export const MenuTrigger: React.ComponentClass<MenuTriggerProps>;
 
   /**
