@@ -14,7 +14,7 @@ type NotAnimatedContextMenuProps = {
   children: any;
   layouts: any;
 };
-const NotAnimatedContextMenu = (props) => {
+const NotAnimatedContextMenu = (props: NotAnimatedContextMenuProps) => {
   const { style, children, layouts, ...other } = props;
   const position = computePosition(layouts, I18nManager.isRTL);
   return (

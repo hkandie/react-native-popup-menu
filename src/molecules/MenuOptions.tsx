@@ -16,7 +16,7 @@ type MenuOptionsProps = {
 const MenuOptions = (props: MenuOptionsProps) => {
   const ctx = useMenuContext();
 
-  function updateCustomStyles(_props: any) {
+  function updateCustomStyles(_props: MenuOptionsProps) {
     const { customStyles } = _props;
     const menu = ctx.menuActions._getOpenedMenu();
     if (!menu) return;
@@ -35,6 +35,5 @@ const MenuOptions = (props: MenuOptionsProps) => {
 
   return <View style={[customStyles.optionsWrapper, style]}>{children}</View>;
 };
-
 
 export default withCtx(MenuOptions);

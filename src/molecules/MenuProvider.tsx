@@ -328,7 +328,7 @@ export default class MenuProvider extends Component {
     const optionsRenderer = renderOptionsContainer || defaultOptionsContainerRenderer;
     const isOutside = !triggerLayout || !optionsLayout;
     const onLayout = (e: any) => this._onOptionsLayout(e, instance.getName(), isOutside);
-    const style = [optionsContainerStyle, customStyles.optionsContainer];
+    const style = [optionsContainerStyle, customStyles?.optionsContainer];
     const layouts = { windowLayout, triggerLayout, optionsLayout, safeAreaLayout };
     const props = { ...rendererProps, style, onLayout, layouts };
     const optionsType = isOutside ? MenuOutside : renderer;

@@ -67,5 +67,4 @@ const ControlledExample = () => {
   );
 };
 
-
 export default ControlledExample;

@@ -18,7 +18,6 @@ const demos = [
 ];
 
 export default function Page() {
- 
   return (
     <View style={styles.container}>
       <Text>{'Select example:'}</Text>
@@ -30,7 +29,9 @@ export default function Page() {
               href={type}
               key={type}
             >
-              <Pressable><Text>{demo}</Text></Pressable>
+              <Pressable>
+                <Text>{demo}</Text>
+              </Pressable>
             </Link>
           );
         })}
