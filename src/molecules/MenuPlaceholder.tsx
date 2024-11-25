@@ -14,7 +14,6 @@ export default class MenuPlaceholder extends Component {
   }
 
   shouldComponentUpdate() {
-    console.log('MenuPlaceholder shouldComponentUpdate', this.props.ctx._isMenuClosing);
     // don't terminate closing animation
     return !this.props.ctx._isMenuClosing;
   }

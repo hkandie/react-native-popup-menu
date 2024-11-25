@@ -1,17 +1,40 @@
-import { StyleProp, ViewStyle } from 'react-native';
+import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { iterator2array } from './helpers';
+import { Menu } from './Menu';
 
-type MenuInstance = {
-  getName: () => string;
-};
+/**
+ * Types for MenuRegistry (which isn't exported)
+ */
+interface TriggerLayoutType {
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+}
 
-type MenuData = {
-  instance: MenuInstance;
-  triggerLayout?: any;
-  optionsLayout?: any;
-  optionsCustomStyles?: StyleProp<ViewStyle>;
-};
+interface OptionsLayoutType {
+  width?: number;
+  height?: number;
+}
 
+interface MenuEntry {
+  name: string;
+  instance: Menu;
+  triggerLayout?: TriggerLayoutType;
+  optionsLayout?: OptionsLayoutType;
+  optionsCustomStyles?: MenuOptionsCustomStyle;
+}
+interface MenuOptionCustomStyle {
+  optionWrapper?: StyleProp<ViewStyle>;
+  optionText?: StyleProp<TextStyle>;
+  optionTouchable?: {};
+  OptionTouchableComponent?: Function;
+}
+
+interface MenuOptionsCustomStyle extends MenuOptionCustomStyle {
+  optionsWrapper?: StyleProp<ViewStyle>;
+  optionsContainer?: StyleProp<ViewStyle>;
+}
 /**
  * Registry to subscribe, unsubscribe and update data of menus.
  *
@@ -37,18 +60,18 @@ export default function makeMenuRegistry(menus = new Map()) {
   /**
    * Unsubscribes menu instance.
    */
-  function unsubscribe(instance: MenuData['instance']) {
+  function unsubscribe(instance: MenuEntry['instance']) {
     menus.delete(instance.getName());
   }
 
   /**
    * Updates layout infomration.
    */
-  function updateLayoutInfo(name: string, layouts: Partial<MenuData> = {}) {
+  function updateLayoutInfo(name: string, layouts: Partial<MenuEntry> = {}) {
     if (!menus.has(name)) {
       return;
     }
-    const menu: MenuData = Object.assign({}, menus.get(name));
+    const menu: MenuEntry = Object.assign({}, menus.get(name));
     if (layouts.hasOwnProperty('triggerLayout')) {
       menu.triggerLayout = layouts.triggerLayout;
     }

@@ -4,6 +4,7 @@ import { Text, View } from 'react-native';
 import Menu, { MenuProvider, MenuOptions, MenuOption, MenuTrigger, renderers } from '../../molecules';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { computePosition } from '@/src/molecules/position';
 
 const CheckedOption = (props: any) => (
   <MenuOption
@@ -21,26 +22,22 @@ const IconOption = ({ iconName, text, value }: any) => (
   </MenuOption>
 );
 
-const { computePosition } = renderers.ContextMenu;
 const roundedStyles = {
   backgroundColor: 'yellow',
   borderRadius: 30
 };
-class RoundedContextMenu extends React.Component {
-  props: any;
-  render() {
-    const { style, children, layouts, ...other } = this.props;
-    const position = computePosition(layouts);
-    return (
-      <View
-        {...other}
-        style={[roundedStyles, style, position]}
-      >
-        {children}
-      </View>
-    );
-  }
-}
+const RoundedContextMenu = (props: { style: any; children: any; layouts: any; [key: string]: any }) => {
+  const { style, children, layouts, ...other } = props;
+  const position = computePosition(layouts);
+  return (
+    <View
+      {...other}
+      style={[roundedStyles, style, position]}
+    >
+      {children}
+    </View>
+  );
+};
 
 /* You can set default renderer for all menus just once in your application: */
 //Menu.setDefaultRenderer(renderers.NotAnimatedContextMenu);
