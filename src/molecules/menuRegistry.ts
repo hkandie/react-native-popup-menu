@@ -1,6 +1,6 @@
 import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { iterator2array } from './helpers';
-import { Menu } from './Menu';
+import { Instance } from './instance';
 
 /**
  * Types for MenuRegistry (which isn't exported)
@@ -48,7 +48,7 @@ export interface MenuLayout {
 
 interface MenuEntry extends MenuLayout {
   name: string;
-  instance: Menu;
+  instance: Instance;
   optionsCustomStyles?: MenuOptionsCustomStyle;
 }
 

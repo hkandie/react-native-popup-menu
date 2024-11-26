@@ -4,27 +4,40 @@ import { useMenuContext } from '../hooks/useMenuContext';
 import { debug } from './logger';
 import { Instance } from './instance';
 import { validateChildren } from './menu-helpers';
+import ContextMenu from './renderers/ContextMenu';
 
 export interface MenuProps {
-  name: string;
-  renderer: React.PropsWithChildren<any>;
-  rendererProps: {};
+  name?: string;
+  renderer?: React.PropsWithChildren<any>;
+  rendererProps?: {};
   onSelect: (value: string) => void;
-  onOpen: () => void;
-  onClose: () => void;
+  onOpen?: () => void;
+  onClose?: () => void;
   opened?: boolean;
   onBackdropPress?: () => void;
   children?: React.ReactNode;
   style?: StyleProp<ViewStyle>;
 }
 
+const defaultProps = {
+  renderer: ContextMenu,
+  rendererProps: {},
+  onSelect: () => {},
+  onOpen: () => {},
+  onClose: () => {},
+  onBackdropPress: () => {}
+};
 const Menu = (props: MenuProps) => {
   const ctx = useMenuContext();
-  const instance = new Instance(ctx, props);
+  const propsWithDefaults = {
+    ...defaultProps,
+    ...props
+  };
+  const instance = new Instance(ctx, propsWithDefaults);
   console.log('Menu instance', instance);
 
   useEffect(() => {
-    if (!validateChildren(props.children)) {
+    if (!validateChildren(propsWithDefaults.children)) {
       return;
     }
     debug('subscribing menu', instance.name);
@@ -33,7 +46,7 @@ const Menu = (props: MenuProps) => {
   }, []);
 
   useEffect(() => {
-    if (props.name !== instance.name) {
+    if (propsWithDefaults.name !== instance.name) {
       console.warn('Menu name cannot be changed');
     }
     // force update if menu is opened as its content might have changed
@@ -48,8 +61,8 @@ const Menu = (props: MenuProps) => {
       }
       ctx.menuRegistry.unsubscribe(instance);
     };
-  }, [props.name]);
-  const { style } = props;
+  }, [propsWithDefaults.name]);
+  const { style } = propsWithDefaults;
   const children = instance.reduceChildren();
   return <View style={style}>{children}</View>;
 };

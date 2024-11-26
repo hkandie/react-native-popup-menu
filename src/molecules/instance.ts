@@ -1,14 +1,13 @@
 import React from 'react';
 import { makeName } from '../helpers';
-import { MenuProps } from './Menu.v2';
+import { MenuProps } from './Menu';
 import { isMenuOptions, isRegularComponent, isTrigger } from './menu-helpers';
 import { IMenuProvider } from './MenuProvider';
 import ContextMenu from './renderers/ContextMenu';
 
 export class Instance {
-  name: string | undefined = '';
-  props: MenuProps = {
-    name: '',
+  name: string = '';
+  props: Partial<MenuProps> = {
     renderer: ContextMenu,
     rendererProps: {},
     onSelect: (_: string) => {},
