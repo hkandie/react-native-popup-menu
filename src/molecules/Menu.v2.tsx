@@ -17,21 +17,14 @@ export interface MenuProps {
   onClose: () => void;
   opened: boolean;
   onBackdropPress: () => void;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   style: StyleProp<ViewStyle>;
 }
 
-const Menu = ({
-  renderer = ContextMenu,
-  rendererProps = {},
-  onSelect = () => {},
-  onOpen = () => {},
-  onClose = () => {},
-  onBackdropPress = () => {},
-  ...props
-}: MenuProps) => {
+const Menu = (props: MenuProps) => {
   const ctx = useMenuContext();
   const instance = new Instance(ctx, props);
+  console.log('Menu instance', instance);
 
   useEffect(() => {
     if (!validateChildren(props.children)) {

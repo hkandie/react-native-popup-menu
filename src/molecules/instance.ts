@@ -3,17 +3,29 @@ import { makeName } from '../helpers';
 import { MenuProps } from './Menu.v2';
 import { isMenuOptions, isRegularComponent, isTrigger } from './menu-helpers';
 import { IMenuProvider } from './MenuProvider';
+import ContextMenu from './renderers/ContextMenu';
 
 export class Instance {
   name = '';
-  props: MenuProps = {};
+  props: MenuProps = {
+    name: '',
+    renderer: ContextMenu,
+    rendererProps: {},
+    onSelect: () => {},
+    onOpen: () => {},
+    onClose: () => {},
+    onBackdropPress: () => {}
+  };
   forceClose: boolean = false;
   opened: boolean = false;
   trigger: React.ReactNode;
   ctx: IMenuProvider;
   constructor(ctx: IMenuProvider, props: MenuProps) {
     this.name = props?.name || makeName();
-    this.props = props;
+    this.props = {
+        ...this.props,
+        ...props
+    };
     this.ctx = ctx;
   }
   getName() {
