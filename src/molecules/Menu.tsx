@@ -1,161 +1,57 @@
-import React, { Component } from 'react';
-
-import PropTypes from 'prop-types';
-
-import { View } from 'react-native';
-
-import ContextMenu from './renderers/ContextMenu';
-
-import { makeName } from './helpers';
-import { debug, CFG } from './logger';
-
-import { withCtx } from './MenuProvider';
+import { StyleProp, View, ViewStyle } from 'react-native';
+import React, { useEffect } from 'react';
+import { useMenuContext } from '../hooks/useMenuContext';
+import { debug } from './logger';
+import { Instance } from './instance';
+import { validateChildren } from './menu-helpers';
 
 export interface MenuProps {
-  name?: string;
-  renderer?: React.PropsWithChildren<any>;
-  rendererProps?: {};
-  onSelect?: () => void;
-  onOpen?: () => void;
-  onClose?: () => void;
+  name: string;
+  renderer: React.PropsWithChildren<any>;
+  rendererProps: {};
+  onSelect: (value: string) => void;
+  onOpen: () => void;
+  onClose: () => void;
   opened?: boolean;
   onBackdropPress?: () => void;
+  children?: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
 }
 
-export class Menu extends Component {
-  _forceClose: any;
-  _name: any;
-  _opened: any;
-  _trigger: any;
-  props: any;
+const Menu = (props: MenuProps) => {
+  const ctx = useMenuContext();
+  const instance = new Instance(ctx, props);
+  console.log('Menu instance', instance);
 
-  constructor(props: any) {
-    super(props);
-    this._name = this.props.name || makeName();
-    this._forceClose = false;
-    const { ctx } = props;
-    if (!(ctx && ctx.menuActions)) {
-      throw new Error('Menu component must be ancestor of MenuProvider');
-    }
-  }
-
-  componentDidMount() {
-    if (!this._validateChildren()) {
+  useEffect(() => {
+    if (!validateChildren(props.children)) {
       return;
     }
-    debug('subscribing menu', this._name);
-    this.props.ctx.menuRegistry.subscribe(this);
-    this.props.ctx.menuActions._notify();
-  }
+    debug('subscribing menu', instance.name);
+    ctx.menuRegistry.subscribe(instance);
+    ctx.menuActions._notify();
+  }, []);
 
-  componentDidUpdate(prevProps: any) {
-    if (this.props.name !== prevProps.name) {
+  useEffect(() => {
+    if (props.name !== instance.name) {
       console.warn('Menu name cannot be changed');
     }
     // force update if menu is opened as its content might have changed
-    const force = this.isOpen();
-    debug('component did update', this._name, force);
-    this.props.ctx.menuActions._notify(force);
-  }
-
-  componentWillUnmount() {
-    debug('unsubscribing menu', this._name);
-    if (this.isOpen()) {
-      this._forceClose = true;
-      this.props.ctx.menuActions._notify();
-    }
-    this.props.ctx.menuRegistry.unsubscribe(this);
-  }
-
-  open() {
-    return this.props.ctx.menuActions.openMenu(this._name);
-  }
-
-  close() {
-    return this.props.ctx.menuActions.closeMenu();
-  }
-
-  isOpen() {
-    if (this._forceClose) {
-      return false;
-    }
-    return this.props.hasOwnProperty('opened') ? this.props.opened : this._opened;
-  }
-
-  getName() {
-    return this._name;
-  }
-
-  render() {
-    const { style } = this.props;
-    const children = this._reduceChildren();
-    return <View style={style}>{children}</View>;
-  }
-
-
-  _getTrigger() {
-    return this._trigger;
-  }
-
-  _getOptions() {
-    return React.Children.toArray(this.props.children).find(isMenuOptions);
-  }
-
-  _getOpened() {
-    return this._opened;
-  }
-
-  _setOpened(opened: any) {
-    this._opened = opened;
-  }
-
-  _validateChildren() {
-    const children = React.Children.toArray(this.props.children);
-    const options = children.find(isMenuOptions);
-    if (!options) {
-      console.warn('Menu has to contain MenuOptions component');
-    }
-    const trigger = children.find(isTrigger);
-    if (!trigger) {
-      console.warn('Menu has to contain MenuTrigger component');
-    }
-    return options && trigger;
-  }
-}
-
-Menu.propTypes = {
-  name: PropTypes.string,
-  renderer: PropTypes.func,
-  rendererProps: PropTypes.object,
-  onSelect: PropTypes.func,
-  onOpen: PropTypes.func,
-  onClose: PropTypes.func,
-  opened: PropTypes.bool,
-  onBackdropPress: PropTypes.func
+    const force = instance.isOpen();
+    debug('component did update', instance.name, force);
+    ctx.menuActions._notify(force);
+    return () => {
+      debug('unsubscribing menu', instance.name);
+      if (instance.isOpen()) {
+        instance.forceClose = true;
+        ctx.menuActions._notify();
+      }
+      ctx.menuRegistry.unsubscribe(instance);
+    };
+  }, [props.name]);
+  const { style } = props;
+  const children = instance.reduceChildren();
+  return <View style={style}>{children}</View>;
 };
 
-Menu.defaultProps = {
-  renderer: ContextMenu,
-  rendererProps: {},
-  onSelect: () => {},
-  onOpen: () => {},
-  onClose: () => {},
-  onBackdropPress: () => {}
-};
-
-const MenuExternal = withCtx(Menu);
-Object.defineProperty(MenuExternal, 'debug', {
-  get: function () {
-    return CFG.debug;
-  },
-  set: function (val) {
-    CFG.debug = val;
-  }
-});
-MenuExternal.setDefaultRenderer = (renderer: any) => {
-  Menu.defaultProps.renderer = renderer;
-};
-MenuExternal.setDefaultRendererProps = (rendererProps: any) => {
-  Menu.defaultProps.rendererProps = rendererProps;
-};
-export default MenuExternal;
+export default Menu;

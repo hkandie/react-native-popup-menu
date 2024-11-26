@@ -6,12 +6,12 @@ import { IMenuProvider } from './MenuProvider';
 import ContextMenu from './renderers/ContextMenu';
 
 export class Instance {
-  name = '';
+  name: string | undefined = '';
   props: MenuProps = {
     name: '',
     renderer: ContextMenu,
     rendererProps: {},
-    onSelect: () => {},
+    onSelect: (_: string) => {},
     onOpen: () => {},
     onClose: () => {},
     onBackdropPress: () => {}
@@ -23,8 +23,8 @@ export class Instance {
   constructor(ctx: IMenuProvider, props: MenuProps) {
     this.name = props?.name || makeName();
     this.props = {
-        ...this.props,
-        ...props
+      ...this.props,
+      ...props
     };
     this.ctx = ctx;
   }
