@@ -260,6 +260,7 @@ export default class MenuProvider extends Component {
               ctx={this}
               backdropStyles={customStyles.backdrop}
               ref={this._onPlaceholderRef}
+              onBackdropRef={this.onBackdropRef}
             />
           </SafeAreaView>
         </View>

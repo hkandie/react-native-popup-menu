@@ -4,16 +4,17 @@ import { Link } from 'expo-router';
 const demos = [
   'Basic example',
   'Advanced example',
-  'Controlled example',
   'Controlling menu using menu methods',
+  'Close on back button press example',
+  'Controlled example',
   'Extensions example',
+  'FlatList Example', ,
+  'Menu in FlatList',
   'Modal example',
+  'Navigation example',
   'Styling example',
   'Touchable config example',
   'Non root example',
-  'Close on back button press example',
-  'Using FlatList',
-  'Menu in FlatList',
   'Popover renderer'
 ];
 
