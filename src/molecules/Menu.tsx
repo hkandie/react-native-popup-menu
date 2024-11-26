@@ -4,10 +4,6 @@ import PropTypes from 'prop-types';
 
 import { View } from 'react-native';
 
-import MenuOptions from './MenuOptions';
-
-import MenuTrigger from './MenuTrigger';
-
 import ContextMenu from './renderers/ContextMenu';
 
 import { makeName } from './helpers';
@@ -15,9 +11,16 @@ import { debug, CFG } from './logger';
 
 import { withCtx } from './MenuProvider';
 
-const isRegularComponent = (c: any) => c.type !== MenuOptions && c.type !== MenuTrigger;
-const isTrigger = (c: any) => c.type === MenuTrigger;
-const isMenuOptions = (c: any) => c.type === MenuOptions;
+export interface MenuProps {
+  name?: string;
+  renderer?: React.PropsWithChildren<any>;
+  rendererProps?: {};
+  onSelect?: () => void;
+  onOpen?: () => void;
+  onClose?: () => void;
+  opened?: boolean;
+  onBackdropPress?: () => void;
+}
 
 export class Menu extends Component {
   _forceClose: any;
@@ -89,23 +92,6 @@ export class Menu extends Component {
     return <View style={style}>{children}</View>;
   }
 
-  _reduceChildren() {
-    return React.Children.toArray(this.props.children).reduce((r: any, child: any) => {
-      if (isTrigger(child)) {
-        r.push(
-          React.cloneElement(child, {
-            key: null,
-            menuName: this._name,
-            onRef: (t: any) => (this._trigger = t)
-          })
-        );
-      }
-      if (isRegularComponent(child)) {
-        r.push(child);
-      }
-      return r;
-    }, []);
-  }
 
   _getTrigger() {
     return this._trigger;

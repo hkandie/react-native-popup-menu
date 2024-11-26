@@ -1,14 +1,14 @@
 import { StyleSheet, View, Text, Pressable } from 'react-native';
 import { Link } from 'expo-router';
 
-const demos = [
+const demos: string[] = [
   'Basic example',
   'Advanced example',
   'Controlling menu using menu methods',
   'Close on back button press example',
   'Controlled example',
   'Extensions example',
-  'FlatList Example', ,
+  'FlatList Example',
   'Menu in FlatList',
   'Modal example',
   'Navigation example',

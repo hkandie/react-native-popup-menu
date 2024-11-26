@@ -1,5 +1,5 @@
 import MenuTrigger from '@/src/molecules/MenuTrigger';
-import Menu from '../../molecules/Menu';
+import Menu from '../../molecules/Menu.v2';
 import MenuProvider from '../../molecules/MenuProvider';
 import React from 'react';
 import { Text } from 'react-native';

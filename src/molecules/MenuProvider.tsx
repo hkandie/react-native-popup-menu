@@ -21,7 +21,7 @@ if (!React.forwardRef) {
   throw new Error('This version of popup-menu requires RN 0.55+. Check our compatibility table.');
 }
 
-interface IMenuProvider {
+export interface IMenuProvider {
   menuActions: any;
   menuRegistry: any;
 }
