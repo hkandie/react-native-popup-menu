@@ -13,7 +13,7 @@ import Menu, {
 } from 'react-native-popup-menu';
 
 class TouchableExample extends React.Component {
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.state = {
       Touchable: Button,
@@ -24,34 +24,43 @@ class TouchableExample extends React.Component {
     const { Touchable } = this.state;
     const buttonText = 'Select ' + (Touchable ? (getDisplayName(Touchable)) : 'default');
     return (
+      
       <MenuProvider style={{flexDirection: 'column', padding: 30}}>
 
-        <Menu onSelect={Touchable => this.setState({ Touchable })}>
+        
+        <Menu onSelect={(Touchable: any) => this.setState({ Touchable })}>
+          
           <MenuTrigger
             customStyles={{
               TriggerTouchableComponent: Button,
               triggerTouchable: { title: 'Select (Custom Touchables)' },
             }}
           />
+        
         <MenuOptions>
+            
             <MenuOption text='Default' />
+            
             <MenuOption text='TouchableOpacity' customStyles={{
                 OptionTouchableComponent: TouchableOpacity,
                 optionTouchable: touchableOpacityProps,
               }}
               value={TouchableOpacity}
             />
+            
             <MenuOption text='TouchableHighlight' customStyles={{
                 OptionTouchableComponent: TouchableHighlight,
                 optionTouchable: touchableHighlightProps,
               }}
               value={TouchableHighlight}
             />
+            
             <MenuOption text='TouchableWithoutFeedback' customStyles={{
               OptionTouchableComponent: TouchableWithoutFeedback,
               }}
               value={TouchableWithoutFeedback}
             />
+            
             <MenuOption customStyles={{
                 OptionTouchableComponent: Button,
                 optionTouchable: { title: 'Button' },
@@ -61,7 +70,9 @@ class TouchableExample extends React.Component {
           </MenuOptions>
         </Menu>
 
+        
         <Menu style={{paddingTop: 30}}>
+          
           <MenuTrigger
             customStyles={{
               TriggerTouchableComponent: Touchable,
@@ -69,13 +80,18 @@ class TouchableExample extends React.Component {
             }}
             text={buttonText}
           />
+          
           <MenuOptions customStyles={{
             OptionTouchableComponent: TouchableOpacity,
             optionTouchable: touchableOpacityProps,
           }}>
+            
             <MenuOption text='Option 1' />
+            
             <MenuOption text='Option 2' />
+            
             <MenuOption text='Option 3' />
+            
             <MenuOption text='Option 4' />
           </MenuOptions>
         </Menu>
@@ -95,10 +111,8 @@ const touchableHighlightProps = {
   underlayColor: 'green',
 };
 
-const getDisplayName = Component => (
-  Component.displayName ||
-  Component.name ||
-  (typeof Component === 'string' ? Component : 'Component')
-);
+const getDisplayName = (Component: any) => Component.displayName ||
+Component.name ||
+(typeof Component === 'string' ? Component : 'Component');
 
 export default TouchableExample;

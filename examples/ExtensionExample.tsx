@@ -9,16 +9,22 @@ import Menu, {
 } from 'react-native-popup-menu';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const CheckedOption = (props) => (
-  <MenuOption
-    value={props.value}
-    text={(props.checked ? '\u2713 ' : '') + props.text}
-  />
-)
 
-const IconOption = ({iconName, text, value}) => (
+const CheckedOption = (props: any) => <MenuOption
+  value={props.value}
+  text={(props.checked ? '\u2713 ' : '') + props.text}
+/>
+
+const IconOption = ({
+  iconName,
+  text,
+  value
+}: any) => (
+  
   <MenuOption value={value}>
+    
     <Text>
+      
       <Icon name={iconName} />
       {' ' + text}
     </Text>
@@ -35,6 +41,7 @@ class RoundedContextMenu extends React.Component {
     const { style, children, layouts, ...other } = this.props;
     const position = computePosition(layouts);
     return (
+      
       <View {...other} style={[roundedStyles, style, position]}>
         {children}
       </View>
@@ -47,23 +54,36 @@ class RoundedContextMenu extends React.Component {
 //Menu.setDefaultRenderer(renderers.NotAnimatedContextMenu);
 
 const ExtensionExample = () => (
+  
   <MenuProvider style={{flexDirection: 'column', padding: 30}}>
+    
     <Text>Extensible hello world!</Text>
+    
     <Menu
-      onSelect={value => alert(`Selected number: ${value}`)}
+      onSelect={(value: any) => alert(`Selected number: ${value}`)}
       renderer={renderers.NotAnimatedContextMenu}
     >
+      
       <MenuTrigger text='Select extension options' />
+      
       <MenuOptions>
+        
         <CheckedOption value={1} text='One' />
+        
         <CheckedOption checked value={2} text='Two' />
+        
         <IconOption value={3} iconName='rocket' text='Three' />
       </MenuOptions>
     </Menu>
+    
     <Menu renderer={RoundedContextMenu}>
+      
       <MenuTrigger text='Select rounded menu' />
+      
       <MenuOptions>
+        
         <MenuOption text="A"/>
+        
         <MenuOption text="B"/>
       </MenuOptions>
     </Menu>

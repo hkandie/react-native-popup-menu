@@ -17,13 +17,19 @@ const data = new Array(500)
 export default class App extends Component {
   render() {
     return (
+      
       <MenuProvider style={styles.container}>
+        
         <Menu onSelect={value => Alert.alert(value)}>
+          
           <MenuTrigger text="Select option" />
+          
           <MenuOptions>
+            
             <FlatList
               data={data}
               renderItem={({ item }) => (
+                
                 <MenuOption value={item.value} text={item.value} />
               )}
               style={{ height: 200 }}

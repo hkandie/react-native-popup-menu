@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, ComponentPropsWithRef } from 'react';
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import Menu from 'react-native-popup-menu';
 
@@ -16,7 +16,7 @@ import FlatListExample from './FlatListExample';
 import InFlatListExample from './InFlatListExample';
 import PopoverExample from './PopoverExample';
 
-const demos = [
+const demos: Array<{ Component: React.FunctionComponent | React.ComponentClass; name: string }> = [
   { Component: BasicExample, name: 'Basic example' },
   { Component: Example, name: 'Advanced example' },
   { Component: ControlledExample, name: 'Controlled example' },
@@ -29,37 +29,40 @@ const demos = [
   { Component: CloseOnBackExample, name: 'Close on back button press example' },
   { Component: FlatListExample, name: 'Using FlatList' },
   { Component: InFlatListExample, name: 'Menu in FlatList' },
-  { Component: PopoverExample, name: 'Popover renderer' },
+  { Component: PopoverExample, name: 'Popover renderer' }
 ];
 
 // show debug messages for demos.
 Menu.debug = true;
 
 export default class Demo extends Component {
-  constructor(props, ctx) {
+  constructor(props: any, ctx: any) {
     super(props, ctx);
     this.state = {
-      selected: undefined,
+      selected: undefined
     };
   }
   render() {
     if (this.state.selected) {
-      return <this.state.selected/>;
+      return <this.state.selected />;
     }
     return (
-        <View style={styles.container}>
-          <View>
-            <Text>Select example:</Text>
-            {demos.map(this.renderDemo, this)}
-          </View>
+      <View style={styles.container}>
+        <View>
+          <Text>Select example:</Text>
+          {demos.map(this.renderDemo, this)}
         </View>
+      </View>
     );
   }
 
-  renderDemo(demo, idx) {
+  renderDemo(demo: any, idx: any) {
     const type = idx + '. ' + demo.name;
     return (
-      <TouchableHighlight key={type} onPress={()=> this.setState({selected: demo.Component})}>
+      <TouchableHighlight
+        key={type}
+        onPress={() => this.setState({ selected: demo.Component })}
+      >
         <View>
           <Text>{type}</Text>
         </View>
@@ -71,8 +74,8 @@ export default class Demo extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection:'column',
-    alignItems:'center',
-    justifyContent:'center',
-  },
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 });

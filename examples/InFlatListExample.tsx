@@ -15,15 +15,23 @@ const data = new Array(100)
 export default class App extends Component {
   render() {
     return (
+      
       <MenuProvider style={styles.container}>
+        
         <FlatList
           data={data}
           renderItem={({ item }) => (
+            
             <Menu onSelect={value => Alert.alert(value)}>
+              
               <MenuTrigger text={'Select option ' + item.value} />
+              
               <MenuOptions>
+                
                 <MenuOption value="A" text="A" />
+                
                 <MenuOption value="B" text="B" />
+                
                 <MenuOption value="C" text="C" />
             </MenuOptions>
           </Menu>
