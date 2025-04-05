@@ -103,6 +103,14 @@ function RootLayoutNav() {
           name='flatlist-example'
           options={{ title: 'Using FlatList', headerTitleAlign: 'center' }}
         />
+        <Stack.Screen
+          name='menu-in-flatlist-example'
+          options={{ title: 'Menu in FlatList Example', headerTitleAlign: 'center' }}
+        />
+        <Stack.Screen
+          name='popover-renderer-example'
+          options={{ title: 'Popover Renderer Example', headerTitleAlign: 'center' }}
+        />
       </Stack>
     </ThemeProvider>
   );
