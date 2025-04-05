@@ -10,10 +10,20 @@
     "expo": "^46.0.0",
     "react": "18.0.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-46.0.0.tar.gz",
-    "react-native-popup-menu": "0.15.8"
+    "react-native-popup-menu": "0.15.8",
+    "typescript": "^5.8.3"
   },
   "devDependencies": {
-    "babel-preset-expo": "~9.2.0"
+    "@types/jest": "^29.5.14",
+    "@typescript-eslint/eslint-plugin": "^8.29.0",
+    "@typescript-eslint/parser": "^8.29.0",
+    "babel-preset-expo": "~9.2.0",
+    "eslint-import-resolver-typescript": "^4.3.1",
+    "eslint-plugin-prefer-import": "^0.0.1",
+    "replace-require-with-import": "^2.1.0",
+    "ts-jest": "^29.3.1",
+    "ts-migrate": "^0.1.35",
+    "ts-node": "^10.9.2"
   },
   "private": true
 }
