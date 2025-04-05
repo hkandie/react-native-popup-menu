@@ -24,6 +24,12 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }

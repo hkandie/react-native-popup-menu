@@ -1,5 +1,5 @@
 import React, { Component, ComponentPropsWithRef } from 'react';
-import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight, Pressable } from 'react-native';
 import Menu from 'react-native-popup-menu';
 
 import Example from './Example';
@@ -15,10 +15,11 @@ import CloseOnBackExample from './CloseOnBackExample';
 import FlatListExample from './FlatListExample';
 import InFlatListExample from './InFlatListExample';
 import PopoverExample from './PopoverExample';
+import AdvancedExample from './Example';
 
-const demos: Array<{ Component: React.FunctionComponent | React.ComponentClass; name: string }> = [
+const demos: Array<{ Component: React.FunctionComponent; name: string }> = [
   { Component: BasicExample, name: 'Basic example' },
-  { Component: Example, name: 'Advanced example' },
+  { Component: AdvancedExample, name: 'Advanced example' },
   { Component: ControlledExample, name: 'Controlled example' },
   { Component: MenuMethodsExample, name: 'Controlling menu using menu methods' },
   { Component: ExtensionExample, name: 'Extensions example' },
@@ -35,41 +36,49 @@ const demos: Array<{ Component: React.FunctionComponent | React.ComponentClass; 
 // show debug messages for demos.
 Menu.debug = true;
 
-export default class Demo extends Component {
-  constructor(props: any, ctx: any) {
-    super(props, ctx);
-    this.state = {
-      selected: undefined
-    };
-  }
-  render() {
-    if (this.state.selected) {
-      return <this.state.selected />;
-    }
+const Demo = () => {
+  const [selected, setSelected] = React.useState<ComponentPropsWithRef<any> | undefined>(undefined);
+
+  if (selected) {
     return (
-      <View style={styles.container}>
+      <View>
         <View>
-          <Text>Select example:</Text>
-          {demos.map(this.renderDemo, this)}
+          <Pressable
+            onPress={() => {
+              setSelected(undefined);
+            }}
+            style={{ padding: 10, backgroundColor: '#ddd', marginBottom: 10 }}
+          >
+            <Text style={{ fontSize: 16, color: 'blue' }}>Back to selection</Text>
+          </Pressable>
         </View>
+        {selected}
       </View>
     );
   }
 
-  renderDemo(demo: any, idx: any) {
-    const type = idx + '. ' + demo.name;
-    return (
-      <TouchableHighlight
-        key={type}
-        onPress={() => this.setState({ selected: demo.Component })}
-      >
-        <View>
-          <Text>{type}</Text>
-        </View>
-      </TouchableHighlight>
-    );
-  }
-}
+  return (
+    <View style={styles.container}>
+      <View>
+        <Text>Select example:</Text>
+        {demos.map((demo, idx) => (
+          <TouchableHighlight
+            key={idx}
+            onPress={() => setSelected(demo.Component)}
+          >
+            <View>
+              <Text>
+                {idx + 1}. {demo.name}
+              </Text>
+            </View>
+          </TouchableHighlight>
+        ))}
+      </View>
+    </View>
+  );
+};
+
+export default Demo;
 
 const styles = StyleSheet.create({
   container: {

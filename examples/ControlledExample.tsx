@@ -2,60 +2,55 @@ import React, { Component } from 'react';
 import { Text } from 'react-native';
 import Menu, { MenuProvider, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
 
-export default class ControlledExample extends Component {
-  constructor(props: any, ctx: any) {
-    super(props, ctx);
-    this.state = { opened: true };
-  }
+const ControlledExample = () => {
+  const [opened, setOpened] = React.useState(true);
 
-  onOptionSelect(value: any) {
+  const onOptionSelect = (value: any) => {
     alert(`Selected number: ${value}`);
-    this.setState({ opened: false });
-  }
+    setOpened(false);
+  };
 
-  onTriggerPress() {
-    this.setState({ opened: true });
-  }
+  const onTriggerPress = () => {
+    setOpened(true);
+  };
 
-  onBackdropPress() {
-    this.setState({ opened: false });
-  }
+  const onBackdropPress = () => {
+    setOpened(false);
+  };
+  console.log('ControlledExample - opened', opened);
+  return (
+    <MenuProvider style={{ flexDirection: 'column', padding: 30 }}>
+      <Text>Hello world!</Text>
 
-  render() {
-    const { opened } = this.state;
-    console.log('ControlledExample - opened', opened);
-    return (
-      <MenuProvider style={{ flexDirection: 'column', padding: 30 }}>
-        <Text>Hello world!</Text>
+      <Menu
+        opened={opened}
+        onBackdropPress={onBackdropPress}
+        onSelect={onOptionSelect}
+      >
+        <MenuTrigger
+          onPress={onTriggerPress}
+          text='Select option'
+        />
 
-        <Menu
-          opened={opened}
-          onBackdropPress={() => this.onBackdropPress()}
-          onSelect={(value: any) => this.onOptionSelect(value)}
-        >
-          <MenuTrigger
-            onPress={() => this.onTriggerPress()}
-            text='Select option'
+        <MenuOptions>
+          <MenuOption
+            value={1}
+            text='One'
           />
 
-          <MenuOptions>
-            <MenuOption
-              value={1}
-              text='One'
-            />
+          <MenuOption value={2}>
+            <Text style={{ color: 'red' }}>Two</Text>
+          </MenuOption>
 
-            <MenuOption value={2}>
-              <Text style={{ color: 'red' }}>Two</Text>
-            </MenuOption>
+          <MenuOption
+            value={3}
+            disabled={true}
+            text='Three'
+          />
+        </MenuOptions>
+      </Menu>
+    </MenuProvider>
+  );
+};
 
-            <MenuOption
-              value={3}
-              disabled={true}
-              text='Three'
-            />
-          </MenuOptions>
-        </Menu>
-      </MenuProvider>
-    );
-  }
-}
+export default ControlledExample;
