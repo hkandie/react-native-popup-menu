@@ -11,7 +11,7 @@ jest.mock('react-native-popup-menu', () => ({
 }));
 
 
-import BasicExample from '../BasicExample';
+import BasicExample from '../app/BasicExample';
 
 
 import renderer from 'react-test-renderer';

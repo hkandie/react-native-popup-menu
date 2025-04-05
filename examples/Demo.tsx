@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableHighlight, Pressable } from 'react-nat
 import Menu from 'react-native-popup-menu';
 
 import Example from './Example';
-import BasicExample from './BasicExample';
+import BasicExample from './app/BasicExample';
 import ControlledExample from './ControlledExample';
 import ExtensionExample from './ExtensionExample';
 import ModalExample from './ModalExample';
@@ -16,6 +16,7 @@ import FlatListExample from './FlatListExample';
 import InFlatListExample from './InFlatListExample';
 import PopoverExample from './PopoverExample';
 import AdvancedExample from './Example';
+import { Link } from 'expo-router';
 
 const demos: Array<{ Component: React.FunctionComponent; name: string }> = [
   { Component: BasicExample, name: 'Basic example' },
@@ -61,18 +62,18 @@ const Demo = () => {
     <View style={styles.container}>
       <View>
         <Text>Select example:</Text>
-        {demos.map((demo, idx) => (
-          <TouchableHighlight
-            key={idx}
-            onPress={() => setSelected(demo.Component)}
-          >
-            <View>
-              <Text>
-                {idx + 1}. {demo.name}
-              </Text>
-            </View>
-          </TouchableHighlight>
-        ))}
+        {demos.map((demo, idx) => {
+          const { Component, name } = demo;
+          const url: string = name.replace(/\s+/g, '-').toLowerCase(); // Normalize the name for URL
+          return (
+            <Link
+              key={idx}
+              href={url} // This is just a placeholder, you can use a real route if needed
+            >
+              {demo.name}
+            </Link>
+          );
+        })}
       </View>
     </View>
   );
