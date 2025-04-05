@@ -4,7 +4,7 @@ import { Menu, MenuProvider, MenuOptions, MenuOption, MenuTrigger } from 'react-
 
 const BasicExample = () => (
   <MenuProvider >
-    <Text>Hello world!</Text>
+    <Text>Basic Example</Text>
 
     <Menu onSelect={(value) => alert(`Selected number: ${value}`)}>
       <MenuTrigger text='Select option' />

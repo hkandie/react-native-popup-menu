@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Text } from 'react-native';
 import Menu, { MenuProvider, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
 
@@ -20,7 +20,7 @@ const ControlledExample = () => {
   console.log('ControlledExample - opened', opened);
   return (
     <MenuProvider style={{ flexDirection: 'column', padding: 30 }}>
-      <Text>Hello world!</Text>
+      <Text>Controlled Example</Text>
 
       <Menu
         opened={opened}

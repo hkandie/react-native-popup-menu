@@ -1,24 +1,14 @@
 import React, { Component } from 'react';
 import { FlatList, Alert, StyleSheet } from 'react-native';
-import {
-  MenuProvider,
-  Menu,
-  MenuTrigger,
-  MenuOptions,
-  MenuOption,
-} from 'react-native-popup-menu';
+import { MenuProvider, Menu, MenuTrigger, MenuOptions, MenuOption } from 'react-native-popup-menu';
 
 Menu.debug = true;
 
-const data = new Array(500)
-  .fill(0)
-  .map((a, i) => ({ key: i, value: 'item' + i }));
+const data = new Array(500).fill(0).map((a, i) => ({ key: i, value: 'item' + i }));
 
-export default class App extends Component {
-  render() {
-    return (
-      
-      <MenuProvider style={styles.container}>
+const FlatListExample = () => {
+  return (
+    <MenuProvider style={styles.container}>
         
         <Menu onSelect={value => Alert.alert(value)}>
           
@@ -37,13 +27,14 @@ export default class App extends Component {
           </MenuOptions>
         </Menu>
       </MenuProvider>
-    );
-  }
-}
+  );
+};
+
+export default FlatListExample;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20,
-  },
+    paddingTop: 20
+  }
 });

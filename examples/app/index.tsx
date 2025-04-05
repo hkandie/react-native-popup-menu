@@ -1,4 +1,4 @@
-import Demo from "../Demo";
+import Demo from "../components/Demo";
 
 export default function App() {
   

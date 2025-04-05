@@ -130,7 +130,7 @@ const AdvancedExample = () => {
         </View>
 
         <ScrollView style={styles.logView}>
-          {state.log.map((l: any, i: any) => {
+          {log.map((l: any, i: any) => {
             const wrapperStyle = { backgroundColor: i % 2 ? 'white' : 'whitesmoke' };
             const textStyle = { color: l.highlighted ? 'red' : 'gray' };
             return (
