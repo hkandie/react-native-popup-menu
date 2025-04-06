@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import Menu, { MenuProvider, MenuOptions, MenuOption, MenuTrigger, renderers } from 'react-native-popup-menu';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const CheckedOption = (props: any) => (
@@ -24,7 +25,7 @@ const roundedStyles = {
   backgroundColor: 'yellow',
   borderRadius: 30
 };
-const RoundedContextMenu = (props) => {
+const RoundedContextMenu = (props: any) => {
   const { style, children, layouts, ...other } = props;
   const position = computePosition(layouts);
   return (

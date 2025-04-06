@@ -7,21 +7,15 @@ jest.mock('react-native-popup-menu', () => ({
   MenuProvider: 'MenuProvider',
   MenuOptions: 'MenuOptions',
   MenuOption: 'MenuOption',
-  MenuTrigger: 'MenuTrigger',
+  MenuTrigger: 'MenuTrigger'
 }));
-
 
 import BasicExample from '../app/BasicExample';
 
-
 import renderer from 'react-test-renderer';
 
-
 test('renders correctly', () => {
-  const tree = renderer.create(
-    
-    <BasicExample />
-  ).toJSON();
- 
+  const tree = renderer.create(<BasicExample />).toJSON();
+
   expect(tree).toMatchSnapshot();
 });

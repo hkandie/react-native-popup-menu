@@ -1,40 +1,38 @@
 import React from 'react';
+
 import { expect } from 'chai';
+
 import { TouchableHighlight, TouchableNativeFeedback, Platform } from 'react-native';
+
 import { View, Text } from 'react-native';
 import { render, nthChild } from './helpers';
 
 jest.dontMock('../src/helpers');
-const {
-  measure,
-  makeName,
-  makeTouchable,
-  lo,
-  isClassComponent,
-  deprecatedComponent,
-} = require('../src/helpers');
+const { measure, makeName, makeTouchable, lo, isClassComponent, deprecatedComponent } = require('../src/helpers');
 
 describe('helpers test', () => {
-
   describe('measure', () => {
-
     it('should be a function', () => {
       expect(measure).to.be.a('function');
     });
 
-    it('should promisify measure callback', done => {
+    it('should promisify measure callback', (done: any) => {
       const ref = {
-        measure: callback => callback(0, 0, 100, 200, 50, 20),
+        measure: (callback: any) => callback(0, 0, 100, 200, 50, 20)
       };
-      measure(ref).then(layout => {
-        expect(layout).to.be.an('object');
-        expect(layout).to.eql({
-          x: 50, y: 20, width: 100, height: 200,
-        });
-        done();
-      }).catch((err = 'promise rejected') => done(err));
+      measure(ref)
+        .then((layout: any) => {
+          expect(layout).to.be.an('object');
+          expect(layout).to.eql({
+            x: 50,
+            y: 20,
+            width: 100,
+            height: 200
+          });
+          done();
+        })
+        .catch((err = 'promise rejected') => done(err));
     });
-
   });
 
   describe('makeName', () => {
@@ -44,7 +42,7 @@ describe('helpers test', () => {
 
     it('should return unique names', () => {
       const name1 = makeName(),
-            name2 = makeName();
+        name2 = makeName();
       expect(name1).to.be.a('string');
       expect(name2).to.be.a('string');
       expect(name1).not.to.be.equal(name2);
@@ -52,9 +50,8 @@ describe('helpers test', () => {
   });
 
   describe('makeTouchable', () => {
-
     it('should create TouchableNativeFeedback for android', () => {
-      Platform.select.mockImplementationOnce(o => {
+      Platform.select.mockImplementationOnce((o: any) => {
         return o.android;
       });
       const { Touchable, defaultTouchableProps } = makeTouchable();
@@ -63,7 +60,7 @@ describe('helpers test', () => {
     });
 
     it('should create TouchableHighlight for ios', () => {
-      Platform.select.mockImplementationOnce(o => {
+      Platform.select.mockImplementationOnce((o: any) => {
         return o.ios;
       });
       const { Touchable, defaultTouchableProps } = makeTouchable();
@@ -72,7 +69,7 @@ describe('helpers test', () => {
     });
 
     it('should create TouchableHighlight for default', () => {
-      Platform.select.mockImplementationOnce(o => {
+      Platform.select.mockImplementationOnce((o: any) => {
         return o.default;
       });
       const { Touchable, defaultTouchableProps } = makeTouchable();
@@ -86,38 +83,36 @@ describe('helpers test', () => {
       expect(Touchable).to.be.equal(MyTouchable);
       expect(defaultTouchableProps).to.be.an('object');
     });
-
   });
 
   describe('lo', () => {
-
     it('should return primitive unchanged', () => {
       const res = lo(3);
       expect(res).to.be.equal(3);
     });
 
     it('should return nexted object without private fields unchanged', () => {
-      const input = { a: 'ahoj', b : { c : 3, d : { e : 'nested' }}};
+      const input = { a: 'ahoj', b: { c: 3, d: { e: 'nested' } } };
       const res = lo(input);
       expect(res).to.be.deep.equal(input);
     });
 
     it('should strip private fields', () => {
-      const res = lo({ a: { _b : "private", c: 3}});
-      expect(res).to.be.deep.equal({ a: { c : 3}});
+      const res = lo({ a: { _b: 'private', c: 3 } });
+      expect(res).to.be.deep.equal({ a: { c: 3 } });
     });
 
     it('should strip excluded fields', () => {
-      const res = lo({ a: { b : "exc", c: 3}}, "b");
-      expect(res).to.be.deep.equal({ a: { c : 3}});
+      const res = lo({ a: { b: 'exc', c: 3 } }, 'b');
+      expect(res).to.be.deep.equal({ a: { c: 3 } });
     });
-
   });
 
   describe('deprecatedComponent', () => {
     it('should render deprecated component', () => {
       const Deprecated = deprecatedComponent('some warning')(View);
       const someStyle = { backgroundColor: 'pink' };
+
       const { output } = render(
         <Deprecated style={someStyle}>
           <Text>Some text</Text>
@@ -125,12 +120,9 @@ describe('helpers test', () => {
       );
       expect(output.type).to.equal(View);
       expect(output.props.style).to.equal(someStyle);
-      expect(nthChild(output, 1)).to.be.deep.equal(
-        <Text>Some text</Text>
-      )
-    })
-  })
-
+      expect(nthChild(output, 1)).to.be.deep.equal(<Text>Some text</Text>);
+    });
+  });
 });
 
 describe('isClassComponent', () => {
@@ -146,7 +138,7 @@ describe('isClassComponent', () => {
 
   it('return false for functional componets', () => {
     function FuncComponent() {
-        return null;
+      return null;
     }
     const result = isClassComponent(FuncComponent);
     expect(result).to.equal(false);
@@ -157,5 +149,4 @@ describe('isClassComponent', () => {
     const result = isClassComponent(ArrowComponent);
     expect(result).to.equal(false);
   });
-
 });

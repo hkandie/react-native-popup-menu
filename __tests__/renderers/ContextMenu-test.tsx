@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Animated, Text } from 'react-native';
 import { render } from '../helpers';
 
@@ -6,12 +7,11 @@ jest.dontMock('../../src/renderers/ContextMenu');
 const { default: ContextMenu, computePosition, fitPositionIntoSafeArea } = require('../../src/renderers/ContextMenu');
 
 describe('ContextMenu', () => {
-
   const windowLayout = { width: 400, height: 600, x: 0, y: 0 };
   const defaultLayouts = {
     windowLayout,
     triggerLayout: { width: 50, height: 50, x: 10, y: 10 },
-    optionsLayout: { width: 200, height: 100 },
+    optionsLayout: { width: 200, height: 100 }
   };
 
   describe('renderer', () => {
@@ -19,28 +19,30 @@ describe('ContextMenu', () => {
       const { output } = render(
         <ContextMenu layouts={defaultLayouts}>
           <Text>Some text</Text>
+
           <Text>Other text</Text>
         </ContextMenu>
       );
+
       expect(output.type).toEqual(Animated.View);
-      expect(output.props.children).toEqual([
-        <Text>Some text</Text>,
-        <Text>Other text</Text>,
-      ]);
+
+      expect(output.props.children).toEqual([<Text>Some text</Text>, <Text>Other text</Text>]);
     });
   });
 
   describe('computePosition', () => {
     it('should be exported', () => {
-        expect(typeof ContextMenu.computePosition).toEqual('function');
+      expect(typeof ContextMenu.computePosition).toEqual('function');
     });
 
     it('should returns default-top-left position', () => {
       const triggerLayout = { width: 50, height: 50, x: 100, y: 100 };
       const optionsLayout = { width: 50, height: 50 };
       const layouts = { windowLayout, triggerLayout, optionsLayout };
+
       expect(computePosition(layouts)).toEqual({
-        top: 100, left: 100,
+        top: 100,
+        left: 100
       });
     });
 
@@ -48,8 +50,10 @@ describe('ContextMenu', () => {
       const triggerLayout = { width: 50, height: 50, x: 10, y: 10 };
       const optionsLayout = { width: 50, height: 50 };
       const layouts = { windowLayout, triggerLayout, optionsLayout };
+
       expect(computePosition(layouts)).toEqual({
-        top: 10, left: 10,
+        top: 10,
+        left: 10
       });
     });
 
@@ -57,8 +61,10 @@ describe('ContextMenu', () => {
       const triggerLayout = { width: 100, height: 50, x: 300, y: 0 };
       const optionsLayout = { width: 150, height: 100 };
       const layouts = { windowLayout, triggerLayout, optionsLayout };
+
       expect(computePosition(layouts)).toEqual({
-        top: 0, left: 250,
+        top: 0,
+        left: 250
       });
     });
 
@@ -66,8 +72,10 @@ describe('ContextMenu', () => {
       const triggerLayout = { width: 100, height: 100, x: 10, y: 500 };
       const optionsLayout = { width: 150, height: 150 };
       const layouts = { windowLayout, triggerLayout, optionsLayout };
+
       expect(computePosition(layouts)).toEqual({
-        top: 450, left: 10,
+        top: 450,
+        left: 10
       });
     });
 
@@ -75,8 +83,10 @@ describe('ContextMenu', () => {
       const triggerLayout = { width: 100, height: 100, x: 300, y: 500 };
       const optionsLayout = { width: 150, height: 150 };
       const layouts = { windowLayout, triggerLayout, optionsLayout };
+
       expect(computePosition(layouts)).toEqual({
-        top: 450, left: 250,
+        top: 450,
+        left: 250
       });
     });
 
@@ -84,8 +94,10 @@ describe('ContextMenu', () => {
       const triggerLayout = { width: 100, height: 20, x: 10, y: 290 };
       const optionsLayout = { width: 150, height: 500 };
       const layouts = { windowLayout, triggerLayout, optionsLayout };
+
       expect(computePosition(layouts)).toEqual({
-        top: 50, left: 10,
+        top: 50,
+        left: 10
       });
     });
 
@@ -93,8 +105,10 @@ describe('ContextMenu', () => {
       const triggerLayout = { width: 100, height: 20, x: 150, y: 10 };
       const optionsLayout = { width: 300, height: 100 };
       const layouts = { windowLayout, triggerLayout, optionsLayout };
+
       expect(computePosition(layouts)).toEqual({
-        top: 10, left: 50,
+        top: 10,
+        left: 50
       });
     });
 
@@ -102,8 +116,10 @@ describe('ContextMenu', () => {
       const triggerLayout = { width: 100, height: 20, x: 10, y: 290 };
       const optionsLayout = { width: 150, height: 700 };
       const layouts = { windowLayout, triggerLayout, optionsLayout };
+
       expect(computePosition(layouts)).toEqual({
-        top: 0, left: 10,
+        top: 0,
+        left: 10
       });
     });
 
@@ -111,8 +127,10 @@ describe('ContextMenu', () => {
       const triggerLayout = { width: 100, height: 20, x: 150, y: 10 };
       const optionsLayout = { width: 500, height: 100 };
       const layouts = { windowLayout, triggerLayout, optionsLayout };
+
       expect(computePosition(layouts)).toEqual({
-        top: 10, left: 0,
+        top: 10,
+        left: 0
       });
     });
 
@@ -120,8 +138,10 @@ describe('ContextMenu', () => {
       const triggerLayout = { width: 100, height: 20, x: 10, y: 200 };
       const optionsLayout = { width: 150, height: 500 };
       const layouts = { windowLayout, triggerLayout, optionsLayout };
+
       expect(computePosition(layouts)).toEqual({
-        top: 0, left: 10,
+        top: 0,
+        left: 10
       });
     });
 
@@ -129,8 +149,10 @@ describe('ContextMenu', () => {
       const triggerLayout = { width: 100, height: 20, x: 10, y: 450 };
       const optionsLayout = { width: 150, height: 500 };
       const layouts = { windowLayout, triggerLayout, optionsLayout };
+
       expect(computePosition(layouts)).toEqual({
-        top: 100, left: 10,
+        top: 100,
+        left: 10
       });
     });
 
@@ -138,8 +160,10 @@ describe('ContextMenu', () => {
       const triggerLayout = { width: 1, height: 20, x: 100, y: 10 };
       const optionsLayout = { width: 350, height: 50 };
       const layouts = { windowLayout, triggerLayout, optionsLayout };
+
       expect(computePosition(layouts)).toEqual({
-        top: 10, left: 0,
+        top: 10,
+        left: 0
       });
     });
 
@@ -148,52 +172,55 @@ describe('ContextMenu', () => {
       const triggerLayout = { width: 50, height: 50, x: 100, y: 100 };
       const optionsLayout = { width: 50, height: 50 };
       const layouts = { windowLayout, triggerLayout, optionsLayout };
+
       expect(computePosition(layouts)).toEqual({
-        top: 70, left: 80,
+        top: 70,
+        left: 80
       });
     });
-
   });
 
   describe('fitPositionIntoSafeArea', () => {
     const optionsLayout = { width: 50, height: 50 };
     const safeAreaLayout = { width: 300, height: 500, x: 20, y: 30 };
-    const defaultLayouts = { optionsLayout, windowLayout, safeAreaLayout};
+    const defaultLayouts = { optionsLayout, windowLayout, safeAreaLayout };
 
     it('should be exported', () => {
-        expect(typeof ContextMenu.fitPositionIntoSafeArea).toEqual('function');
+      expect(typeof ContextMenu.fitPositionIntoSafeArea).toEqual('function');
     });
 
     it('should be identity without safe area', () => {
       const layouts = { optionsLayout };
       const position = { top: 70, left: 80 };
+
       expect(fitPositionIntoSafeArea(position, layouts)).toEqual(position);
     });
 
     it('should avoid top/left edge', () => {
       const position = { top: 10, left: 10 };
+
       expect(fitPositionIntoSafeArea(position, defaultLayouts)).toEqual({
         top: 30,
-        left: 20,
+        left: 20
       });
     });
 
     it('should avoid top/right edge (RTL)', () => {
       const position = { top: 10, right: 10 };
+
       expect(fitPositionIntoSafeArea(position, defaultLayouts)).toEqual({
         top: 30,
-        right: 80, // window - safeArea end
+        right: 80 // window - safeArea end
       });
     });
 
     it('should avoid bottom/right edge', () => {
       const position = { top: 490, left: 290 };
+
       expect(fitPositionIntoSafeArea(position, defaultLayouts)).toEqual({
         top: 480,
-        left: 270,
+        left: 270
       });
     });
-
   });
-
 });

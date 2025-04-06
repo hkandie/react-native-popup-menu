@@ -1,44 +1,58 @@
 import React, { Component, createContext } from 'react';
+
 import PropTypes from 'prop-types';
+
 import { View, BackHandler, SafeAreaView, StyleSheet } from 'react-native';
 
 import { withContext } from './with-context';
 import makeMenuRegistry from './menuRegistry';
+
 import MenuPlaceholder from './MenuPlaceholder';
+
 import { measure, isClassComponent } from './helpers';
 import { debug } from './logger.js';
+
 import MenuOutside from './renderers/MenuOutside';
 
-const defaultOptionsContainerRenderer = options => options;
-const layoutsEqual = (a, b) => (
-  a === b || (a && b && a.width === b.width && a.height === b.height)
-);
+const defaultOptionsContainerRenderer = (options: any) => options;
+const layoutsEqual = (a: any, b: any) => a === b || (a && b && a.width === b.width && a.height === b.height);
 
 if (!React.forwardRef) {
-  throw new Error('This version of popup-menu requires RN 0.55+. Check our compatibility table.')
+  throw new Error('This version of popup-menu requires RN 0.55+. Check our compatibility table.');
 }
-export const PopupMenuContext = createContext({})
-export const withCtx = withContext(PopupMenuContext, "ctx");
+export const PopupMenuContext = createContext({});
+export const withCtx = withContext(PopupMenuContext, 'ctx');
 
 // count of MenuProvider instances
 let instanceCount = 0;
 
 export default class MenuProvider extends Component {
+  _backHandlerSubscription: any;
+  _isMenuClosing: any;
+  _menuRegistry: any;
+  _ownLayout: any;
+  _placeholderRef: any;
+  _safeAreaLayout: any;
+  backdropRef: any;
+  menuCtx: any;
+  openedMenu: any;
+  optionsRef: any;
+  props: any;
 
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this._menuRegistry = makeMenuRegistry();
     this._isMenuClosing = false;
     this._backHandlerSubscription = null;
     const menuActions = {
-      openMenu: name => this.openMenu(name),
+      openMenu: (name: any) => this.openMenu(name),
       closeMenu: () => this.closeMenu(),
-      toggleMenu: name => this.toggleMenu(name),
+      toggleMenu: (name: any) => this.toggleMenu(name),
       isMenuOpen: () => this.isMenuOpen(),
       _getOpenedMenu: () => this._getOpenedMenu(),
-      _notify: force => this._notify(force),
+      _notify: (force: any) => this._notify(force)
     };
-    this.menuCtx = { menuRegistry: this._menuRegistry, menuActions }
+    this.menuCtx = { menuRegistry: this._menuRegistry, menuActions };
   }
 
   _handleBackButton = () => {
@@ -59,23 +73,27 @@ export default class MenuProvider extends Component {
     }
 
     return false;
-  }
+  };
 
   componentDidMount() {
     const { customStyles, skipInstanceCheck } = this.props;
     if (customStyles.menuContextWrapper) {
-      console.warn('menuContextWrapper custom style is deprecated and it might be removed in future releases, use menuProviderWrapper instead.');
+      console.warn(
+        'menuContextWrapper custom style is deprecated and it might be removed in future releases, use menuProviderWrapper instead.'
+      );
     }
     if (!skipInstanceCheck) {
       instanceCount++;
     }
     if (instanceCount > 1) {
-      console.warn('In most cases you should not have more MenuProviders in your app (see API documentation). In other cases use skipInstanceCheck prop.');
+      console.warn(
+        'In most cases you should not have more MenuProviders in your app (see API documentation). In other cases use skipInstanceCheck prop.'
+      );
     }
   }
 
   componentWillUnmount() {
-    debug('unmounting menu provider')
+    debug('unmounting menu provider');
     if (this._backHandlerSubscription != null) {
       this._backHandlerSubscription.remove();
       this._backHandlerSubscription = null;
@@ -90,7 +108,7 @@ export default class MenuProvider extends Component {
     return !!this._getOpenedMenu();
   }
 
-  openMenu(name) {
+  openMenu(name: any) {
     const menu = this._menuRegistry.getMenu(name);
     if (!menu) {
       console.warn(`menu with name ${name} does not exist`);
@@ -103,32 +121,35 @@ export default class MenuProvider extends Component {
       this._backHandlerSubscription = BackHandler.addEventListener('hardwareBackPress', this._handleBackButton);
     }
     menu.instance._setOpened(true);
+
     return this._notify();
   }
 
-  closeMenu() { // has no effect on controlled menus
+  closeMenu() {
+    // has no effect on controlled menus
     debug('close menu');
-    this._menuRegistry.getAll()
-      .filter(menu => menu.instance._getOpened())
-      .forEach(menu => menu.instance._setOpened(false));
+    this._menuRegistry
+      .getAll()
+      .filter((menu: any) => menu.instance._getOpened())
+      .forEach((menu: any) => menu.instance._setOpened(false));
+
     return this._notify();
   }
 
   _invalidateTriggerLayouts() {
     // invalidate layouts for closed menus,
     // both controlled and uncontrolled menus
-    this._menuRegistry.getAll()
-      .filter(menu => !menu.instance.isOpen())
-      .forEach(menu => {
+    this._menuRegistry
+      .getAll()
+      .filter((menu: any) => !menu.instance.isOpen())
+      .forEach((menu: any) => {
         this._menuRegistry.updateLayoutInfo(menu.name, { triggerLayout: undefined });
       });
   }
 
-  _beforeClose(menu) {
+  _beforeClose(menu: any) {
     debug('before close', menu.name);
-    const hideMenu = (this.optionsRef
-      && this.optionsRef.close
-      && this.optionsRef.close()) || Promise.resolve();
+    const hideMenu = (this.optionsRef && this.optionsRef.close && this.optionsRef.close()) || Promise.resolve();
     const hideBackdrop = this.backdropRef && this.backdropRef.close();
     this._invalidateTriggerLayouts();
     this._isMenuClosing = true;
@@ -136,13 +157,13 @@ export default class MenuProvider extends Component {
       .then(() => {
         this._isMenuClosing = false;
       })
-      .catch(err => {
+      .catch((err) => {
         this._isMenuClosing = false;
         throw err;
-      })
+      });
   }
 
-  toggleMenu(name) {
+  toggleMenu(name: any) {
     const menu = this._menuRegistry.getMenu(name);
     if (!menu) {
       console.warn(`menu with name ${name} does not exist`);
@@ -156,22 +177,21 @@ export default class MenuProvider extends Component {
     }
   }
 
-  _notify(forceUpdate) {
+  _notify(forceUpdate: any) {
     const NULL = {};
     const prev = this.openedMenu || NULL;
-    const next = this._menuRegistry.getAll().find(menu => menu.instance.isOpen()) || NULL;
+    const next = this._menuRegistry.getAll().find((menu: any) => menu.instance.isOpen()) || NULL;
     // set newly opened menu before any callbacks are called
     this.openedMenu = next === NULL ? undefined : next;
     if (!forceUpdate && !this._isRenderNeeded(prev, next)) {
       return Promise.resolve();
     }
     debug('notify: next menu:', next.name, ' prev menu:', prev.name);
-    let afterSetState = undefined;
+    let afterSetState: any = undefined;
     let beforeSetState = () => Promise.resolve();
     if (prev.name !== next.name) {
       if (prev !== NULL && !prev.instance.isOpen()) {
-        beforeSetState = () => this._beforeClose(prev)
-          .then(() => prev.instance.props.onClose());
+        beforeSetState = () => this._beforeClose(prev).then(() => prev.instance.props.onClose());
       }
       if (next !== NULL) {
         next.instance.props.onOpen();
@@ -180,8 +200,8 @@ export default class MenuProvider extends Component {
     }
     return beforeSetState().then(() => {
       if (!this._placeholderRef) {
-        debug('setState ignored - maybe the context was unmounted')
-        return
+        debug('setState ignored - maybe the context was unmounted');
+        return;
       }
       this._placeholderRef.setState({ openedMenuName: this.openedMenu && this.openedMenu.name }, afterSetState);
       debug('notify ended');
@@ -191,7 +211,7 @@ export default class MenuProvider extends Component {
   /**
   Compares states of opened menu to determine if rerender is needed.
   */
-  _isRenderNeeded(prev, next) {
+  _isRenderNeeded(prev: any, next: any) {
     if (prev === next) {
       debug('_isRenderNeeded: skipping - no change');
       return false;
@@ -212,50 +232,51 @@ export default class MenuProvider extends Component {
     debug('render menu', this.isMenuOpen(), this._ownLayout);
     return (
       <PopupMenuContext.Provider value={this.menuCtx}>
-        <View style={styles.flex1} onLayout={this._onLayout}>
-          <View style={[
-            styles.flex1,
-            customStyles.menuContextWrapper,
-            customStyles.menuProviderWrapper,
-            style,
-          ]}>
-            { this.props.children }
+        <View
+          style={styles.flex1}
+          onLayout={this._onLayout}
+        >
+          <View style={[styles.flex1, customStyles.menuContextWrapper, customStyles.menuProviderWrapper, style]}>
+            {this.props.children}
           </View>
+
           <SafeAreaView
             style={styles.safeArea}
-            pointerEvents="box-none"
+            pointerEvents='box-none'
           >
             <View
               style={styles.flex1}
               collapsable={false}
-              pointerEvents="box-none"
-              onLayout={this._onSafeAreaLayout}/>
+              pointerEvents='box-none'
+              onLayout={this._onSafeAreaLayout}
+            />
+
             <MenuPlaceholder
               ctx={this}
               backdropStyles={customStyles.backdrop}
               ref={this._onPlaceholderRef}
-              />
+            />
           </SafeAreaView>
         </View>
       </PopupMenuContext.Provider>
     );
   }
 
-  onBackdropRef = r => {
+  onBackdropRef = (r: any) => {
     this.backdropRef = r;
-  }
+  };
 
-  onOptionsRef = r => {
+  onOptionsRef = (r: any) => {
     this.optionsRef = r;
-  }
+  };
 
-  _onPlaceholderRef = r => this._placeholderRef = r;
+  _onPlaceholderRef = (r: any) => (this._placeholderRef = r);
 
   _getOpenedMenu() {
     const name = this._placeholderRef && this._placeholderRef.state.openedMenuName;
     const menu = name ? this._menuRegistry.getMenu(name) : undefined;
-    debug('_getOpenedMenu', name, !!menu)
-    return menu
+    debug('_getOpenedMenu', name, !!menu);
+    return menu;
   }
 
   _onBackdropPress = () => {
@@ -265,28 +286,30 @@ export default class MenuProvider extends Component {
       menu.instance.props.onBackdropPress();
     }
     this.closeMenu();
-  }
+  };
 
   _isInitialized() {
     return !!this._ownLayout;
   }
 
-  _initOpen(menu) {
+  _initOpen(menu: any) {
     debug('opening', menu.name);
     const trigger = menu.instance._getTrigger();
-    measure(trigger).then(triggerLayout => {
+    measure(trigger).then((triggerLayout) => {
       debug('got trigger measurements', triggerLayout);
       this._menuRegistry.updateLayoutInfo(menu.name, { triggerLayout });
-      this.backdropRef && this.backdropRef.open()
+      this.backdropRef && this.backdropRef.open();
+
       this._notify();
     });
   }
 
-  _onOptionsLayout(e, name, isOutside) {
+  _onOptionsLayout(e: any, name: any, isOutside: any) {
     const optionsLayout = e.nativeEvent.layout;
     optionsLayout.isOutside = isOutside;
     debug('got options layout', optionsLayout);
     this._menuRegistry.updateLayoutInfo(name, { optionsLayout });
+
     this._notify();
   }
 
@@ -299,7 +322,7 @@ export default class MenuProvider extends Component {
     const { optionsContainerStyle, renderOptionsContainer, customStyles } = options.props;
     const optionsRenderer = renderOptionsContainer || defaultOptionsContainerRenderer;
     const isOutside = !triggerLayout || !optionsLayout;
-    const onLayout = e => this._onOptionsLayout(e, instance.getName(), isOutside);
+    const onLayout = (e: any) => this._onOptionsLayout(e, instance.getName(), isOutside);
     const style = [optionsContainerStyle, customStyles.optionsContainer];
     const layouts = { windowLayout, triggerLayout, optionsLayout, safeAreaLayout };
     const props = { ...rendererProps, style, onLayout, layouts };
@@ -310,7 +333,7 @@ export default class MenuProvider extends Component {
     return React.createElement(optionsType, props, optionsRenderer(options));
   }
 
-  _onLayout = ({ nativeEvent: { layout } }) => {
+  _onLayout = ({ nativeEvent: { layout } }: any) => {
     if (layoutsEqual(this._ownLayout, layout)) {
       return;
     }
@@ -321,15 +344,15 @@ export default class MenuProvider extends Component {
     }
     const { instance } = this._getOpenedMenu();
     const trigger = instance._getTrigger();
-    measure(trigger).then(triggerLayout => {
+    measure(trigger).then((triggerLayout) => {
       debug('got trigger measurements after context layout change', triggerLayout);
       this._menuRegistry.updateLayoutInfo(instance.getName(), { triggerLayout });
       // force update as own layout has changed
       this._notify(true);
     });
-  }
+  };
 
-  _onSafeAreaLayout = ({ nativeEvent: { layout } }) => {
+  _onSafeAreaLayout = ({ nativeEvent: { layout } }: any) => {
     if (layoutsEqual(this._safeAreaLayout, layout)) {
       return;
     }
@@ -339,31 +362,30 @@ export default class MenuProvider extends Component {
       return;
     }
     this._notify(true);
-  }
-
+  };
 }
 
 MenuProvider.propTypes = {
   customStyles: PropTypes.object,
   backHandler: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
-  skipInstanceCheck: PropTypes.bool,
-}
+  skipInstanceCheck: PropTypes.bool
+};
 
 MenuProvider.defaultProps = {
   customStyles: {},
   backHandler: false,
-  skipInstanceCheck: false,
+  skipInstanceCheck: false
 };
 
 const styles = StyleSheet.create({
   flex1: {
-    flex: 1,
+    flex: 1
   },
   safeArea: {
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
-    bottom: 0,
-  },
+    bottom: 0
+  }
 });

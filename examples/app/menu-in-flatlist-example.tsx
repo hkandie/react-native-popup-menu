@@ -4,7 +4,6 @@ import { MenuProvider, Menu, MenuTrigger, MenuOptions, MenuOption } from 'react-
 
 const data = new Array(100).fill(0).map((a, i) => ({ key: '' + i, value: 'item' + i }));
 
-
 const MemuInFlatListExample = () => {
   return (
     <MenuProvider style={styles.container}>

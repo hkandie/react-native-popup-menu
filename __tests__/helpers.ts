@@ -1,13 +1,14 @@
-import React from 'react'
+import React from 'react';
+
 import ShallowRenderer from 'react-test-renderer/shallow';
 
 /**
  * Renders component and returns instance object and rendered output.
  */
-export function render(element, ctx) {
+export function render(element: any, ctx: any) {
   const renderer = new ShallowRenderer();
   if (ctx) {
-    element = React.cloneElement(element, { ctx })
+    element = React.cloneElement(element, { ctx });
   }
   renderer.render(element);
   const instance = renderer.getMountedInstance();
@@ -18,7 +19,7 @@ export function render(element, ctx) {
 /**
  * Merge styles (possible array) into single style object.
  */
-export function normalizeStyle(styles) {
+export function normalizeStyle(styles: any) {
   if (Array.isArray(styles)) {
     return styles.reduce((r, s) => Object.assign(r, s), {});
   }
@@ -29,10 +30,10 @@ export function normalizeStyle(styles) {
 Enable debug logs
 */
 export function showDebug() {
-  jest.mock('../src/logger', ()=> ({
-    debug : (...args) => {
+  jest.mock('../src/logger', () => ({
+    debug: (...args: any[]) => {
       console.log('test-debug', ...args);
-    },
+    }
   }));
 }
 
@@ -41,17 +42,18 @@ Creates a mock of react instance
 */
 export function mockReactInstance() {
   const instance = {
-    state: {},
+    state: {}
   };
-  instance.setState = (newState, after) => {
+
+  instance.setState = (newState: any, after: any) => {
     Object.assign(instance.state, newState);
     after && after();
-  }
+  };
   return instance;
 }
 
 const WAIT_STEP = 50;
-export function waitFor(condition, timeout = 200) {
+export function waitFor(condition: any, timeout = 200) {
   const startTime = new Date().getTime();
   return new Promise((resolve, reject) => {
     const check = () => {
@@ -69,6 +71,6 @@ export function waitFor(condition, timeout = 200) {
   });
 }
 
-export function nthChild(node, n) {
+export function nthChild(node: any, n: any) {
   return n === 0 ? node : nthChild(node.props.children, n - 1);
 }

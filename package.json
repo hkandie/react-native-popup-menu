@@ -2,15 +2,13 @@
   "name": "react-native-popup-menu",
   "version": "0.17.0",
   "description": "extensible popup/context menu for react native",
-  "main": "build/rnpm.js",
   "directories": {
     "example": "examples"
   },
   "scripts": {
-    "build": "rollup -c rollup.config.babel.js",
-    "prepublish": "yarn build",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "format": "prettier --write \"**/*.{js,jsx,json,ts,tsx}\""
   },
   "repository": {
     "type": "git",
@@ -66,6 +64,7 @@
     "jasmine-reporters": "^2.1.1",
     "jest-cli": "^24.1.0",
     "metro-react-native-babel-preset": "^0.51.1",
+    "prettier": "^3.5.3",
     "prop-types": "^15.5.10",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
@@ -80,8 +79,5 @@
     "ts-jest": "^29.3.1",
     "ts-migrate": "^0.1.35",
     "ts-node": "^10.9.2"
-  },
-  "dependencies": {
-    "typescript": "^5.8.3"
   }
 }

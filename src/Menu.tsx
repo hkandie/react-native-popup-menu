@@ -1,26 +1,38 @@
 import React, { Component } from 'react';
+
 import PropTypes from 'prop-types';
+
 import { View } from 'react-native';
+
 import MenuOptions from './MenuOptions';
+
 import MenuTrigger from './MenuTrigger';
+
 import ContextMenu from './renderers/ContextMenu';
+
 import { makeName } from './helpers';
 import { debug, CFG } from './logger';
+
 import { withCtx } from './MenuProvider';
 
-const isRegularComponent = c => c.type !== MenuOptions && c.type !== MenuTrigger;
-const isTrigger = c => c.type === MenuTrigger;
-const isMenuOptions = c => c.type === MenuOptions;
+const isRegularComponent = (c: any) => c.type !== MenuOptions && c.type !== MenuTrigger;
+const isTrigger = (c: any) => c.type === MenuTrigger;
+const isMenuOptions = (c: any) => c.type === MenuOptions;
 
 export class Menu extends Component {
+  _forceClose: any;
+  _name: any;
+  _opened: any;
+  _trigger: any;
+  props: any;
 
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this._name = this.props.name || makeName();
     this._forceClose = false;
     const { ctx } = props;
-    if(!(ctx && ctx.menuActions)) {
-      throw new Error("Menu component must be ancestor of MenuProvider");
+    if (!(ctx && ctx.menuActions)) {
+      throw new Error('Menu component must be ancestor of MenuProvider');
     }
   }
 
@@ -33,7 +45,7 @@ export class Menu extends Component {
     this.props.ctx.menuActions._notify();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: any) {
     if (this.props.name !== prevProps.name) {
       console.warn('Menu name cannot be changed');
     }
@@ -74,21 +86,19 @@ export class Menu extends Component {
   render() {
     const { style } = this.props;
     const children = this._reduceChildren();
-    return (
-      <View style={style}>
-        {children}
-      </View>
-    );
+    return <View style={style}>{children}</View>;
   }
 
   _reduceChildren() {
-    return React.Children.toArray(this.props.children).reduce((r, child) => {
+    return React.Children.toArray(this.props.children).reduce((r: any, child: any) => {
       if (isTrigger(child)) {
-        r.push(React.cloneElement(child, {
-          key: null,
-          menuName: this._name,
-          onRef: (t => this._trigger = t),
-        }));
+        r.push(
+          React.cloneElement(child, {
+            key: null,
+            menuName: this._name,
+            onRef: (t: any) => (this._trigger = t)
+          })
+        );
       }
       if (isRegularComponent(child)) {
         r.push(child);
@@ -109,7 +119,7 @@ export class Menu extends Component {
     return this._opened;
   }
 
-  _setOpened(opened) {
+  _setOpened(opened: any) {
     this._opened = opened;
   }
 
@@ -125,7 +135,6 @@ export class Menu extends Component {
     }
     return options && trigger;
   }
-
 }
 
 Menu.propTypes = {
@@ -136,7 +145,7 @@ Menu.propTypes = {
   onOpen: PropTypes.func,
   onClose: PropTypes.func,
   opened: PropTypes.bool,
-  onBackdropPress: PropTypes.func,
+  onBackdropPress: PropTypes.func
 };
 
 Menu.defaultProps = {
@@ -145,19 +154,22 @@ Menu.defaultProps = {
   onSelect: () => {},
   onOpen: () => {},
   onClose: () => {},
-  onBackdropPress: () => {},
+  onBackdropPress: () => {}
 };
 
 const MenuExternal = withCtx(Menu);
-Object.defineProperty(MenuExternal, 'debug', 
-    { 
-      get: function() { return CFG.debug }, 
-      set: function(val) { CFG.debug = val }, 
-    });
-MenuExternal.setDefaultRenderer = (renderer) => {
+Object.defineProperty(MenuExternal, 'debug', {
+  get: function () {
+    return CFG.debug;
+  },
+  set: function (val) {
+    CFG.debug = val;
+  }
+});
+MenuExternal.setDefaultRenderer = (renderer: any) => {
   Menu.defaultProps.renderer = renderer;
-}
-MenuExternal.setDefaultRendererProps = (rendererProps) => {
+};
+MenuExternal.setDefaultRendererProps = (rendererProps: any) => {
   Menu.defaultProps.rendererProps = rendererProps;
-}
+};
 export default MenuExternal;

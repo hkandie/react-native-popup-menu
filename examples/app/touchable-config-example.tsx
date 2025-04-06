@@ -10,7 +10,7 @@ const TouchableExample = () => {
 
   return (
     <MenuProvider style={{ flexDirection: 'column', padding: 30 }}>
-      <Menu onSelect={(Touchable: any) =>  setTouchable(Touchable)}>
+      <Menu onSelect={(Touchable: any) => setTouchable(Touchable)}>
         <MenuTrigger
           customStyles={{
             TriggerTouchableComponent: Button,
@@ -65,6 +65,7 @@ const TouchableExample = () => {
           }}
           text={buttonText}
         />
+
         <MenuOptions
           customStyles={{
             OptionTouchableComponent: TouchableOpacity,
@@ -72,8 +73,11 @@ const TouchableExample = () => {
           }}
         >
           <MenuOption text='Option 1' />
+
           <MenuOption text='Option 2' />
+
           <MenuOption text='Option 3' />
+
           <MenuOption text='Option 4' />
         </MenuOptions>
       </Menu>

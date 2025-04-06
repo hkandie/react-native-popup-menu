@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+
 import { View, StyleSheet } from 'react-native';
+
 import Backdrop from './Backdrop';
 import { debug } from './logger.js';
 
 export default class MenuPlaceholder extends Component {
-  constructor(props) {
-    super(props)
+  props: any;
+  state: any;
+  constructor(props: any) {
+    super(props);
     this.state = {};
   }
 
@@ -28,9 +32,7 @@ export default class MenuPlaceholder extends Component {
           style={backdropStyles}
           ref={ctx.onBackdropRef}
         />
-        {
-          ctx._makeOptions()
-        }
+        {ctx._makeOptions()}
       </View>
     );
   }
@@ -43,6 +45,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    overflow: 'hidden',
-  },
+    overflow: 'hidden'
+  }
 });

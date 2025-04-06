@@ -9,24 +9,23 @@ const data = new Array(500).fill(0).map((a, i) => ({ key: i, value: 'item' + i }
 const FlatListExample = () => {
   return (
     <MenuProvider style={styles.container}>
-        
-        <Menu onSelect={value => Alert.alert(value)}>
-          
-          <MenuTrigger text="Select option" />
-          
-          <MenuOptions>
-            
-            <FlatList
-              data={data}
-              renderItem={({ item }) => (
-                
-                <MenuOption value={item.value} text={item.value} />
-              )}
-              style={{ height: 200 }}
-            />
-          </MenuOptions>
-        </Menu>
-      </MenuProvider>
+      <Menu onSelect={(value) => Alert.alert(value)}>
+        <MenuTrigger text='Select option' />
+
+        <MenuOptions>
+          <FlatList
+            data={data}
+            renderItem={({ item }) => (
+              <MenuOption
+                value={item.value}
+                text={item.value}
+              />
+            )}
+            style={{ height: 200 }}
+          />
+        </MenuOptions>
+      </Menu>
+    </MenuProvider>
   );
 };
 

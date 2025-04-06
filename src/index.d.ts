@@ -3,9 +3,9 @@
  *
  * @author Wang Guan <momocraft@gmail>
  */
-declare module "react-native-popup-menu" {
-  import * as React from "react";
-  import { StyleProp, ViewStyle, TextStyle } from "react-native";
+declare module 'react-native-popup-menu' {
+  import * as React from 'react';
+  import { StyleProp, ViewStyle, TextStyle } from 'react-native';
 
   /**
    * MenuProvider
@@ -88,7 +88,7 @@ declare module "react-native-popup-menu" {
     triggerOnLongPress?: boolean;
 
     onPress?(): void;
-    onAlternativeAction? (): void;
+    onAlternativeAction?(): void;
     children?: React.ReactNode;
     style?: StyleProp<ViewStyle>;
   }
@@ -199,7 +199,7 @@ declare module "react-native-popup-menu" {
     toggleMenu: (name: string) => Promise<void>;
     isMenuOpen: () => boolean;
   }
-  
+
   export interface MenuContext {
     // This part shouldn't be exported to the user so it's commented out
     // menuRegistry: MenuRegistry;
@@ -212,5 +212,5 @@ declare module "react-native-popup-menu" {
 
   export function withMenuContext<PropType extends MenuContextProps>(
     component: React.ComponentType<PropType>
-  ): React.ComponentType<Omit<PropType, "ctx">>;
+  ): React.ComponentType<Omit<PropType, 'ctx'>>;
 }

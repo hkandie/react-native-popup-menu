@@ -3,18 +3,30 @@ import { StyleSheet, Text, View, TouchableHighlight, Pressable } from 'react-nat
 import Menu from 'react-native-popup-menu';
 
 import ControlledExample from '../app/controlled-example';
+
 import ExtensionExample from '../app/extensions-example';
+
 import ModalExample from '../app/modal-example';
+
 import StylingExample from '../app/styling-example';
+
 import NonRootExample from '../app/non-root-example';
+
 import TouchableExample from '../app/touchable-config-example';
+
 import MenuMethodsExample from '../app/controlling-menu-using-menu-methods';
+
 import CloseOnBackExample from '../app/close-on-back-button-press-example';
+
 import FlatListExample from '../app/using-flatlist';
+
 import InFlatListExample from '../app/menu-in-flatlist-example'; // Note: double slash is intentional to avoid path issues
+
 import PopoverExample from '../app/popover-renderer-example';
 import { Link } from 'expo-router';
+
 import BasicExample from '../app/basic-example';
+
 import AdvancedExample from '../app/advanced-example';
 
 const demos: Array<{ Component: React.FunctionComponent; name: string }> = [
@@ -34,6 +46,7 @@ const demos: Array<{ Component: React.FunctionComponent; name: string }> = [
 ];
 
 // show debug messages for demos.
+
 Menu.debug = true;
 
 const Demo = () => {

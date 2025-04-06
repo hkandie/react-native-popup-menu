@@ -1,9 +1,9 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { Menu, MenuProvider, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
+import { Menu, MenuProvider, MenuTrigger, MenuOptions, MenuOption } from '..';
 
 const BasicExample = () => (
-  <MenuProvider >
+  <MenuProvider>
     <Text>Basic Example</Text>
 
     <Menu onSelect={(value) => alert(`Selected number: ${value}`)}>

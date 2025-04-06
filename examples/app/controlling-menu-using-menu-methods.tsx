@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
+
 import Menu, { MenuProvider, MenuOptions, MenuOption, MenuTrigger, withMenuContext } from 'react-native-popup-menu';
 
 const Openner = (props: any) => (
@@ -39,5 +40,5 @@ const ControlledExample = () => {
       <ContextOpenner />
     </MenuProvider>
   );
-}
+};
 export default ControlledExample;

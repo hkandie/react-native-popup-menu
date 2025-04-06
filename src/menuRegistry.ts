@@ -9,14 +9,13 @@ import { iterator2array } from './helpers';
  *   optionsLayout: Object - layout of menu options if known
  *   optionsCustomStyles: Object - custom styles of options
  * }
-*/
+ */
 export default function makeMenuRegistry(menus = new Map()) {
-
   /**
    * Subscribes menu instance.
    */
-  function subscribe(instance) {
-    const name = instance.getName()
+  function subscribe(instance: any) {
+    const name = instance.getName();
     if (menus.get(name)) {
       console.warn(`incorrect usage of popup menu - menu with name ${name} already exists`);
     }
@@ -26,14 +25,14 @@ export default function makeMenuRegistry(menus = new Map()) {
   /**
    * Unsubscribes menu instance.
    */
-  function unsubscribe(instance) {
+  function unsubscribe(instance: any) {
     menus.delete(instance.getName());
   }
 
   /**
    * Updates layout infomration.
    */
-  function updateLayoutInfo(name, layouts = {}) {
+  function updateLayoutInfo(name: any, layouts = {}) {
     if (!menus.has(name)) {
       return;
     }
@@ -47,7 +46,7 @@ export default function makeMenuRegistry(menus = new Map()) {
     menus.set(name, menu);
   }
 
-  function setOptionsCustomStyles(name, optionsCustomStyles) {
+  function setOptionsCustomStyles(name: any, optionsCustomStyles: any) {
     if (!menus.has(name)) {
       return;
     }
@@ -58,7 +57,7 @@ export default function makeMenuRegistry(menus = new Map()) {
   /**
    * Get `menu data` by name.
    */
-  function getMenu(name) {
+  function getMenu(name: any) {
     return menus.get(name);
   }
 
