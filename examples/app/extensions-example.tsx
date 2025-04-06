@@ -5,16 +5,16 @@ import Menu, { MenuProvider, MenuOptions, MenuOption, MenuTrigger, renderers } f
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const CheckedOption = (props: any) => (
-  <MenuOption
+    <MenuOption
     value={props.value}
     text={(props.checked ? '\u2713 ' : '') + props.text}
   />
 );
 
 const IconOption = ({ iconName, text, value }: any) => (
-  <MenuOption value={value}>
-    <Text>
-      <Icon name={iconName} />
+    <MenuOption value={value}>
+        <Text>
+            <Icon name={iconName} />
       {' ' + text}
     </Text>
   </MenuOption>
@@ -29,7 +29,7 @@ const RoundedContextMenu = (props: any) => {
   const { style, children, layouts, ...other } = props;
   const position = computePosition(layouts);
   return (
-    <View
+        <View
       {...other}
       style={[roundedStyles, style, position]}
     >
@@ -42,28 +42,28 @@ const RoundedContextMenu = (props: any) => {
 //Menu.setDefaultRenderer(renderers.NotAnimatedContextMenu);
 
 const ExtensionExample = () => (
-  <MenuProvider style={{ flexDirection: 'column', padding: 30 }}>
-    <Text>Extensible hello world!</Text>
+    <MenuProvider style={{ flexDirection: 'column', padding: 30 }}>
+        <Text>Extensible hello world!</Text>
 
-    <Menu
+        <Menu
       onSelect={(value: any) => alert(`Selected number: ${value}`)}
       renderer={renderers.NotAnimatedContextMenu}
     >
-      <MenuTrigger text='Select extension options' />
+            <MenuTrigger text='Select extension options' />
 
-      <MenuOptions>
-        <CheckedOption
+            <MenuOptions>
+                <CheckedOption
           value={1}
           text='One'
         />
 
-        <CheckedOption
+                <CheckedOption
           checked
           value={2}
           text='Two'
         />
 
-        <IconOption
+                <IconOption
           value={3}
           iconName='rocket'
           text='Three'
@@ -71,13 +71,13 @@ const ExtensionExample = () => (
       </MenuOptions>
     </Menu>
 
-    <Menu renderer={RoundedContextMenu}>
-      <MenuTrigger text='Select rounded menu' />
+        <Menu renderer={RoundedContextMenu}>
+            <MenuTrigger text='Select rounded menu' />
 
-      <MenuOptions>
-        <MenuOption text='A' />
+            <MenuOptions>
+                <MenuOption text='A' />
 
-        <MenuOption text='B' />
+                <MenuOption text='B' />
       </MenuOptions>
     </Menu>
   </MenuProvider>

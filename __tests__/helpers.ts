@@ -30,7 +30,7 @@ export function normalizeStyle(styles: any) {
 Enable debug logs
 */
 export function showDebug() {
-  jest.mock('../src/logger', () => ({
+    jest.mock('../src/logger', () => ({
     debug: (...args: any[]) => {
       console.log('test-debug', ...args);
     }
@@ -45,7 +45,7 @@ export function mockReactInstance() {
     state: {}
   };
 
-  instance.setState = (newState: any, after: any) => {
+    instance.setState = (newState: any, after: any) => {
     Object.assign(instance.state, newState);
     after && after();
   };
@@ -60,7 +60,7 @@ export function waitFor(condition: any, timeout = 200) {
       const t = new Date().getTime();
       console.log('Checking condition at time:', t - startTime);
       if (condition()) {
-        return resolve();
+                return resolve();
       }
       if (t > startTime + timeout) {
         return reject();

@@ -26,8 +26,8 @@ export default class MenuPlaceholder extends Component {
       return null;
     }
     return (
-      <View style={styles.placeholder}>
-        <Backdrop
+            <View style={styles.placeholder}>
+                <Backdrop
           onPress={ctx._onBackdropPress}
           style={backdropStyles}
           ref={ctx.onBackdropRef}

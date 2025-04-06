@@ -39,89 +39,89 @@ const AdvancedExample = () => {
   };
 
   return (
-    <MenuProvider style={{ flex: 1 }}>
-      <View style={styles.container}>
-        <View style={styles.topbar}>
-          <Menu
+        <MenuProvider style={{ flex: 1 }}>
+            <View style={styles.container}>
+                <View style={styles.topbar}>
+                    <Menu
             name='numbers'
             renderer={SlideInMenu}
             onSelect={(value: any) => selectNumber(value)}
           >
-            <MenuTrigger style={styles.trigger}>
-              <Text style={[styles.text, styles.triggerText]}>Slide-in menu...</Text>
+                        <MenuTrigger style={styles.trigger}>
+                            <Text style={[styles.text, styles.triggerText]}>Slide-in menu...</Text>
             </MenuTrigger>
 
-            <MenuOptions customStyles={{ optionText: [styles.text, styles.slideInOption] }}>
-              <MenuOption
+                        <MenuOptions customStyles={{ optionText: [styles.text, styles.slideInOption] }}>
+                            <MenuOption
                 value={1}
                 text='Option one'
               />
 
-              <MenuOption
+                            <MenuOption
                 value={2}
                 text='Option two'
               />
 
-              <MenuOption
+                            <MenuOption
                 value={3}
                 text='Option three'
               />
 
-              <MenuOption
+                            <MenuOption
                 value={4}
                 text='Option four'
               />
               {null /* conditional not rendered option */}
 
-              <MenuOption
+                            <MenuOption
                 value={5}
                 text='Option five'
               />
             </MenuOptions>
           </Menu>
 
-          <View style={{ flex: 1 }}></View>
+                    <View style={{ flex: 1 }}></View>
 
-          <Menu
+                    <Menu
             name='types'
             onSelect={(value: any) => selectOptionType(value)}
             onBackdropPress={() => addLog('menu will be closed by backdrop')}
             onOpen={() => addLog('menu is opening')}
             onClose={() => addLog('menu is closing')}
           >
-            <MenuTrigger
+                        <MenuTrigger
               onAlternativeAction={() => addLog('trigger longpressed')}
               style={styles.trigger}
             >
-              <Text style={[styles.text, styles.triggerText]}>Context menu...</Text>
+                            <Text style={[styles.text, styles.triggerText]}>Context menu...</Text>
             </MenuTrigger>
 
-            <MenuOptions customStyles={{ optionText: styles.text }}>
-              <MenuOption
+                        <MenuOptions customStyles={{ optionText: styles.text }}>
+                            <MenuOption
                 value='Normal'
                 text='Normal'
               />
 
-              <MenuOption
+                            <MenuOption
                 value='N/A'
                 disabled={true}
                 text='Disabled'
               />
 
-              <MenuOption
+                            <MenuOption
                 value='N/A'
                 disableTouchable={true}
                 text='Non-selectable'
               />
 
-              <MenuOption
+                            <MenuOption
                 value='Do not close'
                 text='Do not close'
               />
 
-              <View style={styles.divider} />
+                            <View style={styles.divider} />
 
-              <MenuOption
+                            <MenuOption
                 value={{ text: 'Hello world!' }}
                 text='Object as value'
               />
@@ -129,32 +129,32 @@ const AdvancedExample = () => {
           </Menu>
         </View>
 
-        <ScrollView style={styles.logView}>
+                <ScrollView style={styles.logView}>
           {log.map((l: any, i: any) => {
             const wrapperStyle = { backgroundColor: i % 2 ? 'white' : 'whitesmoke' };
             const textStyle = { color: l.highlighted ? 'red' : 'gray' };
             return (
-              <View
+                            <View
                 style={[styles.logItem, wrapperStyle]}
                 key={l.id}
               >
-                <Text style={[styles.text, textStyle]}>{l.value}</Text>
+                                <Text style={[styles.text, textStyle]}>{l.value}</Text>
 
-                <View style={{ flex: 1 }}></View>
+                                <View style={{ flex: 1 }}></View>
 
-                <Menu>
-                  <MenuTrigger
+                                <Menu>
+                                    <MenuTrigger
                     text='edit'
                     customStyles={{ triggerText: styles.text }}
                   />
 
-                  <MenuOptions customStyles={{ optionText: styles.text }}>
-                    <MenuOption
+                                    <MenuOptions customStyles={{ optionText: styles.text }}>
+                                        <MenuOption
                       onSelect={() => toggleHighlight(l.id)}
                       text={l.highlighted ? 'Unhighlight' : 'Highlight'}
                     />
 
-                    <MenuOption
+                                        <MenuOption
                       onSelect={() => deleteLogItem(l.id)}
                       text='Delete'
                     />

@@ -1,26 +1,26 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react-native'), require('react')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'react-native', 'react'], factory) :
-  (global = global || self, factory(global.ReactNativePopupMenu = {}, global.reactNative, global.React));
-}(this, function (exports, reactNative, React) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react-native'), require('react')) :
+    typeof define === 'function' && define.amd ? define(['exports', 'react-native', 'react'], factory) :
+    (global = global || self, factory(global.ReactNativePopupMenu = {}, global.reactNative, global.React));
+}(this, function (exports: any, reactNative: any, React: any) { 'use strict';
 
   var React__default = 'default' in React ? React['default'] : React;
 
   // platform select polyfil for older RN versions
 
   if (!reactNative.Platform.select) {
-    reactNative.Platform.select = function (obj) {
+    reactNative.Platform.select = function (obj: any) {
       return obj[reactNative.Platform.OS];
     };
   }
 
-  function _classCallCheck(instance, Constructor) {
+  function _classCallCheck(instance: any, Constructor: any) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
 
-  function _defineProperties(target, props) {
+  function _defineProperties(target: any, props: any) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
       descriptor.enumerable = descriptor.enumerable || false;
@@ -30,13 +30,13 @@
     }
   }
 
-  function _createClass(Constructor, protoProps, staticProps) {
+  function _createClass(Constructor: any, protoProps: any, staticProps: any) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
     return Constructor;
   }
 
-  function _defineProperty(obj, key, value) {
+  function _defineProperty(obj: any, key: any, value: any) {
     if (key in obj) {
       Object.defineProperty(obj, key, {
         value: value,
@@ -51,8 +51,8 @@
     return obj;
   }
 
-  function _extends() {
-    _extends = Object.assign || function (target) {
+    function _extends(this: any) {
+        _extends = Object.assign || function (target: any) {
       for (var i = 1; i < arguments.length; i++) {
         var source = arguments[i];
 
@@ -66,17 +66,17 @@
       return target;
     };
 
-    return _extends.apply(this, arguments);
+        return _extends.apply(this, arguments);
   }
 
-  function _objectSpread(target) {
+  function _objectSpread(target: any) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i] != null ? arguments[i] : {};
       var ownKeys = Object.keys(source);
 
       if (typeof Object.getOwnPropertySymbols === 'function') {
-        ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
-          return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+                ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
+                    return Object.getOwnPropertyDescriptor(source, sym).enumerable;
         }));
       }
 
@@ -88,7 +88,7 @@
     return target;
   }
 
-  function _inherits(subClass, superClass) {
+  function _inherits(subClass: any, superClass: any) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
@@ -103,15 +103,15 @@
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
 
-  function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    function _getPrototypeOf(o: any) {
+        _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o: any) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
 
-  function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    function _setPrototypeOf(o: any, p: any) {
+        _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o: any, p: any) {
       o.__proto__ = p;
       return o;
     };
@@ -119,7 +119,7 @@
     return _setPrototypeOf(o, p);
   }
 
-  function _objectWithoutPropertiesLoose(source, excluded) {
+  function _objectWithoutPropertiesLoose(source: any, excluded: any) {
     if (source == null) return {};
     var target = {};
     var sourceKeys = Object.keys(source);
@@ -128,13 +128,13 @@
     for (i = 0; i < sourceKeys.length; i++) {
       key = sourceKeys[i];
       if (excluded.indexOf(key) >= 0) continue;
-      target[key] = source[key];
+            target[key] = source[key];
     }
 
     return target;
   }
 
-  function _objectWithoutProperties(source, excluded) {
+  function _objectWithoutProperties(source: any, excluded: any) {
     if (source == null) return {};
 
     var target = _objectWithoutPropertiesLoose(source, excluded);
@@ -148,14 +148,14 @@
         key = sourceSymbolKeys[i];
         if (excluded.indexOf(key) >= 0) continue;
         if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-        target[key] = source[key];
+                target[key] = source[key];
       }
     }
 
     return target;
   }
 
-  function _assertThisInitialized(self) {
+  function _assertThisInitialized(self: any) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
@@ -163,7 +163,7 @@
     return self;
   }
 
-  function _possibleConstructorReturn(self, call) {
+  function _possibleConstructorReturn(self: any, call: any) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     }
@@ -175,9 +175,9 @@
    * Promisifies measure's callback function and returns layout object.
    */
 
-  var measure = function measure(ref) {
+  var measure = function measure(ref: any) {
     return new Promise(function (resolve) {
-      ref.measure(function (x, y, width, height, pageX, pageY) {
+      ref.measure(function (x: any, y: any, width: any, height: any, pageX: any, pageY: any) {
         resolve({
           x: pageX,
           y: pageY,
@@ -194,7 +194,7 @@
   var makeName = function () {
     var nextID = 1;
     return function () {
-      return "menu-".concat(nextID++);
+            return "menu-".concat(nextID++);
     };
   }();
   /**
@@ -202,7 +202,7 @@
    * It also returns default props for specific touchable types.
    */
 
-  function makeTouchable(TouchableComponent) {
+  function makeTouchable(TouchableComponent: any) {
     var Touchable = TouchableComponent || reactNative.Platform.select({
       android: reactNative.TouchableNativeFeedback,
       ios: reactNative.TouchableHighlight,
@@ -225,7 +225,7 @@
   Converts iterator to array
   */
 
-  function iterator2array(it) {
+  function iterator2array(it: any) {
     // workaround around https://github.com/instea/react-native-popup-menu/issues/41#issuecomment-340290127
     var arr = [];
 
@@ -237,7 +237,7 @@
   }
   /** checks if component is class component */
 
-  function isClassComponent(component) {
+  function isClassComponent(component: any) {
     return component.prototype && !!component.prototype.render;
   }
   /**
@@ -246,9 +246,9 @@
    * methods - array of method names to be delegated to deprecated component
    */
 
-  function deprecatedComponent(message) {
+  function deprecatedComponent(message: any) {
     var methods = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-    return function deprecatedComponentHOC(Component) {
+    return function deprecatedComponentHOC(Component: any) {
       var _temp;
 
       return _temp =
@@ -256,10 +256,10 @@
       function (_React$Component) {
         _inherits(DeprecatedComponent, _React$Component);
 
-        function DeprecatedComponent() {
+        function DeprecatedComponent(this: any) {
           var _getPrototypeOf2;
 
-          var _this;
+          var _this: any;
 
           _classCallCheck(this, DeprecatedComponent);
 
@@ -269,11 +269,11 @@
 
           _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(DeprecatedComponent)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
-          _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onRef", function (ref) {
+          _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onRef", function (ref: any) {
             return _this.ref = ref;
           });
 
-          methods.forEach(function (name) {
+          methods.forEach(function (name: any) {
             // delegate methods to the component
             _this[name] = function () {
               var _this$ref;
@@ -284,10 +284,10 @@
           return _this;
         }
 
-        _createClass(DeprecatedComponent, [{
+                _createClass(DeprecatedComponent, [{
           key: "render",
           value: function render() {
-            return React__default.createElement(Component, _extends({}, this.props, {
+                        return React__default.createElement(Component, _extends({}, this.props, {
               ref: this.onRef
             }));
           }
@@ -303,7 +303,7 @@
     };
   }
 
-  function createCommonjsModule(fn, module) {
+  function createCommonjsModule(fn: any, module: any) {
   	return module = { exports: {} }, fn(module, module.exports), module.exports;
   }
 
@@ -317,7 +317,7 @@
   var hasOwnProperty = Object.prototype.hasOwnProperty;
   var propIsEnumerable = Object.prototype.propertyIsEnumerable;
 
-  function toObject(val) {
+    function toObject(val) {
   	if (val === null || val === undefined) {
   		throw new TypeError('Object.assign cannot be called with null or undefined');
   	}
@@ -335,7 +335,7 @@
 
   		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
   		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
-  		test1[5] = 'de';
+    		test1[5] = 'de';
   		if (Object.getOwnPropertyNames(test1)[0] === '5') {
   			return false;
   		}
@@ -343,10 +343,10 @@
   		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
   		var test2 = {};
   		for (var i = 0; i < 10; i++) {
-  			test2['_' + String.fromCharCode(i)] = i;
+    			test2['_' + String.fromCharCode(i)] = i;
   		}
   		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
-  			return test2[n];
+    			return test2[n];
   		});
   		if (order2.join('') !== '0123456789') {
   			return false;
@@ -355,7 +355,7 @@
   		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
   		var test3 = {};
   		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
-  			test3[letter] = letter;
+    			test3[letter] = letter;
   		});
   		if (Object.keys(Object.assign({}, test3)).join('') !==
   				'abcdefghijklmnopqrst') {
@@ -369,7 +369,7 @@
   	}
   }
 
-  var objectAssign = shouldUseNative() ? Object.assign : function (target, source) {
+    var objectAssign = shouldUseNative() ? Object.assign : function (target, source) {
   	var from;
   	var to = toObject(target);
   	var symbols;
@@ -413,7 +413,7 @@
     var ReactPropTypesSecret$1 = ReactPropTypesSecret_1;
     var loggedTypeFailures = {};
 
-    printWarning = function(text) {
+        printWarning = function(text) {
       var message = 'Warning: ' + text;
       if (typeof console !== 'undefined') {
         console.error(message);
@@ -438,7 +438,7 @@
    * @param {?Function} getStack Returns the component stack.
    * @private
    */
-  function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
+    function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
     {
       for (var typeSpecName in typeSpecs) {
         if (typeSpecs.hasOwnProperty(typeSpecName)) {
@@ -463,7 +463,7 @@
           }
           if (error && !(error instanceof Error)) {
             printWarning(
-              (componentName || 'React class') + ': type specification of ' +
+                            (componentName || 'React class') + ': type specification of ' +
               location + ' `' + typeSpecName + '` is invalid; the type checker ' +
               'function must return `null` or an `Error` but returned a ' + typeof error + '. ' +
               'You may have forgotten to pass an argument to the type checker ' +
@@ -475,12 +475,12 @@
           if (error instanceof Error && !(error.message in loggedTypeFailures)) {
             // Only monitor this failure once because there tends to be a lot of the
             // same error.
-            loggedTypeFailures[error.message] = true;
+                        loggedTypeFailures[error.message] = true;
 
             var stack = getStack ? getStack() : '';
 
             printWarning(
-              'Failed ' + location + ' type: ' + error.message + (stack != null ? stack : '')
+                            'Failed ' + location + ' type: ' + error.message + (stack != null ? stack : '')
             );
           }
         }
@@ -493,7 +493,7 @@
   var printWarning$1 = function() {};
 
   {
-    printWarning$1 = function(text) {
+        printWarning$1 = function(text) {
       var message = 'Warning: ' + text;
       if (typeof console !== 'undefined') {
         console.error(message);
@@ -511,7 +511,7 @@
     return null;
   }
 
-  var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
+    var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
     /* global Symbol */
     var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
     var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
@@ -530,7 +530,7 @@
      * @param {?object} maybeIterable
      * @return {?function}
      */
-    function getIteratorFn(maybeIterable) {
+        function getIteratorFn(maybeIterable) {
       var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
       if (typeof iteratorFn === 'function') {
         return iteratorFn;
@@ -614,7 +614,7 @@
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
      */
     /*eslint-disable no-self-compare*/
-    function is(x, y) {
+        function is(x, y) {
       // SameValue algorithm
       if (x === y) {
         // Steps 1-5, 7-10
@@ -634,19 +634,19 @@
      * is prohibitively expensive if they are created too often, such as what
      * happens in oneOfType() for any type before the one that matched.
      */
-    function PropTypeError(message) {
-      this.message = message;
-      this.stack = '';
+        function PropTypeError(message) {
+            this.message = message;
+            this.stack = '';
     }
     // Make `instanceof Error` still work for returned errors.
     PropTypeError.prototype = Error.prototype;
 
-    function createChainableTypeChecker(validate) {
+        function createChainableTypeChecker(validate) {
       {
         var manualPropTypeCallCache = {};
         var manualPropTypeWarningCount = 0;
       }
-      function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
+            function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
         componentName = componentName || ANONYMOUS;
         propFullName = propFullName || propName;
 
@@ -664,18 +664,18 @@
             // Old behavior for people using React.PropTypes
             var cacheKey = componentName + ':' + propName;
             if (
-              !manualPropTypeCallCache[cacheKey] &&
+                            !manualPropTypeCallCache[cacheKey] &&
               // Avoid spamming the console because they are often not actionable except for lib authors
               manualPropTypeWarningCount < 3
             ) {
               printWarning$1(
-                'You are manually calling a React.PropTypes validation ' +
+                                'You are manually calling a React.PropTypes validation ' +
                 'function for the `' + propFullName + '` prop on `' + componentName  + '`. This is deprecated ' +
                 'and will throw in the standalone `prop-types` package. ' +
                 'You may be seeing this warning due to a third-party PropTypes ' +
                 'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.'
               );
-              manualPropTypeCallCache[cacheKey] = true;
+                            manualPropTypeCallCache[cacheKey] = true;
               manualPropTypeWarningCount++;
             }
           }
@@ -683,9 +683,9 @@
         if (props[propName] == null) {
           if (isRequired) {
             if (props[propName] === null) {
-              return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required ' + ('in `' + componentName + '`, but its value is `null`.'));
+                            return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required ' + ('in `' + componentName + '`, but its value is `null`.'));
             }
-            return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required in ' + ('`' + componentName + '`, but its value is `undefined`.'));
+                        return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required in ' + ('`' + componentName + '`, but its value is `undefined`.'));
           }
           return null;
         } else {
@@ -694,13 +694,13 @@
       }
 
       var chainedCheckType = checkType.bind(null, false);
-      chainedCheckType.isRequired = checkType.bind(null, true);
+            chainedCheckType.isRequired = checkType.bind(null, true);
 
       return chainedCheckType;
     }
 
-    function createPrimitiveTypeChecker(expectedType) {
-      function validate(props, propName, componentName, location, propFullName, secret) {
+        function createPrimitiveTypeChecker(expectedType) {
+            function validate(props, propName, componentName, location, propFullName, secret) {
         var propValue = props[propName];
         var propType = getPropType(propValue);
         if (propType !== expectedType) {
@@ -709,7 +709,7 @@
           // 'of type `object`'.
           var preciseType = getPreciseType(propValue);
 
-          return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'));
+                    return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'));
         }
         return null;
       }
@@ -720,15 +720,15 @@
       return createChainableTypeChecker(emptyFunctionThatReturnsNull);
     }
 
-    function createArrayOfTypeChecker(typeChecker) {
-      function validate(props, propName, componentName, location, propFullName) {
+        function createArrayOfTypeChecker(typeChecker) {
+            function validate(props, propName, componentName, location, propFullName) {
         if (typeof typeChecker !== 'function') {
-          return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside arrayOf.');
+                    return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside arrayOf.');
         }
         var propValue = props[propName];
         if (!Array.isArray(propValue)) {
           var propType = getPropType(propValue);
-          return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
+                    return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
         }
         for (var i = 0; i < propValue.length; i++) {
           var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret_1);
@@ -742,36 +742,36 @@
     }
 
     function createElementTypeChecker() {
-      function validate(props, propName, componentName, location, propFullName) {
+            function validate(props, propName, componentName, location, propFullName) {
         var propValue = props[propName];
         if (!isValidElement(propValue)) {
           var propType = getPropType(propValue);
-          return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement.'));
+                    return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement.'));
         }
         return null;
       }
       return createChainableTypeChecker(validate);
     }
 
-    function createInstanceTypeChecker(expectedClass) {
-      function validate(props, propName, componentName, location, propFullName) {
+        function createInstanceTypeChecker(expectedClass) {
+            function validate(props, propName, componentName, location, propFullName) {
         if (!(props[propName] instanceof expectedClass)) {
           var expectedClassName = expectedClass.name || ANONYMOUS;
           var actualClassName = getClassName(props[propName]);
-          return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));
+                    return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));
         }
         return null;
       }
       return createChainableTypeChecker(validate);
     }
 
-    function createEnumTypeChecker(expectedValues) {
+        function createEnumTypeChecker(expectedValues) {
       if (!Array.isArray(expectedValues)) {
-        printWarning$1('Invalid argument supplied to oneOf, expected an instance of array.');
+                printWarning$1('Invalid argument supplied to oneOf, expected an instance of array.');
         return emptyFunctionThatReturnsNull;
       }
 
-      function validate(props, propName, componentName, location, propFullName) {
+            function validate(props, propName, componentName, location, propFullName) {
         var propValue = props[propName];
         for (var i = 0; i < expectedValues.length; i++) {
           if (is(propValue, expectedValues[i])) {
@@ -780,20 +780,20 @@
         }
 
         var valuesString = JSON.stringify(expectedValues);
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of value `' + propValue + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));
+                return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of value `' + propValue + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));
       }
       return createChainableTypeChecker(validate);
     }
 
-    function createObjectOfTypeChecker(typeChecker) {
-      function validate(props, propName, componentName, location, propFullName) {
+        function createObjectOfTypeChecker(typeChecker) {
+            function validate(props, propName, componentName, location, propFullName) {
         if (typeof typeChecker !== 'function') {
-          return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside objectOf.');
+                    return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside objectOf.');
         }
         var propValue = props[propName];
         var propType = getPropType(propValue);
         if (propType !== 'object') {
-          return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
+                    return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
         }
         for (var key in propValue) {
           if (propValue.hasOwnProperty(key)) {
@@ -808,9 +808,9 @@
       return createChainableTypeChecker(validate);
     }
 
-    function createUnionTypeChecker(arrayOfTypeCheckers) {
+        function createUnionTypeChecker(arrayOfTypeCheckers) {
       if (!Array.isArray(arrayOfTypeCheckers)) {
-        printWarning$1('Invalid argument supplied to oneOfType, expected an instance of array.');
+                printWarning$1('Invalid argument supplied to oneOfType, expected an instance of array.');
         return emptyFunctionThatReturnsNull;
       }
 
@@ -818,14 +818,14 @@
         var checker = arrayOfTypeCheckers[i];
         if (typeof checker !== 'function') {
           printWarning$1(
-            'Invalid argument supplied to oneOfType. Expected an array of check functions, but ' +
+                        'Invalid argument supplied to oneOfType. Expected an array of check functions, but ' +
             'received ' + getPostfixForTypeWarning(checker) + ' at index ' + i + '.'
           );
           return emptyFunctionThatReturnsNull;
         }
       }
 
-      function validate(props, propName, componentName, location, propFullName) {
+            function validate(props, propName, componentName, location, propFullName) {
         for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
           var checker = arrayOfTypeCheckers[i];
           if (checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret_1) == null) {
@@ -833,27 +833,27 @@
           }
         }
 
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`.'));
+                return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`.'));
       }
       return createChainableTypeChecker(validate);
     }
 
     function createNodeChecker() {
-      function validate(props, propName, componentName, location, propFullName) {
+            function validate(props, propName, componentName, location, propFullName) {
         if (!isNode(props[propName])) {
-          return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));
+                    return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));
         }
         return null;
       }
       return createChainableTypeChecker(validate);
     }
 
-    function createShapeTypeChecker(shapeTypes) {
-      function validate(props, propName, componentName, location, propFullName) {
+        function createShapeTypeChecker(shapeTypes) {
+            function validate(props, propName, componentName, location, propFullName) {
         var propValue = props[propName];
         var propType = getPropType(propValue);
         if (propType !== 'object') {
-          return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+                    return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
         }
         for (var key in shapeTypes) {
           var checker = shapeTypes[key];
@@ -870,12 +870,12 @@
       return createChainableTypeChecker(validate);
     }
 
-    function createStrictShapeTypeChecker(shapeTypes) {
-      function validate(props, propName, componentName, location, propFullName) {
+        function createStrictShapeTypeChecker(shapeTypes) {
+            function validate(props, propName, componentName, location, propFullName) {
         var propValue = props[propName];
         var propType = getPropType(propValue);
         if (propType !== 'object') {
-          return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+                    return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
         }
         // We need to check all keys in case some are required but missing from
         // props.
@@ -883,7 +883,7 @@
         for (var key in allKeys) {
           var checker = shapeTypes[key];
           if (!checker) {
-            return new PropTypeError(
+                        return new PropTypeError(
               'Invalid ' + location + ' `' + propFullName + '` key `' + key + '` supplied to `' + componentName + '`.' +
               '\nBad object: ' + JSON.stringify(props[propName], null, '  ') +
               '\nValid keys: ' +  JSON.stringify(Object.keys(shapeTypes), null, '  ')
@@ -900,7 +900,7 @@
       return createChainableTypeChecker(validate);
     }
 
-    function isNode(propValue) {
+        function isNode(propValue) {
       switch (typeof propValue) {
         case 'number':
         case 'string':
@@ -947,7 +947,7 @@
       }
     }
 
-    function isSymbol(propType, propValue) {
+        function isSymbol(propType, propValue) {
       // Native Symbol.
       if (propType === 'symbol') {
         return true;
@@ -967,7 +967,7 @@
     }
 
     // Equivalent of `typeof` but with special handling for array and regexp.
-    function getPropType(propValue) {
+        function getPropType(propValue) {
       var propType = typeof propValue;
       if (Array.isArray(propValue)) {
         return 'array';
@@ -986,7 +986,7 @@
 
     // This handles more types than `getPropType`. Only used for error messages.
     // See `createPrimitiveTypeChecker`.
-    function getPreciseType(propValue) {
+        function getPreciseType(propValue) {
       if (typeof propValue === 'undefined' || propValue === null) {
         return '' + propValue;
       }
@@ -1003,7 +1003,7 @@
 
     // Returns a string that is postfixed to a warning about an invalid type.
     // For example, "undefined" or "of type array"
-    function getPostfixForTypeWarning(value) {
+        function getPostfixForTypeWarning(value) {
       var type = getPreciseType(value);
       switch (type) {
         case 'array':
@@ -1019,20 +1019,20 @@
     }
 
     // Returns class name of the object, if any.
-    function getClassName(propValue) {
+        function getClassName(propValue) {
       if (!propValue.constructor || !propValue.constructor.name) {
         return ANONYMOUS;
       }
       return propValue.constructor.name;
     }
 
-    ReactPropTypes.checkPropTypes = checkPropTypes_1;
-    ReactPropTypes.PropTypes = ReactPropTypes;
+        ReactPropTypes.checkPropTypes = checkPropTypes_1;
+        ReactPropTypes.PropTypes = ReactPropTypes;
 
     return ReactPropTypes;
   };
 
-  var propTypes = createCommonjsModule(function (module) {
+    var propTypes = createCommonjsModule(function (module) {
   /**
    * Copyright (c) 2013-present, Facebook, Inc.
    *
@@ -1046,7 +1046,7 @@
       Symbol.for('react.element')) ||
       0xeac7;
 
-    var isValidElement = function(object) {
+        var isValidElement = function(object) {
       return typeof object === 'object' &&
         object !== null &&
         object.$$typeof === REACT_ELEMENT_TYPE;
@@ -1059,32 +1059,32 @@
   }
   });
 
-  function withContext(Context) {
+    function withContext(Context) {
     var propName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "context";
-    return function wrap(Component) {
+        return function wrap(Component) {
       var EnhanceContext =
       /*#__PURE__*/
       function (_React$Component) {
         _inherits(EnhanceContext, _React$Component);
 
         function EnhanceContext() {
-          _classCallCheck(this, EnhanceContext);
+                    _classCallCheck(this, EnhanceContext);
 
-          return _possibleConstructorReturn(this, _getPrototypeOf(EnhanceContext).apply(this, arguments));
+                    return _possibleConstructorReturn(this, _getPrototypeOf(EnhanceContext).apply(this, arguments));
         }
 
-        _createClass(EnhanceContext, [{
+                _createClass(EnhanceContext, [{
           key: "render",
           value: function render() {
             var _this$props = this.props,
                 forwardedRef = _this$props.forwardedRef,
                 rest = _objectWithoutProperties(_this$props, ["forwardedRef"]);
 
-            return React__default.createElement(Context.Consumer, null, function (value) {
+                        return React__default.createElement(Context.Consumer, null, function (value) {
               var _custom;
 
               var custom = (_custom = {}, _defineProperty(_custom, propName, value), _defineProperty(_custom, "ref", forwardedRef), _custom);
-              return React__default.createElement(Component, _extends({}, custom, rest));
+                            return React__default.createElement(Component, _extends({}, custom, rest));
             });
           }
         }]);
@@ -1095,8 +1095,8 @@
       var name = Component.displayName || Component.name || "Component";
       var consumerName = Context.Consumer.displayName || Context.Consumer.name || "Context.Consumer";
 
-      function enhanceForwardRef(props, ref) {
-        return React__default.createElement(EnhanceContext, _extends({}, props, {
+            function enhanceForwardRef(props, ref) {
+                return React__default.createElement(EnhanceContext, _extends({}, props, {
           forwardedRef: ref
         }));
       }
@@ -1126,7 +1126,7 @@
     /**
      * Subscribes menu instance.
      */
-    function subscribe(instance) {
+        function subscribe(instance) {
       var name = instance.getName();
 
       if (menus.get(name)) {
@@ -1134,7 +1134,7 @@
       }
 
       menus.set(name, {
-        name: name,
+                name: any: name,
         instance: instance
       });
     }
@@ -1143,7 +1143,7 @@
      */
 
 
-    function unsubscribe(instance) {
+        function unsubscribe(instance) {
       menus.delete(instance.getName());
     }
     /**
@@ -1151,7 +1151,7 @@
      */
 
 
-    function updateLayoutInfo(name) {
+        function updateLayoutInfo(name) {
       var layouts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
       if (!menus.has(name)) {
@@ -1171,12 +1171,12 @@
       menus.set(name, menu);
     }
 
-    function setOptionsCustomStyles(name, optionsCustomStyles) {
+        function setOptionsCustomStyles(name, optionsCustomStyles) {
       if (!menus.has(name)) {
         return;
       }
 
-      var menu = _objectSpread({}, menus.get(name), {
+            var menu = _objectSpread({}, menus.get(name), {
         optionsCustomStyles: optionsCustomStyles
       });
 
@@ -1187,7 +1187,7 @@
      */
 
 
-    function getMenu(name) {
+        function getMenu(name) {
       return menus.get(name);
     }
     /**
@@ -1223,18 +1223,18 @@
 
       var _this;
 
-      _classCallCheck(this, Backdrop);
+            _classCallCheck(this, Backdrop);
 
       for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
         args[_key] = arguments[_key];
       }
 
-      _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Backdrop)).call.apply(_getPrototypeOf2, [this].concat(args)));
+            _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Backdrop)).call.apply(_getPrototypeOf2, [this].concat(args)));
       _this.fadeAnim = new reactNative.Animated.Value(0.001);
       return _this;
     }
 
-    _createClass(Backdrop, [{
+        _createClass(Backdrop, [{
       key: "open",
       value: function open() {
         var _this2 = this;
@@ -1281,7 +1281,7 @@
     return Backdrop;
   }(React.Component);
 
-  Backdrop.propTypes = {
+    Backdrop.propTypes = {
     onPress: propTypes.func.isRequired
   };
   var styles = reactNative.StyleSheet.create({
@@ -1317,17 +1317,17 @@
   function (_Component) {
     _inherits(MenuPlaceholder, _Component);
 
-    function MenuPlaceholder(props) {
+        function MenuPlaceholder(props) {
       var _this;
 
-      _classCallCheck(this, MenuPlaceholder);
+            _classCallCheck(this, MenuPlaceholder);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(MenuPlaceholder).call(this, props));
+            _this = _possibleConstructorReturn(this, _getPrototypeOf(MenuPlaceholder).call(this, props));
       _this.state = {};
       return _this;
     }
 
-    _createClass(MenuPlaceholder, [{
+        _createClass(MenuPlaceholder, [{
       key: "shouldComponentUpdate",
       value: function shouldComponentUpdate() {
         // don't terminate closing animation
@@ -1342,7 +1342,7 @@
 
         var shouldRenderMenu = ctx.isMenuOpen() && ctx._isInitialized();
 
-        debug('MenuPlaceholder should render', shouldRenderMenu);
+                debug('MenuPlaceholder should render', shouldRenderMenu);
 
         if (!shouldRenderMenu) {
           return null;
@@ -1371,7 +1371,7 @@
     }
   });
 
-  var computePosition = function computePosition(_ref) {
+    var computePosition = function computePosition(_ref) {
     var windowLayout = _ref.windowLayout;
     return {
       top: windowLayout.height,
@@ -1379,14 +1379,14 @@
     };
   };
 
-  var MenuOutside = function MenuOutside(props) {
+    var MenuOutside = function MenuOutside(props) {
     var style = props.style,
         children = props.children,
         layouts = props.layouts,
         other = _objectWithoutProperties(props, ["style", "children", "layouts"]);
 
     var position = computePosition(layouts);
-    return React__default.createElement(reactNative.View, _extends({}, other, {
+        return React__default.createElement(reactNative.View, _extends({}, other, {
       style: [styles$2.options, style, position],
       collapsable: false
     }), children);
@@ -1398,11 +1398,11 @@
     }
   });
 
-  var defaultOptionsContainerRenderer = function defaultOptionsContainerRenderer(options) {
+    var defaultOptionsContainerRenderer = function defaultOptionsContainerRenderer(options) {
     return options;
   };
 
-  var layoutsEqual = function layoutsEqual(a, b) {
+    var layoutsEqual = function layoutsEqual(a, b) {
     return a === b || a && b && a.width === b.width && a.height === b.height;
   };
 
@@ -1411,7 +1411,7 @@
   }
 
   var PopupMenuContext = React.createContext({});
-  var withCtx = withContext(PopupMenuContext, "ctx"); // count of MenuProvider instances
+    var withCtx = withContext(PopupMenuContext, "ctx"); // count of MenuProvider instances
 
   var instanceCount = 0;
 
@@ -1420,20 +1420,20 @@
   function (_Component) {
     _inherits(MenuProvider, _Component);
 
-    function MenuProvider(props) {
-      var _this;
+        function MenuProvider(props) {
+            var _this;
 
-      _classCallCheck(this, MenuProvider);
+            _classCallCheck(this, MenuProvider);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(MenuProvider).call(this, props));
+            _this = _possibleConstructorReturn(this, _getPrototypeOf(MenuProvider).call(this, props));
 
       _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "_handleBackButton", function () {
-        var backHandler = _this.props.backHandler;
-        debug('_handleBackButton called', backHandler); // Default handler if true is passed
+                var backHandler = _this.props.backHandler;
+                debug('_handleBackButton called', backHandler); // Default handler if true is passed
 
         if (backHandler === true) {
-          if (_this.isMenuOpen()) {
-            _this.closeMenu();
+                    if (_this.isMenuOpen()) {
+                        _this.closeMenu();
 
             return true;
           }
@@ -1441,105 +1441,105 @@
 
 
         if (typeof backHandler === 'function') {
-          return backHandler(_assertThisInitialized(_assertThisInitialized(_this)));
+                    return backHandler(_assertThisInitialized(_assertThisInitialized(_this)));
         }
 
         return false;
       });
 
-      _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onBackdropRef", function (r) {
-        _this.backdropRef = r;
+            _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onBackdropRef", function (r) {
+                _this.backdropRef = r;
       });
 
-      _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onOptionsRef", function (r) {
-        _this.optionsRef = r;
+            _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onOptionsRef", function (r) {
+                _this.optionsRef = r;
       });
 
-      _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "_onPlaceholderRef", function (r) {
-        return _this._placeholderRef = r;
+            _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "_onPlaceholderRef", function (r) {
+                return _this._placeholderRef = r;
       });
 
       _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "_onBackdropPress", function () {
-        debug('on backdrop press');
+                debug('on backdrop press');
 
-        var menu = _this._getOpenedMenu();
+                var menu = _this._getOpenedMenu();
 
         if (menu) {
           menu.instance.props.onBackdropPress();
         }
 
-        _this.closeMenu();
+                _this.closeMenu();
       });
 
-      _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "_onLayout", function (_ref) {
+            _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "_onLayout", function (_ref) {
         var layout = _ref.nativeEvent.layout;
 
-        if (layoutsEqual(_this._ownLayout, layout)) {
+                if (layoutsEqual(_this._ownLayout, layout)) {
           return;
         }
 
-        _this._ownLayout = layout;
-        debug('context layout has changed', _this._ownLayout);
+                _this._ownLayout = layout;
+                debug('context layout has changed', _this._ownLayout);
 
-        if (!_this.isMenuOpen()) {
+                if (!_this.isMenuOpen()) {
           return;
         }
 
-        var _this$_getOpenedMenu = _this._getOpenedMenu(),
+                var _this$_getOpenedMenu = _this._getOpenedMenu(),
             instance = _this$_getOpenedMenu.instance;
 
         var trigger = instance._getTrigger();
 
         measure(trigger).then(function (triggerLayout) {
-          debug('got trigger measurements after context layout change', triggerLayout);
+                    debug('got trigger measurements after context layout change', triggerLayout);
 
-          _this._menuRegistry.updateLayoutInfo(instance.getName(), {
+                    _this._menuRegistry.updateLayoutInfo(instance.getName(), {
             triggerLayout: triggerLayout
           }); // force update as own layout has changed
 
 
-          _this._notify(true);
+                    _this._notify(true);
         });
       });
 
-      _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "_onSafeAreaLayout", function (_ref2) {
+            _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "_onSafeAreaLayout", function (_ref2) {
         var layout = _ref2.nativeEvent.layout;
 
-        if (layoutsEqual(_this._safeAreaLayout, layout)) {
+                if (layoutsEqual(_this._safeAreaLayout, layout)) {
           return;
         }
 
-        _this._safeAreaLayout = layout;
-        debug('safeArea layout has changed', _this._safeAreaLayout);
+                _this._safeAreaLayout = layout;
+                debug('safeArea layout has changed', _this._safeAreaLayout);
 
-        if (!_this.isMenuOpen()) {
+                if (!_this.isMenuOpen()) {
           return;
         }
 
-        _this._notify(true);
+                _this._notify(true);
       });
 
       _this._menuRegistry = makeMenuRegistry();
       _this._isMenuClosing = false;
       _this._backHandlerSubscription = null;
       var menuActions = {
-        openMenu: function openMenu(name) {
-          return _this.openMenu(name);
+                openMenu: function openMenu(name) {
+                    return _this.openMenu(name);
         },
         closeMenu: function closeMenu() {
-          return _this.closeMenu();
+                    return _this.closeMenu();
         },
-        toggleMenu: function toggleMenu(name) {
-          return _this.toggleMenu(name);
+                toggleMenu: function toggleMenu(name) {
+                    return _this.toggleMenu(name);
         },
         isMenuOpen: function isMenuOpen() {
-          return _this.isMenuOpen();
+                    return _this.isMenuOpen();
         },
         _getOpenedMenu: function _getOpenedMenu() {
-          return _this._getOpenedMenu();
+                    return _this._getOpenedMenu();
         },
-        _notify: function _notify(force) {
-          return _this._notify(force);
+                _notify: function _notify(force) {
+                    return _this._notify(force);
         }
       };
       _this.menuCtx = {
@@ -1549,7 +1549,7 @@
       return _this;
     }
 
-    _createClass(MenuProvider, [{
+        _createClass(MenuProvider, [{
       key: "componentDidMount",
       value: function componentDidMount() {
         var _this$props = this.props,
@@ -1571,7 +1571,7 @@
     }, {
       key: "componentWillUnmount",
       value: function componentWillUnmount() {
-        debug('unmounting menu provider');
+                debug('unmounting menu provider');
 
         if (this._backHandlerSubscription != null) {
           this._backHandlerSubscription.remove();
@@ -1592,7 +1592,7 @@
       }
     }, {
       key: "openMenu",
-      value: function openMenu(name) {
+            value: function openMenu(name) {
         var menu = this._menuRegistry.getMenu(name);
 
         if (!menu) {
@@ -1600,7 +1600,7 @@
           return Promise.resolve();
         }
 
-        debug('open menu', name);
+                debug('open menu', name);
 
         if (this._backHandlerSubscription == null) {
           // delay menu registration until the menu is really opened (and thus this back handler will be called "sooner")
@@ -1616,11 +1616,11 @@
       key: "closeMenu",
       value: function closeMenu() {
         // has no effect on controlled menus
-        debug('close menu');
+                debug('close menu');
 
-        this._menuRegistry.getAll().filter(function (menu) {
+                this._menuRegistry.getAll().filter(function (menu) {
           return menu.instance._getOpened();
-        }).forEach(function (menu) {
+                }).forEach(function (menu) {
           return menu.instance._setOpened(false);
         });
 
@@ -1633,9 +1633,9 @@
 
         // invalidate layouts for closed menus,
         // both controlled and uncontrolled menus
-        this._menuRegistry.getAll().filter(function (menu) {
+                this._menuRegistry.getAll().filter(function (menu) {
           return !menu.instance.isOpen();
-        }).forEach(function (menu) {
+                }).forEach(function (menu) {
           _this2._menuRegistry.updateLayoutInfo(menu.name, {
             triggerLayout: undefined
           });
@@ -1643,10 +1643,10 @@
       }
     }, {
       key: "_beforeClose",
-      value: function _beforeClose(menu) {
+            value: function _beforeClose(menu) {
         var _this3 = this;
 
-        debug('before close', menu.name);
+                debug('before close', menu.name);
         var hideMenu = this.optionsRef && this.optionsRef.close && this.optionsRef.close() || Promise.resolve();
         var hideBackdrop = this.backdropRef && this.backdropRef.close();
 
@@ -1662,7 +1662,7 @@
       }
     }, {
       key: "toggleMenu",
-      value: function toggleMenu(name) {
+            value: function toggleMenu(name) {
         var menu = this._menuRegistry.getMenu(name);
 
         if (!menu) {
@@ -1670,7 +1670,7 @@
           return Promise.resolve();
         }
 
-        debug('toggle menu', name);
+                debug('toggle menu', name);
 
         if (menu.instance._getOpened()) {
           return this.closeMenu();
@@ -1680,12 +1680,12 @@
       }
     }, {
       key: "_notify",
-      value: function _notify(forceUpdate) {
+            value: function _notify(forceUpdate) {
         var _this4 = this;
 
         var NULL = {};
         var prev = this.openedMenu || NULL;
-        var next = this._menuRegistry.getAll().find(function (menu) {
+                var next = this._menuRegistry.getAll().find(function (menu) {
           return menu.instance.isOpen();
         }) || NULL; // set newly opened menu before any callbacks are called
 
@@ -1695,8 +1695,8 @@
           return Promise.resolve();
         }
 
-        debug('notify: next menu:', next.name, ' prev menu:', prev.name);
-        var afterSetState = undefined;
+                debug('notify: next menu:', next.name, ' prev menu:', prev.name);
+                var afterSetState = undefined;
 
         var beforeSetState = function beforeSetState() {
           return Promise.resolve();
@@ -1722,15 +1722,15 @@
 
         return beforeSetState().then(function () {
           if (!_this4._placeholderRef) {
-            debug('setState ignored - maybe the context was unmounted');
+                        debug('setState ignored - maybe the context was unmounted');
             return;
           }
 
           _this4._placeholderRef.setState({
             openedMenuName: _this4.openedMenu && _this4.openedMenu.name
-          }, afterSetState);
+                    }, afterSetState);
 
-          debug('notify ended');
+                    debug('notify ended');
         });
       }
       /**
@@ -1739,9 +1739,9 @@
 
     }, {
       key: "_isRenderNeeded",
-      value: function _isRenderNeeded(prev, next) {
+            value: function _isRenderNeeded(prev, next) {
         if (prev === next) {
-          debug('_isRenderNeeded: skipping - no change');
+                    debug('_isRenderNeeded: skipping - no change');
           return false;
         }
 
@@ -1753,7 +1753,7 @@
             optionsLayout = next.optionsLayout;
 
         if (!triggerLayout || !optionsLayout) {
-          debug('_isRenderNeeded: skipping - no trigger or options layout');
+                    debug('_isRenderNeeded: skipping - no trigger or options layout');
           return false;
         }
 
@@ -1765,7 +1765,7 @@
         var _this$props2 = this.props,
             style = _this$props2.style,
             customStyles = _this$props2.customStyles;
-        debug('render menu', this.isMenuOpen(), this._ownLayout);
+                debug('render menu', this.isMenuOpen(), this._ownLayout);
         return React__default.createElement(PopupMenuContext.Provider, {
           value: this.menuCtx
         }, React__default.createElement(reactNative.View, {
@@ -1792,7 +1792,7 @@
       value: function _getOpenedMenu() {
         var name = this._placeholderRef && this._placeholderRef.state.openedMenuName;
         var menu = name ? this._menuRegistry.getMenu(name) : undefined;
-        debug('_getOpenedMenu', name, !!menu);
+                debug('_getOpenedMenu', name, !!menu);
         return menu;
       }
     }, {
@@ -1802,15 +1802,15 @@
       }
     }, {
       key: "_initOpen",
-      value: function _initOpen(menu) {
+            value: function _initOpen(menu) {
         var _this5 = this;
 
-        debug('opening', menu.name);
+                debug('opening', menu.name);
 
         var trigger = menu.instance._getTrigger();
 
         measure(trigger).then(function (triggerLayout) {
-          debug('got trigger measurements', triggerLayout);
+                    debug('got trigger measurements', triggerLayout);
 
           _this5._menuRegistry.updateLayoutInfo(menu.name, {
             triggerLayout: triggerLayout
@@ -1823,10 +1823,10 @@
       }
     }, {
       key: "_onOptionsLayout",
-      value: function _onOptionsLayout(e, name, isOutside) {
+            value: function _onOptionsLayout(e, name, isOutside) {
         var optionsLayout = e.nativeEvent.layout;
         optionsLayout.isOutside = isOutside;
-        debug('got options layout', optionsLayout);
+                debug('got options layout', optionsLayout);
 
         this._menuRegistry.updateLayoutInfo(name, {
           optionsLayout: optionsLayout
@@ -1858,7 +1858,7 @@
         var optionsRenderer = renderOptionsContainer || defaultOptionsContainerRenderer;
         var isOutside = !triggerLayout || !optionsLayout;
 
-        var onLayout = function onLayout(e) {
+                var onLayout = function onLayout(e) {
           return _this6._onOptionsLayout(e, instance.getName(), isOutside);
         };
 
@@ -1870,7 +1870,7 @@
           safeAreaLayout: safeAreaLayout
         };
 
-        var props = _objectSpread({}, rendererProps, {
+                var props = _objectSpread({}, rendererProps, {
           style: style,
           onLayout: onLayout,
           layouts: layouts
@@ -1888,12 +1888,12 @@
 
     return MenuProvider;
   }(React.Component);
-  MenuProvider.propTypes = {
+    MenuProvider.propTypes = {
     customStyles: propTypes.object,
     backHandler: propTypes.oneOfType([propTypes.bool, propTypes.func]),
     skipInstanceCheck: propTypes.bool
   };
-  MenuProvider.defaultProps = {
+    MenuProvider.defaultProps = {
     customStyles: {},
     backHandler: false,
     skipInstanceCheck: false
@@ -1917,14 +1917,14 @@
     _inherits(MenuOptions, _React$Component);
 
     function MenuOptions() {
-      _classCallCheck(this, MenuOptions);
+            _classCallCheck(this, MenuOptions);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(MenuOptions).apply(this, arguments));
+            return _possibleConstructorReturn(this, _getPrototypeOf(MenuOptions).apply(this, arguments));
     }
 
-    _createClass(MenuOptions, [{
+        _createClass(MenuOptions, [{
       key: "updateCustomStyles",
-      value: function updateCustomStyles(_props) {
+            value: function updateCustomStyles(_props) {
         var customStyles = _props.customStyles;
 
         var menu = this.props.ctx.menuActions._getOpenedMenu(); // FIXME react 16.3 workaround for ControlledExample!
@@ -1959,12 +1959,12 @@
 
     return MenuOptions;
   }(React__default.Component);
-  MenuOptions.propTypes = {
+    MenuOptions.propTypes = {
     customStyles: propTypes.object,
     renderOptionsContainer: propTypes.func,
     optionsContainerStyle: propTypes.oneOfType([propTypes.object, propTypes.number, propTypes.array])
   };
-  MenuOptions.defaultProps = {
+    MenuOptions.defaultProps = {
     customStyles: {}
   };
   var MenuOptions$1 = withCtx(MenuOptions);
@@ -1975,15 +1975,15 @@
     _inherits(MenuTrigger, _Component);
 
     function MenuTrigger() {
-      _classCallCheck(this, MenuTrigger);
+            _classCallCheck(this, MenuTrigger);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(MenuTrigger).apply(this, arguments));
+            return _possibleConstructorReturn(this, _getPrototypeOf(MenuTrigger).apply(this, arguments));
     }
 
-    _createClass(MenuTrigger, [{
+        _createClass(MenuTrigger, [{
       key: "_onPress",
       value: function _onPress() {
-        debug('trigger onPress');
+                debug('trigger onPress');
         this.props.onPress && this.props.onPress();
         this.props.ctx.menuActions.openMenu(this.props.menuName);
       }
@@ -2017,11 +2017,11 @@
           ref: onRef,
           collapsable: false,
           style: customStyles.triggerOuterWrapper
-        }, React__default.createElement(Touchable, _extends({
+                }, React__default.createElement(Touchable, _extends({
           testID: testID,
           onPress: triggerOnLongPress ? onAlternativeAction : onPress,
           onLongPress: triggerOnLongPress ? onPress : onAlternativeAction
-        }, defaultTouchableProps, customStyles.triggerTouchable), React__default.createElement(reactNative.View, _extends({}, other, {
+                }, defaultTouchableProps, customStyles.triggerTouchable), React__default.createElement(reactNative.View, _extends({}, other, {
           style: [customStyles.triggerWrapper, style]
         }), text ? React__default.createElement(reactNative.Text, {
           style: customStyles.triggerText
@@ -2031,7 +2031,7 @@
 
     return MenuTrigger;
   }(React.Component);
-  MenuTrigger.propTypes = {
+    MenuTrigger.propTypes = {
     disabled: propTypes.bool,
     text: propTypes.string,
     onPress: propTypes.func,
@@ -2040,14 +2040,14 @@
     triggerOnLongPress: propTypes.bool,
     testID: propTypes.string
   };
-  MenuTrigger.defaultProps = {
+    MenuTrigger.defaultProps = {
     disabled: false,
     customStyles: {},
     testID: undefined
   };
   var MenuTrigger$1 = withCtx(MenuTrigger);
 
-  var axisPosition = function axisPosition(oDim, wDim, tPos, tDim) {
+    var axisPosition = function axisPosition(oDim, wDim, tPos, tDim) {
     // if options are bigger than window dimension, then render at 0
     if (oDim > wDim) {
       return 0;
@@ -2079,7 +2079,7 @@
     return pos;
   };
 
-  function fit(pos, len, minPos, maxPos) {
+    function fit(pos, len, minPos, maxPos) {
     if (pos === undefined) {
       return undefined;
     }
@@ -2096,7 +2096,7 @@
   } // fits options (position) into safeArea
 
 
-  var fitPositionIntoSafeArea = function fitPositionIntoSafeArea(position, layouts) {
+    var fitPositionIntoSafeArea = function fitPositionIntoSafeArea(position, layouts) {
     var windowLayout = layouts.windowLayout,
         safeAreaLayout = layouts.safeAreaLayout,
         optionsLayout = layouts.optionsLayout;
@@ -2124,7 +2124,7 @@
       right: right
     };
   };
-  var computePosition$1 = function computePosition(layouts, isRTL) {
+    var computePosition$1 = function computePosition(layouts, isRTL) {
     var windowLayout = layouts.windowLayout,
         triggerLayout = layouts.triggerLayout,
         optionsLayout = layouts.optionsLayout;
@@ -2154,19 +2154,19 @@
   function (_React$Component) {
     _inherits(ContextMenu, _React$Component);
 
-    function ContextMenu(props) {
+        function ContextMenu(props) {
       var _this;
 
-      _classCallCheck(this, ContextMenu);
+            _classCallCheck(this, ContextMenu);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ContextMenu).call(this, props));
+            _this = _possibleConstructorReturn(this, _getPrototypeOf(ContextMenu).call(this, props));
       _this.state = {
         scaleAnim: new reactNative.Animated.Value(0.1)
       };
       return _this;
     }
 
-    _createClass(ContextMenu, [{
+        _createClass(ContextMenu, [{
       key: "componentDidMount",
       value: function componentDidMount() {
         reactNative.Animated.timing(this.state.scaleAnim, {
@@ -2206,7 +2206,7 @@
           opacity: this.state.scaleAnim
         };
         var position = computePosition$1(layouts, reactNative.I18nManager.isRTL);
-        return React__default.createElement(reactNative.Animated.View, _extends({}, other, {
+                return React__default.createElement(reactNative.Animated.View, _extends({}, other, {
           style: [styles$4.options, style, animation, position]
         }), children);
       }
@@ -2214,8 +2214,8 @@
 
     return ContextMenu;
   }(React__default.Component); // public exports
-  ContextMenu.computePosition = computePosition$1;
-  ContextMenu.fitPositionIntoSafeArea = fitPositionIntoSafeArea;
+    ContextMenu.computePosition = computePosition$1;
+    ContextMenu.fitPositionIntoSafeArea = fitPositionIntoSafeArea;
   var styles$4 = reactNative.StyleSheet.create({
     options: {
       position: 'absolute',
@@ -2235,15 +2235,15 @@
     }
   });
 
-  var isRegularComponent = function isRegularComponent(c) {
+    var isRegularComponent = function isRegularComponent(c) {
     return c.type !== MenuOptions$1 && c.type !== MenuTrigger$1;
   };
 
-  var isTrigger = function isTrigger(c) {
+    var isTrigger = function isTrigger(c) {
     return c.type === MenuTrigger$1;
   };
 
-  var isMenuOptions = function isMenuOptions(c) {
+    var isMenuOptions = function isMenuOptions(c) {
     return c.type === MenuOptions$1;
   };
 
@@ -2252,12 +2252,12 @@
   function (_Component) {
     _inherits(Menu, _Component);
 
-    function Menu(props) {
+        function Menu(props) {
       var _this;
 
-      _classCallCheck(this, Menu);
+            _classCallCheck(this, Menu);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Menu).call(this, props));
+            _this = _possibleConstructorReturn(this, _getPrototypeOf(Menu).call(this, props));
       _this._name = _this.props.name || makeName();
       _this._forceClose = false;
       var ctx = props.ctx;
@@ -2269,35 +2269,35 @@
       return _this;
     }
 
-    _createClass(Menu, [{
+        _createClass(Menu, [{
       key: "componentDidMount",
       value: function componentDidMount() {
         if (!this._validateChildren()) {
           return;
         }
 
-        debug('subscribing menu', this._name);
+                debug('subscribing menu', this._name);
         this.props.ctx.menuRegistry.subscribe(this);
 
         this.props.ctx.menuActions._notify();
       }
     }, {
       key: "componentDidUpdate",
-      value: function componentDidUpdate(prevProps) {
+            value: function componentDidUpdate(prevProps) {
         if (this.props.name !== prevProps.name) {
           console.warn('Menu name cannot be changed');
         } // force update if menu is opened as its content might have changed
 
 
         var force = this.isOpen();
-        debug('component did update', this._name, force);
+                debug('component did update', this._name, force);
 
         this.props.ctx.menuActions._notify(force);
       }
     }, {
       key: "componentWillUnmount",
       value: function componentWillUnmount() {
-        debug('unsubscribing menu', this._name);
+                debug('unsubscribing menu', this._name);
 
         if (this.isOpen()) {
           this._forceClose = true;
@@ -2347,12 +2347,12 @@
       value: function _reduceChildren() {
         var _this2 = this;
 
-        return React__default.Children.toArray(this.props.children).reduce(function (r, child) {
+                return React__default.Children.toArray(this.props.children).reduce(function (r, child) {
           if (isTrigger(child)) {
             r.push(React__default.cloneElement(child, {
               key: null,
               menuName: _this2._name,
-              onRef: function onRef(t) {
+                            onRef: function onRef(t) {
                 return _this2._trigger = t;
               }
             }));
@@ -2382,7 +2382,7 @@
       }
     }, {
       key: "_setOpened",
-      value: function _setOpened(opened) {
+            value: function _setOpened(opened) {
         this._opened = opened;
       }
     }, {
@@ -2407,7 +2407,7 @@
 
     return Menu;
   }(React.Component);
-  Menu.propTypes = {
+    Menu.propTypes = {
     name: propTypes.string,
     renderer: propTypes.func,
     rendererProps: propTypes.object,
@@ -2417,7 +2417,7 @@
     opened: propTypes.bool,
     onBackdropPress: propTypes.func
   };
-  Menu.defaultProps = {
+    Menu.defaultProps = {
     renderer: ContextMenu,
     rendererProps: {},
     onSelect: function onSelect() {},
@@ -2435,12 +2435,12 @@
     }
   });
 
-  MenuExternal.setDefaultRenderer = function (renderer) {
-    Menu.defaultProps.renderer = renderer;
+    MenuExternal.setDefaultRenderer = function (renderer) {
+        Menu.defaultProps.renderer = renderer;
   };
 
-  MenuExternal.setDefaultRendererProps = function (rendererProps) {
-    Menu.defaultProps.rendererProps = rendererProps;
+    MenuExternal.setDefaultRendererProps = function (rendererProps) {
+        Menu.defaultProps.rendererProps = rendererProps;
   };
 
   var MenuOption =
@@ -2449,12 +2449,12 @@
     _inherits(MenuOption, _Component);
 
     function MenuOption() {
-      _classCallCheck(this, MenuOption);
+            _classCallCheck(this, MenuOption);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(MenuOption).apply(this, arguments));
+            return _possibleConstructorReturn(this, _getPrototypeOf(MenuOption).apply(this, arguments));
     }
 
-    _createClass(MenuOption, [{
+        _createClass(MenuOption, [{
       key: "_onSelect",
       value: function _onSelect() {
         var value = this.props.value;
@@ -2462,7 +2462,7 @@
         var onSelect = this.props.onSelect || this._getMenusOnSelect();
 
         var shouldClose = onSelect(value) !== false;
-        debug('select option', value, shouldClose);
+                debug('select option', value, shouldClose);
 
         if (shouldClose) {
           this.props.ctx.menuActions.closeMenu();
@@ -2481,7 +2481,7 @@
         // FIXME react 16.3 workaround for ControlledExample!
         var menu = this.props.ctx.menuActions._getOpenedMenu() || {};
         var optionsCustomStyles = menu.optionsCustomStyles;
-        return _objectSpread({}, optionsCustomStyles, this.props.customStyles);
+                return _objectSpread({}, optionsCustomStyles, this.props.customStyles);
       }
     }, {
       key: "render",
@@ -2524,7 +2524,7 @@
               Touchable = _makeTouchable.Touchable,
               defaultTouchableProps = _makeTouchable.defaultTouchableProps;
 
-          return React__default.createElement(Touchable, _extends({
+                    return React__default.createElement(Touchable, _extends({
             testID: testID,
             onPress: function onPress() {
               return _this._onSelect();
@@ -2536,7 +2536,7 @@
 
     return MenuOption;
   }(React.Component);
-  MenuOption.propTypes = {
+    MenuOption.propTypes = {
     disabled: propTypes.bool,
     disableTouchable: propTypes.bool,
     onSelect: propTypes.func,
@@ -2545,7 +2545,7 @@
     customStyles: propTypes.object,
     testID: propTypes.string
   };
-  MenuOption.defaultProps = {
+    MenuOption.defaultProps = {
     disabled: false,
     disableTouchable: false,
     customStyles: {},
@@ -2572,12 +2572,12 @@
     _inherits(NotAnimatedContextMenu, _React$Component);
 
     function NotAnimatedContextMenu() {
-      _classCallCheck(this, NotAnimatedContextMenu);
+            _classCallCheck(this, NotAnimatedContextMenu);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(NotAnimatedContextMenu).apply(this, arguments));
+            return _possibleConstructorReturn(this, _getPrototypeOf(NotAnimatedContextMenu).apply(this, arguments));
     }
 
-    _createClass(NotAnimatedContextMenu, [{
+        _createClass(NotAnimatedContextMenu, [{
       key: "render",
       value: function render() {
         var _this$props = this.props,
@@ -2587,7 +2587,7 @@
             other = _objectWithoutProperties(_this$props, ["style", "children", "layouts"]);
 
         var position = computePosition$1(layouts, reactNative.I18nManager.isRTL);
-        return React__default.createElement(reactNative.View, _extends({}, other, {
+                return React__default.createElement(reactNative.View, _extends({}, other, {
           style: [styles$4.options, style, position]
         }), children);
       }
@@ -2596,7 +2596,7 @@
     return NotAnimatedContextMenu;
   }(React__default.Component);
 
-  var computePosition$2 = function computePosition(layouts) {
+    var computePosition$2 = function computePosition(layouts) {
     var windowLayout = layouts.windowLayout,
         optionsLayout = layouts.optionsLayout;
     var wHeight = windowLayout.height;
@@ -2619,19 +2619,19 @@
   function (_React$Component) {
     _inherits(SlideInMenu, _React$Component);
 
-    function SlideInMenu(props) {
+        function SlideInMenu(props) {
       var _this;
 
-      _classCallCheck(this, SlideInMenu);
+            _classCallCheck(this, SlideInMenu);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(SlideInMenu).call(this, props));
+            _this = _possibleConstructorReturn(this, _getPrototypeOf(SlideInMenu).call(this, props));
       _this.state = {
         slide: new reactNative.Animated.Value(0)
       };
       return _this;
     }
 
-    _createClass(SlideInMenu, [{
+        _createClass(SlideInMenu, [{
       key: "componentDidMount",
       value: function componentDidMount() {
         reactNative.Animated.timing(this.state.slide, {
@@ -2674,7 +2674,7 @@
           }]
         };
         var position = computePosition$2(layouts);
-        return React__default.createElement(reactNative.Animated.View, _extends({
+                return React__default.createElement(reactNative.Animated.View, _extends({
           style: [styles$5.options, style, animation, position]
         }, other), children);
       }
@@ -2704,7 +2704,7 @@
   var anchorHyp = Math.sqrt(anchorSize * anchorSize + anchorSize * anchorSize);
   var anchorOffset = (anchorHyp + anchorSize) / 2 - popoverPadding; // left/top placement
 
-  function axisNegativeSideProperties(_ref) {
+    function axisNegativeSideProperties(_ref) {
     var oDim = _ref.oDim,
         tPos = _ref.tPos;
     return {
@@ -2713,7 +2713,7 @@
   } // right/bottom placement
 
 
-  function axisPositiveSideProperties(_ref2) {
+    function axisPositiveSideProperties(_ref2) {
     var tPos = _ref2.tPos,
         tDim = _ref2.tDim;
     // substract also anchor placeholder from the beginning
@@ -2723,7 +2723,7 @@
   } // computes offsets (off screen overlap) of popover when trying to align it to the center
 
 
-  function centeringProperties(_ref3) {
+    function centeringProperties(_ref3) {
     var oDim = _ref3.oDim,
         wDim = _ref3.wDim,
         tPos = _ref3.tPos,
@@ -2746,7 +2746,7 @@
    */
 
 
-  function axisCenteredPositionProperties(options) {
+    function axisCenteredPositionProperties(options) {
     var oDim = options.oDim,
         wDim = options.wDim;
 
@@ -2782,7 +2782,7 @@
   /* Evaluate centering placement */
 
 
-  function getCenteringPrice(options) {
+    function getCenteringPrice(options) {
     var _centeringProperties2 = centeringProperties(options),
         leftOffset = _centeringProperties2.leftOffset,
         rightOffset = _centeringProperties2.rightOffset; // TODO: currently shifted popovers have higher price,
@@ -2794,7 +2794,7 @@
   /* Evaluate top placement */
 
 
-  function getTopPrice(hOptions, vOptions) {
+    function getTopPrice(hOptions, vOptions) {
     var centerOffset = getCenteringPrice(vOptions);
     var sideOffset = Math.max(0, hOptions.oDim - hOptions.tPos);
     return centerOffset + sideOffset;
@@ -2802,7 +2802,7 @@
   /* Evaluate bottom placement */
 
 
-  function getBottomPrice(hOptions, vOptions) {
+    function getBottomPrice(hOptions, vOptions) {
     var centerOffset = getCenteringPrice(vOptions);
     var sideOffset = Math.max(0, hOptions.tPos + hOptions.tDim + hOptions.oDim - hOptions.wDim);
     return centerOffset + sideOffset;
@@ -2810,7 +2810,7 @@
   /* Evaluate left placement */
 
 
-  function getLeftPrice(hOptions, vOptions) {
+    function getLeftPrice(hOptions, vOptions) {
     var centerOffset = getCenteringPrice(hOptions);
     var sideOffset = Math.max(0, vOptions.oDim - vOptions.tPos);
     return centerOffset + sideOffset;
@@ -2818,17 +2818,17 @@
   /* Evaluate right placement */
 
 
-  function getRightPrice(hOptions, vOptions) {
+    function getRightPrice(hOptions, vOptions) {
     var centerOffset = getCenteringPrice(hOptions);
     var sideOffset = Math.max(0, vOptions.tPos + vOptions.tDim + vOptions.oDim - vOptions.wDim);
     return centerOffset + sideOffset;
   }
 
-  function getStartPosKey(isRTL) {
+    function getStartPosKey(isRTL) {
     return isRTL ? 'right' : 'left';
   }
 
-  function topProperties(hOptions, vOptions, isRTL) {
+    function topProperties(hOptions, vOptions, isRTL) {
     var centered = axisCenteredPositionProperties(vOptions);
     var side = axisNegativeSideProperties(hOptions);
     return {
@@ -2840,7 +2840,7 @@
     };
   }
 
-  function bottomProperties(hOptions, vOptions, isRTL) {
+    function bottomProperties(hOptions, vOptions, isRTL) {
     var centered = axisCenteredPositionProperties(vOptions);
     var side = axisPositiveSideProperties(hOptions);
     return {
@@ -2852,7 +2852,7 @@
     };
   }
 
-  function rightProperties(hOptions, vOptions, isRTL) {
+    function rightProperties(hOptions, vOptions, isRTL) {
     var centered = axisCenteredPositionProperties(hOptions);
     var side = axisPositiveSideProperties(vOptions);
     return {
@@ -2864,7 +2864,7 @@
     };
   }
 
-  function leftProperties(hOptions, vOptions, isRTL) {
+    function leftProperties(hOptions, vOptions, isRTL) {
     var centered = axisCenteredPositionProperties(hOptions);
     var side = axisNegativeSideProperties(vOptions);
     return {
@@ -2891,7 +2891,7 @@
    *   - offset: <Number> value by which must be anchor shifted
    */
 
-  function computeProperties(_ref4, placement, preferredPlacement, isRTL) {
+    function computeProperties(_ref4, placement, preferredPlacement, isRTL) {
     var windowLayout = _ref4.windowLayout,
         triggerLayout = _ref4.triggerLayout,
         optionsLayout = _ref4.optionsLayout;
@@ -2918,8 +2918,8 @@
       tDim: tWidth
     };
 
-    if (placement !== 'auto' && propertiesByPlacement[placement]) {
-      return propertiesByPlacement[placement](hOptions, vOptions, isRTL);
+        if (placement !== 'auto' && propertiesByPlacement[placement]) {
+            return propertiesByPlacement[placement](hOptions, vOptions, isRTL);
     }
 
     var prices = {
@@ -2928,13 +2928,13 @@
       right: getRightPrice(hOptions, vOptions),
       left: getLeftPrice(hOptions, vOptions)
     };
-    var bestPrice = Object.values(prices).sort(function (a, b) {
+        var bestPrice = Object.values(prices).sort(function (a, b) {
       return a - b;
     })[0];
-    var bestPlacement = prices[preferredPlacement] === bestPrice ? preferredPlacement : Object.keys(prices).find(function (pl) {
-      return prices[pl] === bestPrice;
+        var bestPlacement = prices[preferredPlacement] === bestPrice ? preferredPlacement : Object.keys(prices).find(function (pl) {
+            return prices[pl] === bestPrice;
     });
-    return propertiesByPlacement[bestPlacement](hOptions, vOptions, isRTL);
+        return propertiesByPlacement[bestPlacement](hOptions, vOptions, isRTL);
   }
 
   var Popover =
@@ -2942,19 +2942,19 @@
   function (_React$Component) {
     _inherits(Popover, _React$Component);
 
-    function Popover(props) {
+        function Popover(props) {
       var _this;
 
-      _classCallCheck(this, Popover);
+            _classCallCheck(this, Popover);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Popover).call(this, props));
+            _this = _possibleConstructorReturn(this, _getPrototypeOf(Popover).call(this, props));
       _this.state = {
         scaleAnim: new reactNative.Animated.Value(0.1)
       };
       return _this;
     }
 
-    _createClass(Popover, [{
+        _createClass(Popover, [{
       key: "componentDidMount",
       value: function componentDidMount() {
         reactNative.Animated.timing(this.state.scaleAnim, {
@@ -3017,7 +3017,7 @@
             offset: offset,
             isRTL: isRTL
           }), anchorStyle]
-        }), React__default.createElement(reactNative.View, _extends({}, other, {
+                }), React__default.createElement(reactNative.View, _extends({}, other, {
           style: [styles$6.options, style]
         }), children));
       }
@@ -3025,22 +3025,22 @@
 
     return Popover;
   }(React__default.Component);
-  Popover.propTypes = {
+    Popover.propTypes = {
     anchorStyle: propTypes.oneOfType([propTypes.object, propTypes.number, propTypes.array]),
     placement: propTypes.oneOf(['auto', 'top', 'right', 'bottom', 'left']),
     preferredPlacement: propTypes.oneOf(['top', 'right', 'bottom', 'left']),
     openAnimationDuration: propTypes.number,
     closeAnimationDuration: propTypes.number
   };
-  Popover.defaultProps = {
+    Popover.defaultProps = {
     preferredPlacement: 'top',
     placement: 'auto'
   };
 
-  var getContainerStyle = function getContainerStyle(_ref5) {
+    var getContainerStyle = function getContainerStyle(_ref5) {
     var placement = _ref5.placement,
         isRTL = _ref5.isRTL;
-    return {
+        return {
       left: {
         flexDirection: isRTL ? 'row' : 'row-reverse'
       },
@@ -3056,7 +3056,7 @@
     }[placement];
   };
 
-  var dynamicAnchorStyle = function dynamicAnchorStyle(_ref6) {
+    var dynamicAnchorStyle = function dynamicAnchorStyle(_ref6) {
     var _ref7, _ref8;
 
     var offset = _ref6.offset,
@@ -3138,7 +3138,7 @@
     NotAnimatedContextMenu: NotAnimatedContextMenu,
     Popover: Popover
   };
-  var MenuContext = deprecatedComponent('MenuContext is deprecated and it might be removed in future releases, use MenuProvider instead.', ['openMenu', 'toggleMenu', 'closeMenu', 'isMenuOpen'])(MenuProvider);
+    var MenuContext = deprecatedComponent('MenuContext is deprecated and it might be removed in future releases, use MenuProvider instead.', ['openMenu', 'toggleMenu', 'closeMenu', 'isMenuOpen'])(MenuProvider);
 
   exports.default = MenuExternal;
   exports.Menu = MenuExternal;

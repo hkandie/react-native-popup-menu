@@ -8,15 +8,15 @@ const data = new Array(500).fill(0).map((a, i) => ({ key: i, value: 'item' + i }
 
 const FlatListExample = () => {
   return (
-    <MenuProvider style={styles.container}>
-      <Menu onSelect={(value) => Alert.alert(value)}>
-        <MenuTrigger text='Select option' />
+        <MenuProvider style={styles.container}>
+            <Menu onSelect={(value) => Alert.alert(value)}>
+                <MenuTrigger text='Select option' />
 
-        <MenuOptions>
-          <FlatList
+                <MenuOptions>
+                    <FlatList
             data={data}
             renderItem={({ item }) => (
-              <MenuOption
+                            <MenuOption
                 value={item.value}
                 text={item.value}
               />

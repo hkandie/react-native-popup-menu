@@ -5,56 +5,56 @@ import React from 'react';
 const { Popover } = renderers;
 
 const MyPopover = () => (
-  <Menu
+    <Menu
     renderer={Popover}
     rendererProps={{ preferredPlacement: 'bottom' }}
   >
-    <MenuTrigger style={styles.menuTrigger}>
-      <Text style={styles.triggerText}>{'\u263A'}</Text>
+        <MenuTrigger style={styles.menuTrigger}>
+            <Text style={styles.triggerText}>{'\u263A'}</Text>
     </MenuTrigger>
 
-    <MenuOptions style={styles.menuOptions}>
-      <Text style={styles.contentText}>Hello world!</Text>
+        <MenuOptions style={styles.menuOptions}>
+            <Text style={styles.contentText}>Hello world!</Text>
     </MenuOptions>
   </Menu>
 );
 
 const Row = () => (
-  <View style={styles.row}>
-    <MyPopover />
+    <View style={styles.row}>
+        <MyPopover />
 
-    <MyPopover />
+        <MyPopover />
 
-    <MyPopover />
+        <MyPopover />
 
-    <MyPopover />
+        <MyPopover />
 
-    <MyPopover />
+        <MyPopover />
 
-    <MyPopover />
+        <MyPopover />
   </View>
 );
 
 const PopoverExample = () => (
-  <MenuProvider
+    <MenuProvider
     style={styles.container}
     customStyles={{ backdrop: styles.backdrop }}
   >
-    <Row />
+        <Row />
 
-    <Row />
+        <Row />
 
-    <Row />
+        <Row />
 
-    <Row />
+        <Row />
 
-    <Row />
+        <Row />
 
-    <Row />
+        <Row />
 
-    <Row />
+        <Row />
 
-    <Row />
+        <Row />
   </MenuProvider>
 );
 

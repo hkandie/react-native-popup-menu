@@ -37,7 +37,7 @@ export function IconSymbol({
   weight?: SymbolWeight;
 }) {
   return (
-    <MaterialIcons
+        <MaterialIcons
       color={color}
       size={size}
       name={MAPPING[name]}

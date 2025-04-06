@@ -11,70 +11,70 @@ const { MenuTrigger } = require('../src/MenuTrigger');
 const { createSpy, objectContaining } = jasmine;
 
 describe('MenuTrigger', () => {
-  it('should render component', () => {
-    const { output } = render(
-      <MenuTrigger>
-        <Text>Trigger Button</Text>
+    it('should render component', () => {
+        const { output } = render(
+            <MenuTrigger>
+                <Text>Trigger Button</Text>
       </MenuTrigger>
     );
 
-    expect(output.type).toEqual(View);
+        expect(output.type).toEqual(View);
 
-    expect(nthChild(output, 1).type).toEqual(TouchableHighlight);
+        expect(nthChild(output, 1).type).toEqual(TouchableHighlight);
 
-    expect(nthChild(output, 2).type).toEqual(View);
+        expect(nthChild(output, 2).type).toEqual(View);
 
-    expect(nthChild(output, 3)).toEqual(<Text>Trigger Button</Text>);
+        expect(nthChild(output, 3)).toEqual(<Text>Trigger Button</Text>);
   });
 
-  it('should render component using text property', () => {
-    const { output } = render(<MenuTrigger text='Trigger text' />);
+    it('should render component using text property', () => {
+        const { output } = render(<MenuTrigger text='Trigger text' />);
 
-    expect(nthChild(output, 1).type).toEqual(TouchableHighlight);
+        expect(nthChild(output, 1).type).toEqual(TouchableHighlight);
 
-    expect(nthChild(output, 2).type).toEqual(View);
+        expect(nthChild(output, 2).type).toEqual(View);
 
-    expect(nthChild(output, 3)).toEqual(<Text>Trigger text</Text>);
+        expect(nthChild(output, 3)).toEqual(<Text>Trigger text</Text>);
   });
 
-  it('should be enabled by default', () => {
-    const { instance } = render(<MenuTrigger />);
+    it('should be enabled by default', () => {
+        const { instance } = render(<MenuTrigger />);
 
-    expect(instance.props.disabled).toBe(false);
+        expect(instance.props.disabled).toBe(false);
   });
 
-  it('should trigger on ref event', () => {
+    it('should trigger on ref event', () => {
     const onRefSpy = createSpy();
 
-    const { output } = render(<MenuTrigger onRef={onRefSpy} />);
+        const { output } = render(<MenuTrigger onRef={onRefSpy} />);
 
-    expect(typeof output.ref).toEqual('function');
+        expect(typeof output.ref).toEqual('function');
     output.ref();
 
-    expect(onRefSpy).toHaveBeenCalled();
+        expect(onRefSpy).toHaveBeenCalled();
 
-    expect(onRefSpy.calls.count()).toEqual(1);
+        expect(onRefSpy.calls.count()).toEqual(1);
   });
 
-  it('should open menu', () => {
+    it('should open menu', () => {
     const menuActions = { openMenu: createSpy() };
 
-    const { output } = render(
-      <MenuTrigger
+        const { output } = render(
+            <MenuTrigger
         menuName='menu1'
         ctx={{ menuActions }}
       />
     );
     nthChild(output, 1).props.onPress();
 
-    expect(menuActions.openMenu).toHaveBeenCalledWith('menu1');
+        expect(menuActions.openMenu).toHaveBeenCalledWith('menu1');
 
-    expect(menuActions.openMenu.calls.count()).toEqual(1);
+        expect(menuActions.openMenu.calls.count()).toEqual(1);
   });
 
-  it('should not open menu when disabled', () => {
-    const { output, instance } = render(
-      <MenuTrigger
+    it('should not open menu when disabled', () => {
+        const { output, instance } = render(
+            <MenuTrigger
         menuName='menu1'
         disabled={true}
       />
@@ -83,18 +83,18 @@ describe('MenuTrigger', () => {
     instance.props.ctx = { menuActions };
     nthChild(output, 1).props.onPress();
 
-    expect(menuActions.openMenu).not.toHaveBeenCalled();
+        expect(menuActions.openMenu).not.toHaveBeenCalled();
   });
 
-  it('should render trigger with custom styles', () => {
+    it('should render trigger with custom styles', () => {
     const customStyles = {
       triggerWrapper: { backgroundColor: 'red' },
       triggerText: { color: 'blue' },
       triggerTouchable: { underlayColor: 'green' }
     };
 
-    const { output } = render(
-      <MenuTrigger
+        const { output } = render(
+            <MenuTrigger
         menuName='menu1'
         text='some text'
         customStyles={customStyles}
@@ -104,10 +104,10 @@ describe('MenuTrigger', () => {
     const view = nthChild(output, 2);
     const text = nthChild(output, 3);
 
-    expect(normalizeStyle(touchable.props)).toEqual(objectContaining({ underlayColor: 'green' }));
+        expect(normalizeStyle(touchable.props)).toEqual(objectContaining({ underlayColor: 'green' }));
 
-    expect(normalizeStyle(view.props.style)).toEqual(objectContaining(customStyles.triggerWrapper));
+        expect(normalizeStyle(view.props.style)).toEqual(objectContaining(customStyles.triggerWrapper));
 
-    expect(normalizeStyle(text.props.style)).toEqual(objectContaining(customStyles.triggerText));
+        expect(normalizeStyle(text.props.style)).toEqual(objectContaining(customStyles.triggerText));
   });
 });

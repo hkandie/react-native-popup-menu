@@ -10,18 +10,29 @@ const anchorHyp = Math.sqrt(anchorSize*anchorSize + anchorSize*anchorSize);
 const anchorOffset = (anchorHyp + anchorSize) / 2 - popoverPadding;
 
 // left/top placement
-function axisNegativeSideProperties({ oDim, tPos }) {
+function axisNegativeSideProperties({
+  oDim,
+  tPos
+}: any) {
   return { position: tPos - oDim };
 }
 
 // right/bottom placement
-function axisPositiveSideProperties({ tPos, tDim }) {
+function axisPositiveSideProperties({
+  tPos,
+  tDim
+}: any) {
   // substract also anchor placeholder from the beginning
   return { position: tPos + tDim - anchorSize };
 }
 
 // computes offsets (off screen overlap) of popover when trying to align it to the center
-function centeringProperties({ oDim, wDim, tPos, tDim }) {
+function centeringProperties({
+  oDim,
+  wDim,
+  tPos,
+  tDim
+}: any) {
   const center = Math.round(tPos + (tDim / 2));
   const leftOffset = (oDim / 2) - center;
   const rightOffset = center + (oDim / 2) - wDim;
@@ -35,7 +46,7 @@ function centeringProperties({ oDim, wDim, tPos, tDim }) {
  *   - position: <Number> Absolute position - top/left,
  *   - offset: <Number> window overlapping size if window boundaries were not considered
  */
-function axisCenteredPositionProperties(options) {
+function axisCenteredPositionProperties(options: any) {
   const { oDim, wDim } = options;
   const { center, leftOffset, rightOffset } = centeringProperties(options);
   if (leftOffset > 0 || rightOffset > 0) {
@@ -53,7 +64,7 @@ function axisCenteredPositionProperties(options) {
 }
 
 /* Evaluate centering placement */
-function getCenteringPrice(options) {
+function getCenteringPrice(options: any) {
   const { leftOffset, rightOffset } = centeringProperties(options);
   // TODO: currently shifted popovers have higher price,
   // popover shift could be taken into account with the same price
@@ -61,38 +72,38 @@ function getCenteringPrice(options) {
 }
 
 /* Evaluate top placement */
-function getTopPrice(hOptions, vOptions) {
+function getTopPrice(hOptions: any, vOptions: any) {
   const centerOffset = getCenteringPrice(vOptions)
   const sideOffset =  Math.max(0, hOptions.oDim - hOptions.tPos)
   return centerOffset + sideOffset
 }
 
 /* Evaluate bottom placement */
-function getBottomPrice(hOptions, vOptions) {
+function getBottomPrice(hOptions: any, vOptions: any) {
   const centerOffset = getCenteringPrice(vOptions)
   const sideOffset =  Math.max(0, hOptions.tPos + hOptions.tDim + hOptions.oDim - hOptions.wDim)
   return centerOffset + sideOffset
 }
 
 /* Evaluate left placement */
-function getLeftPrice(hOptions, vOptions) {
+function getLeftPrice(hOptions: any, vOptions: any) {
   const centerOffset = getCenteringPrice(hOptions)
   const sideOffset =  Math.max(0, vOptions.oDim - vOptions.tPos)
   return centerOffset + sideOffset
 }
 
 /* Evaluate right placement */
-function getRightPrice(hOptions, vOptions) {
+function getRightPrice(hOptions: any, vOptions: any) {
   const centerOffset = getCenteringPrice(hOptions)
   const sideOffset =  Math.max(0, vOptions.tPos + vOptions.tDim + vOptions.oDim - vOptions.wDim)
   return centerOffset + sideOffset
 }
 
-function getStartPosKey(isRTL) {
+function getStartPosKey(isRTL: any) {
   return isRTL ? 'right' : 'left';
 }
 
-function topProperties(hOptions, vOptions, isRTL) {
+function topProperties(hOptions: any, vOptions: any, isRTL: any) {
   const centered = axisCenteredPositionProperties(vOptions);
   const side = axisNegativeSideProperties(hOptions);
   return {
@@ -105,7 +116,7 @@ function topProperties(hOptions, vOptions, isRTL) {
   };
 }
 
-function bottomProperties(hOptions, vOptions, isRTL) {
+function bottomProperties(hOptions: any, vOptions: any, isRTL: any) {
   const centered = axisCenteredPositionProperties(vOptions);
   const side = axisPositiveSideProperties(hOptions);
   return {
@@ -118,7 +129,7 @@ function bottomProperties(hOptions, vOptions, isRTL) {
   };
 }
 
-function rightProperties(hOptions, vOptions, isRTL) {
+function rightProperties(hOptions: any, vOptions: any, isRTL: any) {
   const centered = axisCenteredPositionProperties(hOptions);
   const side = axisPositiveSideProperties(vOptions);
   return {
@@ -131,7 +142,7 @@ function rightProperties(hOptions, vOptions, isRTL) {
   };
 }
 
-function leftProperties(hOptions, vOptions, isRTL) {
+function leftProperties(hOptions: any, vOptions: any, isRTL: any) {
   const centered = axisCenteredPositionProperties(hOptions);
   const side = axisNegativeSideProperties(vOptions);
   return {
@@ -160,10 +171,14 @@ const propertiesByPlacement = {
  *   - offset: <Number> value by which must be anchor shifted
  */
 export function computeProperties (
-  { windowLayout, triggerLayout, optionsLayout },
-  placement,
-  preferredPlacement,
-  isRTL,
+  {
+    windowLayout,
+    triggerLayout,
+    optionsLayout
+  }: any,
+  placement: any,
+  preferredPlacement: any,
+  isRTL: any,
 ) {
   const { x: wX, y: wY, width: wWidth, height: wHeight } = windowLayout;
   const { x: tX, y: tY, height: tHeight, width: tWidth } = triggerLayout;
@@ -180,8 +195,8 @@ export function computeProperties (
     tPos: tX - wX,
     tDim: tWidth,
   };
-  if (placement !== 'auto' && propertiesByPlacement[placement]) {
-    return propertiesByPlacement[placement](hOptions, vOptions, isRTL)
+    if (placement !== 'auto' && propertiesByPlacement[placement]) {
+        return propertiesByPlacement[placement](hOptions, vOptions, isRTL)
   }
 
   const prices = {
@@ -190,17 +205,19 @@ export function computeProperties (
     right: getRightPrice(hOptions, vOptions),
     left: getLeftPrice(hOptions, vOptions),
   };
-  const bestPrice = Object.values(prices).sort((a, b) => a - b)[0]
-  const bestPlacement = prices[preferredPlacement] === bestPrice
+    const bestPrice = Object.values(prices).sort((a: any, b: any) => a - b)[0]
+    const bestPlacement = prices[preferredPlacement] === bestPrice
     ? preferredPlacement
-    : Object.keys(prices).find(pl => prices[pl] === bestPrice)
+        : Object.keys(prices).find(pl => prices[pl] === bestPrice)
 
-  return propertiesByPlacement[bestPlacement](hOptions, vOptions, isRTL)
+    return propertiesByPlacement[bestPlacement](hOptions, vOptions, isRTL)
 }
 
 export default class Popover extends React.Component {
+  props: any;
+  state: any;
 
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.state = {
       scaleAnim: new Animated.Value(0.1),
@@ -251,7 +268,7 @@ export default class Popover extends React.Component {
       isRTL,
     );
     return (
-      <Animated.View
+            <Animated.View
         style={[
           styles.animated,
           animation,
@@ -260,20 +277,19 @@ export default class Popover extends React.Component {
         ]}
         pointerEvents="box-none"
       >
-        <View
+                <View
           style={[
             styles.anchor,
             dynamicAnchorStyle({ placement, offset, isRTL }),
             anchorStyle,
           ]}
         />
-        <View {...other} style={[styles.options, style]}>
+                <View {...other} style={[styles.options, style]}>
           {children}
         </View>
       </Animated.View>
     );
   }
-
 }
 
 Popover.propTypes = {
@@ -293,7 +309,10 @@ Popover.defaultProps = {
   placement: 'auto',
 };
 
-const getContainerStyle = ({ placement, isRTL }) => ({
+const getContainerStyle = ({
+  placement,
+  isRTL
+}: any) => ({
   left: {
     flexDirection: isRTL ? 'row' : 'row-reverse',
   },
@@ -308,7 +327,11 @@ const getContainerStyle = ({ placement, isRTL }) => ({
   },
 })[placement]
 
-const dynamicAnchorStyle = ({ offset, placement, isRTL }) => {
+const dynamicAnchorStyle = ({
+  offset,
+  placement,
+  isRTL
+}: any) => {
   const start = getStartPosKey(isRTL);
   switch (placement) {
     case 'right':

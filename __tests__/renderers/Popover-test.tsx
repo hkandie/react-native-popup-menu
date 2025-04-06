@@ -13,25 +13,25 @@ describe('Popover', () => {
     optionsLayout: { width: 200, height: 100 }
   };
 
-  describe('renderer', () => {
-    it('should render component', () => {
-      const { output } = render(
-        <Popover layouts={defaultLayouts}>
-          <Text>Some text</Text>
+    describe('renderer', () => {
+        it('should render component', () => {
+            const { output } = render(
+                <Popover layouts={defaultLayouts}>
+                    <Text>Some text</Text>
 
-          <Text>Other text</Text>
+                    <Text>Other text</Text>
         </Popover>
       );
 
-      expect(output.type).toEqual(Animated.View);
+            expect(output.type).toEqual(Animated.View);
       const anchor = output.props.children[0];
 
-      expect(anchor.type).toEqual(View);
+            expect(anchor.type).toEqual(View);
       const content = output.props.children[1];
 
-      expect(content.type).toEqual(View);
+            expect(content.type).toEqual(View);
 
-      expect(content.props.children).toEqual([<Text>Some text</Text>, <Text>Other text</Text>]);
+            expect(content.props.children).toEqual([<Text>Some text</Text>, <Text>Other text</Text>]);
     });
   });
 });

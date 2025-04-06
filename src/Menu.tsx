@@ -86,7 +86,7 @@ export class Menu extends Component {
   render() {
     const { style } = this.props;
     const children = this._reduceChildren();
-    return <View style={style}>{children}</View>;
+        return <View style={style}>{children}</View>;
   }
 
   _reduceChildren() {
@@ -167,9 +167,9 @@ Object.defineProperty(MenuExternal, 'debug', {
   }
 });
 MenuExternal.setDefaultRenderer = (renderer: any) => {
-  Menu.defaultProps.renderer = renderer;
+    Menu.defaultProps.renderer = renderer;
 };
 MenuExternal.setDefaultRendererProps = (rendererProps: any) => {
-  Menu.defaultProps.rendererProps = rendererProps;
+    Menu.defaultProps.rendererProps = rendererProps;
 };
 export default MenuExternal;

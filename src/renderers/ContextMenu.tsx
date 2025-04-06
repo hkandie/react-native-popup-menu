@@ -2,7 +2,7 @@ import React from 'react';
 import { I18nManager, Animated, Easing, StyleSheet, PixelRatio } from 'react-native';
 import { OPEN_ANIM_DURATION, CLOSE_ANIM_DURATION, USE_NATIVE_DRIVER } from '../constants';
 
-const axisPosition = (oDim, wDim, tPos, tDim) => {
+const axisPosition = (oDim: any, wDim: any, tPos: any, tDim: any) => {
   // if options are bigger than window dimension, then render at 0
   if (oDim > wDim) {
     return 0;
@@ -29,7 +29,7 @@ const axisPosition = (oDim, wDim, tPos, tDim) => {
   return pos;
 };
 
-function fit(pos, len, minPos, maxPos) {
+function fit(pos: any, len: any, minPos: any, maxPos: any) {
   if (pos === undefined) {
     return undefined;
   }
@@ -42,7 +42,7 @@ function fit(pos, len, minPos, maxPos) {
   return pos;
 }
 // fits options (position) into safeArea
-export const fitPositionIntoSafeArea = (position, layouts) => {
+export const fitPositionIntoSafeArea = (position: any, layouts: any) => {
   const { windowLayout, safeAreaLayout, optionsLayout } = layouts;
   if (!safeAreaLayout) {
     return position;
@@ -57,7 +57,7 @@ export const fitPositionIntoSafeArea = (position, layouts) => {
   return { top, left, right };
 }
 
-export const computePosition = (layouts, isRTL) => {
+export const computePosition = (layouts: any, isRTL: any) => {
   const { windowLayout, triggerLayout, optionsLayout } = layouts;
   const { x: wX, y: wY, width: wWidth, height: wHeight } = windowLayout;
   const { x: tX, y: tY, height: tHeight, width: tWidth } = triggerLayout;
@@ -70,8 +70,10 @@ export const computePosition = (layouts, isRTL) => {
 };
 
 export default class ContextMenu extends React.Component {
+  props: any;
+  state: any;
 
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.state = {
       scaleAnim: new Animated.Value(0.1),
@@ -106,12 +108,11 @@ export default class ContextMenu extends React.Component {
     };
     const position = computePosition(layouts, I18nManager.isRTL);
     return (
-      <Animated.View {...other} style={[styles.options, style, animation, position]}>
+            <Animated.View {...other} style={[styles.options, style, animation, position]}>
         {children}
       </Animated.View>
     );
   }
-
 }
 
 // public exports

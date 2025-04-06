@@ -1,25 +1,25 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { Menu, MenuProvider, MenuTrigger, MenuOptions, MenuOption } from '..';
+import { Menu, MenuProvider, MenuTrigger, MenuOptions, MenuOption } from 'react-native-popup-menu';
 
 const BasicExample = () => (
-  <MenuProvider>
-    <Text>Basic Example</Text>
+    <MenuProvider>
+        <Text>Basic Example</Text>
 
-    <Menu onSelect={(value) => alert(`Selected number: ${value}`)}>
-      <MenuTrigger text='Select option' />
+        <Menu onSelect={(value: any) => alert(`Selected number: ${value}`)}>
+            <MenuTrigger text='Select option' />
 
-      <MenuOptions>
-        <MenuOption
+            <MenuOptions>
+                <MenuOption
           value={1}
           text='One'
         />
 
-        <MenuOption value={2}>
-          <Text style={{ color: 'red' }}>Two</Text>
+                <MenuOption value={2}>
+                    <Text style={{ color: 'red' }}>Two</Text>
         </MenuOption>
 
-        <MenuOption
+                <MenuOption
           value={3}
           disabled={true}
           text='Three'

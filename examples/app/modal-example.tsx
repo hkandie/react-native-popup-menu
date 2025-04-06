@@ -6,45 +6,45 @@ const ModalExample = (props: any) => {
   const [visible, setVisible] = useState(false);
 
   return (
-    <MenuProvider style={{ flexDirection: 'column', padding: 30 }}>
-      <Text>Main window:</Text>
+        <MenuProvider style={{ flexDirection: 'column', padding: 30 }}>
+            <Text>Main window:</Text>
 
-      <Menu>
-        <MenuTrigger text='Select option' />
+            <Menu>
+                <MenuTrigger text='Select option' />
 
-        <MenuOptions>
-          <MenuOption
+                <MenuOptions>
+                    <MenuOption
             onSelect={() => setVisible(true)}
             text='Open modal'
           />
         </MenuOptions>
       </Menu>
 
-      <Modal
+            <Modal
         visible={visible}
         onRequestClose={() => setVisible(false)}
       >
-        <MenuProvider
+                <MenuProvider
           skipInstanceCheck
           style={{ flexDirection: 'column', padding: 30, backgroundColor: 'white' }}
         >
-          <Text>Modal window:</Text>
+                    <Text>Modal window:</Text>
 
-          <Menu onSelect={(value: any) => alert(`Selected number: ${value}`)}>
-            <MenuTrigger text='Select option' />
+                    <Menu onSelect={(value: any) => alert(`Selected number: ${value}`)}>
+                        <MenuTrigger text='Select option' />
 
-            <MenuOptions>
-              <MenuOption
+                        <MenuOptions>
+                            <MenuOption
                 value={1}
                 text='One'
               />
 
-              <MenuOption
+                            <MenuOption
                 value={2}
                 text='Two'
               />
 
-              <MenuOption
+                            <MenuOption
                 onSelect={() => setVisible(false)}
                 text='Close modal'
               />

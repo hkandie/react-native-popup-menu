@@ -19,30 +19,30 @@ const ControlledExample = () => {
   };
   console.log('ControlledExample - opened', opened);
   return (
-    <MenuProvider style={{ flexDirection: 'column', padding: 30 }}>
-      <Text>Controlled Example</Text>
+        <MenuProvider style={{ flexDirection: 'column', padding: 30 }}>
+            <Text>Controlled Example</Text>
 
-      <Menu
+            <Menu
         opened={opened}
         onBackdropPress={onBackdropPress}
         onSelect={onOptionSelect}
       >
-        <MenuTrigger
+                <MenuTrigger
           onPress={onTriggerPress}
           text='Select option'
         />
 
-        <MenuOptions>
-          <MenuOption
+                <MenuOptions>
+                    <MenuOption
             value={1}
             text='One'
           />
 
-          <MenuOption value={2}>
-            <Text style={{ color: 'red' }}>Two</Text>
+                    <MenuOption value={2}>
+                        <Text style={{ color: 'red' }}>Two</Text>
           </MenuOption>
 
-          <MenuOption
+                    <MenuOption
             value={3}
             disabled={true}
             text='Three'

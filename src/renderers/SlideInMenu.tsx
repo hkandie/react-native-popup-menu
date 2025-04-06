@@ -2,7 +2,7 @@ import React from 'react';
 import { Animated, StyleSheet, Easing } from 'react-native';
 import { OPEN_ANIM_DURATION, CLOSE_ANIM_DURATION, USE_NATIVE_DRIVER } from '../constants';
 
-export const computePosition = (layouts) => {
+export const computePosition = (layouts: any) => {
   const { windowLayout, optionsLayout } = layouts
   const { height: wHeight } = windowLayout;
   const { height: oHeight } = optionsLayout;
@@ -15,8 +15,10 @@ export const computePosition = (layouts) => {
 }
 
 export default class SlideInMenu extends React.Component {
+  props: any;
+  state: any;
 
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.state = {
       slide: new Animated.Value(0),
@@ -56,7 +58,7 @@ export default class SlideInMenu extends React.Component {
     };
     const position = computePosition(layouts);
     return (
-      <Animated.View style={[styles.options, style, animation, position]} {...other}>
+            <Animated.View style={[styles.options, style, animation, position]} {...other}>
         {children}
       </Animated.View>
     );

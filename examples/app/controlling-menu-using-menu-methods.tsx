@@ -4,11 +4,11 @@ import { Text, TouchableOpacity } from 'react-native';
 import Menu, { MenuProvider, MenuOptions, MenuOption, MenuTrigger, withMenuContext } from 'react-native-popup-menu';
 
 const Openner = (props: any) => (
-  <TouchableOpacity
+    <TouchableOpacity
     style={{ paddingTop: 50 }}
     onPress={() => props.ctx.menuActions.openMenu('menu-1')}
   >
-    <Text>Open menu from context</Text>
+        <Text>Open menu from context</Text>
   </TouchableOpacity>
 );
 
@@ -16,28 +16,28 @@ const ContextOpenner = withMenuContext(Openner);
 
 const ControlledExample = () => {
   return (
-    <MenuProvider style={{ flexDirection: 'column', padding: 30 }}>
-      <Text>Controlled Example</Text>
+        <MenuProvider style={{ flexDirection: 'column', padding: 30 }}>
+            <Text>Controlled Example</Text>
 
-      <Menu
+            <Menu
         name='menu-1'
         onSelect={(value: any) => alert(`Selected number: ${value}`)}
       >
-        <MenuTrigger text='Select option' />
+                <MenuTrigger text='Select option' />
 
-        <MenuOptions>
-          <MenuOption
+                <MenuOptions>
+                    <MenuOption
             value={1}
             text='One'
           />
 
-          <MenuOption value={2}>
-            <Text style={{ color: 'red' }}>Two (not closing)</Text>
+                    <MenuOption value={2}>
+                        <Text style={{ color: 'red' }}>Two (not closing)</Text>
           </MenuOption>
         </MenuOptions>
       </Menu>
 
-      <ContextOpenner />
+            <ContextOpenner />
     </MenuProvider>
   );
 };
