@@ -12,29 +12,29 @@ const CloseOnBackExample: React.FC = () => {
   };
 
   return (
-        <MenuProvider
+    <MenuProvider
       style={{ flexDirection: 'column', padding: 50 }}
       backHandler={customBack ? customBackHandler : true}
     >
-            <Button
+      <Button
         title={customBack ? 'Change to default' : 'Change to custom'}
         onPress={() => setCustomBack(!customBack)}
       />
 
-            <Menu>
-                <MenuTrigger text='Select option' />
+      <Menu>
+        <MenuTrigger text='Select option' />
 
-                <MenuOptions>
-                    <MenuOption
+        <MenuOptions>
+          <MenuOption
             value={1}
             text='One'
           />
 
-                    <MenuOption value={2}>
-                        <Text style={{ color: 'red' }}>Two</Text>
+          <MenuOption value={2}>
+            <Text style={{ color: 'red' }}>Two</Text>
           </MenuOption>
 
-                    <MenuOption
+          <MenuOption
             value={3}
             disabled={true}
             text='Three'
@@ -42,21 +42,21 @@ const CloseOnBackExample: React.FC = () => {
         </MenuOptions>
       </Menu>
 
-            <Button
+      <Button
         title={additionalMenu ? 'Remove 2nd menu' : 'Add 2nd menu'}
         onPress={() => setAdditionalMenu(!additionalMenu)}
       />
       {additionalMenu && (
-                <Menu>
-                    <MenuTrigger text='Select option 2' />
+        <Menu>
+          <MenuTrigger text='Select option 2' />
 
-                    <MenuOptions>
-                        <MenuOption
+          <MenuOptions>
+            <MenuOption
               value={1}
               text='One'
             />
 
-                        <MenuOption
+            <MenuOption
               value={2}
               text='Two'
             />

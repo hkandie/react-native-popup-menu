@@ -6,34 +6,34 @@ const Page = () => {
   const router = useRouter();
 
   return (
-        <View style={{ flexDirection: 'column', padding: 70 }}>
-            <Text>Hello world with react-native-router-flux!</Text>
+    <View style={{ flexDirection: 'column', padding: 70 }}>
+      <Text>Hello world with react-native-router-flux!</Text>
 
-            <Menu>
-                <MenuTrigger text='Select option' />
+      <Menu>
+        <MenuTrigger text='Select option' />
 
-                <MenuOptions>
-                    <MenuOption
+        <MenuOptions>
+          <MenuOption
             onSelect={() => {
               router.push('/login');
             }}
             text='Login'
           />
 
-                    <MenuOption
+          <MenuOption
             onSelect={() => {
               router.push('/register');
             }}
             text='Register'
           />
 
-                    <MenuOption
+          <MenuOption
             onSelect={() => {
               router.push('/home');
             }}
             text='Home'
           />
-                </MenuOptions>
+        </MenuOptions>
       </Menu>
     </View>
   );

@@ -2,40 +2,29 @@ import { I18nManager, Animated, Easing, StyleSheet, View } from 'react-native';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { OPEN_ANIM_DURATION, CLOSE_ANIM_DURATION, USE_NATIVE_DRIVER } from '../constants.js';
+import { OPEN_ANIM_DURATION, CLOSE_ANIM_DURATION, USE_NATIVE_DRIVER } from '../constants';
 
 const popoverPadding = 7;
 const anchorSize = 15;
-const anchorHyp = Math.sqrt(anchorSize*anchorSize + anchorSize*anchorSize);
+const anchorHyp = Math.sqrt(anchorSize * anchorSize + anchorSize * anchorSize);
 const anchorOffset = (anchorHyp + anchorSize) / 2 - popoverPadding;
 
 // left/top placement
-function axisNegativeSideProperties({
-  oDim,
-  tPos
-}: any) {
+function axisNegativeSideProperties({ oDim, tPos }: any) {
   return { position: tPos - oDim };
 }
 
 // right/bottom placement
-function axisPositiveSideProperties({
-  tPos,
-  tDim
-}: any) {
+function axisPositiveSideProperties({ tPos, tDim }: any) {
   // substract also anchor placeholder from the beginning
   return { position: tPos + tDim - anchorSize };
 }
 
 // computes offsets (off screen overlap) of popover when trying to align it to the center
-function centeringProperties({
-  oDim,
-  wDim,
-  tPos,
-  tDim
-}: any) {
-  const center = Math.round(tPos + (tDim / 2));
-  const leftOffset = (oDim / 2) - center;
-  const rightOffset = center + (oDim / 2) - wDim;
+function centeringProperties({ oDim, wDim, tPos, tDim }: any) {
+  const center = Math.round(tPos + tDim / 2);
+  const leftOffset = oDim / 2 - center;
+  const rightOffset = center + oDim / 2 - wDim;
   return { center, leftOffset, rightOffset };
 }
 
@@ -73,30 +62,30 @@ function getCenteringPrice(options: any) {
 
 /* Evaluate top placement */
 function getTopPrice(hOptions: any, vOptions: any) {
-  const centerOffset = getCenteringPrice(vOptions)
-  const sideOffset =  Math.max(0, hOptions.oDim - hOptions.tPos)
-  return centerOffset + sideOffset
+  const centerOffset = getCenteringPrice(vOptions);
+  const sideOffset = Math.max(0, hOptions.oDim - hOptions.tPos);
+  return centerOffset + sideOffset;
 }
 
 /* Evaluate bottom placement */
 function getBottomPrice(hOptions: any, vOptions: any) {
-  const centerOffset = getCenteringPrice(vOptions)
-  const sideOffset =  Math.max(0, hOptions.tPos + hOptions.tDim + hOptions.oDim - hOptions.wDim)
-  return centerOffset + sideOffset
+  const centerOffset = getCenteringPrice(vOptions);
+  const sideOffset = Math.max(0, hOptions.tPos + hOptions.tDim + hOptions.oDim - hOptions.wDim);
+  return centerOffset + sideOffset;
 }
 
 /* Evaluate left placement */
 function getLeftPrice(hOptions: any, vOptions: any) {
-  const centerOffset = getCenteringPrice(hOptions)
-  const sideOffset =  Math.max(0, vOptions.oDim - vOptions.tPos)
-  return centerOffset + sideOffset
+  const centerOffset = getCenteringPrice(hOptions);
+  const sideOffset = Math.max(0, vOptions.oDim - vOptions.tPos);
+  return centerOffset + sideOffset;
 }
 
 /* Evaluate right placement */
 function getRightPrice(hOptions: any, vOptions: any) {
-  const centerOffset = getCenteringPrice(hOptions)
-  const sideOffset =  Math.max(0, vOptions.tPos + vOptions.tDim + vOptions.oDim - vOptions.wDim)
-  return centerOffset + sideOffset
+  const centerOffset = getCenteringPrice(hOptions);
+  const sideOffset = Math.max(0, vOptions.tPos + vOptions.tDim + vOptions.oDim - vOptions.wDim);
+  return centerOffset + sideOffset;
 }
 
 function getStartPosKey(isRTL: any) {
@@ -109,10 +98,10 @@ function topProperties(hOptions: any, vOptions: any, isRTL: any) {
   return {
     position: {
       top: side.position,
-      [getStartPosKey(isRTL)]: centered.position,
+      [getStartPosKey(isRTL)]: centered.position
     },
     offset: centered.offset,
-    placement: 'top',
+    placement: 'top'
   };
 }
 
@@ -122,10 +111,10 @@ function bottomProperties(hOptions: any, vOptions: any, isRTL: any) {
   return {
     position: {
       top: side.position,
-      [getStartPosKey(isRTL)]: centered.position,
+      [getStartPosKey(isRTL)]: centered.position
     },
     offset: centered.offset,
-    placement: 'bottom',
+    placement: 'bottom'
   };
 }
 
@@ -135,10 +124,10 @@ function rightProperties(hOptions: any, vOptions: any, isRTL: any) {
   return {
     position: {
       top: centered.position,
-      [getStartPosKey(isRTL)]: side.position,
+      [getStartPosKey(isRTL)]: side.position
     },
     offset: centered.offset,
-    placement: 'right',
+    placement: 'right'
   };
 }
 
@@ -148,10 +137,10 @@ function leftProperties(hOptions: any, vOptions: any, isRTL: any) {
   return {
     position: {
       top: centered.position,
-      [getStartPosKey(isRTL)]: side.position,
+      [getStartPosKey(isRTL)]: side.position
     },
     offset: centered.offset,
-    placement: 'left',
+    placement: 'left'
   };
 }
 
@@ -160,7 +149,7 @@ const propertiesByPlacement = {
   top: topProperties,
   bottom: bottomProperties,
   left: leftProperties,
-  right: rightProperties,
+  right: rightProperties
 };
 
 /**
@@ -170,15 +159,11 @@ const propertiesByPlacement = {
  *   - placement: <Enum> top|left|top|bottom - position to the trigger
  *   - offset: <Number> value by which must be anchor shifted
  */
-export function computeProperties (
-  {
-    windowLayout,
-    triggerLayout,
-    optionsLayout
-  }: any,
+export function computeProperties(
+  { windowLayout, triggerLayout, optionsLayout }: any,
   placement: any,
   preferredPlacement: any,
-  isRTL: any,
+  isRTL: any
 ) {
   const { x: wX, y: wY, width: wWidth, height: wHeight } = windowLayout;
   const { x: tX, y: tY, height: tHeight, width: tWidth } = triggerLayout;
@@ -187,30 +172,31 @@ export function computeProperties (
     oDim: oHeight + popoverPadding * 2,
     wDim: wHeight,
     tPos: tY - wY,
-    tDim: tHeight,
+    tDim: tHeight
   };
   const vOptions = {
     oDim: oWidth + popoverPadding * 2,
     wDim: wWidth,
     tPos: tX - wX,
-    tDim: tWidth,
+    tDim: tWidth
   };
-    if (placement !== 'auto' && propertiesByPlacement[placement]) {
-        return propertiesByPlacement[placement](hOptions, vOptions, isRTL)
+  if (placement !== 'auto' && propertiesByPlacement[placement]) {
+    return propertiesByPlacement[placement](hOptions, vOptions, isRTL);
   }
 
   const prices = {
     top: getTopPrice(hOptions, vOptions),
     bottom: getBottomPrice(hOptions, vOptions),
     right: getRightPrice(hOptions, vOptions),
-    left: getLeftPrice(hOptions, vOptions),
+    left: getLeftPrice(hOptions, vOptions)
   };
-    const bestPrice = Object.values(prices).sort((a: any, b: any) => a - b)[0]
-    const bestPlacement = prices[preferredPlacement] === bestPrice
-    ? preferredPlacement
-        : Object.keys(prices).find(pl => prices[pl] === bestPrice)
+  const bestPrice = Object.values(prices).sort((a: any, b: any) => a - b)[0];
+  const bestPlacement =
+    prices[preferredPlacement] === bestPrice
+      ? preferredPlacement
+      : Object.keys(prices).find((pl) => prices[pl] === bestPrice);
 
-    return propertiesByPlacement[bestPlacement](hOptions, vOptions, isRTL)
+  return propertiesByPlacement[bestPlacement](hOptions, vOptions, isRTL);
 }
 
 export default class Popover extends React.Component {
@@ -220,7 +206,7 @@ export default class Popover extends React.Component {
   constructor(props: any) {
     super(props);
     this.state = {
-      scaleAnim: new Animated.Value(0.1),
+      scaleAnim: new Animated.Value(0.1)
     };
   }
 
@@ -229,17 +215,18 @@ export default class Popover extends React.Component {
       duration: this.props.openAnimationDuration !== undefined ? this.props.openAnimationDuration : OPEN_ANIM_DURATION,
       toValue: 1,
       easing: Easing.out(Easing.cubic),
-      useNativeDriver: USE_NATIVE_DRIVER,
+      useNativeDriver: USE_NATIVE_DRIVER
     }).start();
   }
 
   close() {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       Animated.timing(this.state.scaleAnim, {
-        duration: this.props.closeAnimationDuration !== undefined ? this.props.closeAnimationDuration : CLOSE_ANIM_DURATION,
+        duration:
+          this.props.closeAnimationDuration !== undefined ? this.props.closeAnimationDuration : CLOSE_ANIM_DURATION,
         toValue: 0,
         easing: Easing.in(Easing.cubic),
-        useNativeDriver: USE_NATIVE_DRIVER,
+        useNativeDriver: USE_NATIVE_DRIVER
       }).start(resolve);
     });
   }
@@ -258,33 +245,20 @@ export default class Popover extends React.Component {
     } = this.props;
     const isRTL = I18nManager.isRTL;
     const animation = {
-      transform: [ { scale: this.state.scaleAnim } ],
-      opacity: this.state.scaleAnim,
+      transform: [{ scale: this.state.scaleAnim }],
+      opacity: this.state.scaleAnim
     };
-    const { position, placement, offset } = computeProperties(
-      layouts,
-      userPlacement,
-      preferredPlacement,
-      isRTL,
-    );
+    const { position, placement, offset } = computeProperties(layouts, userPlacement, preferredPlacement, isRTL);
     return (
-            <Animated.View
-        style={[
-          styles.animated,
-          animation,
-          position,
-          getContainerStyle({ placement, isRTL }),
-        ]}
-        pointerEvents="box-none"
+      <Animated.View
+        style={[styles.animated, animation, position, getContainerStyle({ placement, isRTL })]}
+        pointerEvents='box-none'
       >
-                <View
-          style={[
-            styles.anchor,
-            dynamicAnchorStyle({ placement, offset, isRTL }),
-            anchorStyle,
-          ]}
-        />
-                <View {...other} style={[styles.options, style]}>
+        <View style={[styles.anchor, dynamicAnchorStyle({ placement, offset, isRTL }), anchorStyle]} />
+        <View
+          {...other}
+          style={[styles.options, style]}
+        >
           {children}
         </View>
       </Animated.View>
@@ -293,88 +267,66 @@ export default class Popover extends React.Component {
 }
 
 Popover.propTypes = {
-  anchorStyle: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.number,
-    PropTypes.array,
-  ]),
+  anchorStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.array]),
   placement: PropTypes.oneOf(['auto', 'top', 'right', 'bottom', 'left']),
   preferredPlacement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
   openAnimationDuration: PropTypes.number,
-  closeAnimationDuration: PropTypes.number,
+  closeAnimationDuration: PropTypes.number
 };
 
 Popover.defaultProps = {
   preferredPlacement: 'top',
-  placement: 'auto',
+  placement: 'auto'
 };
 
-const getContainerStyle = ({
-  placement,
-  isRTL
-}: any) => ({
-  left: {
-    flexDirection: isRTL ? 'row' : 'row-reverse',
-  },
-  right: {
-    flexDirection: isRTL ? 'row-reverse' : 'row',
-  },
-  top: {
-    flexDirection: 'column-reverse',
-  },
-  bottom: {
-    flexDirection: 'column',
-  },
-})[placement]
+const getContainerStyle = ({ placement, isRTL }: any) =>
+  ({
+    left: {
+      flexDirection: isRTL ? 'row' : 'row-reverse'
+    },
+    right: {
+      flexDirection: isRTL ? 'row-reverse' : 'row'
+    },
+    top: {
+      flexDirection: 'column-reverse'
+    },
+    bottom: {
+      flexDirection: 'column'
+    }
+  })[placement];
 
-const dynamicAnchorStyle = ({
-  offset,
-  placement,
-  isRTL
-}: any) => {
+const dynamicAnchorStyle = ({ offset, placement, isRTL }: any) => {
   const start = getStartPosKey(isRTL);
   switch (placement) {
     case 'right':
       return {
         top: offset,
-        transform: [
-          { translateX: anchorOffset },
-          { rotate: '45deg' },
-        ],
+        transform: [{ translateX: anchorOffset }, { rotate: '45deg' }]
       };
     case 'left':
       return {
         top: offset,
-        transform: [
-          { translateX: -anchorOffset },
-          { rotate: '45deg' },
-        ],
+        transform: [{ translateX: -anchorOffset }, { rotate: '45deg' }]
       };
     case 'top':
       return {
         [start]: offset,
-        transform: [
-          { translateY: -anchorOffset },
-          { rotate: '45deg' },
-        ],
+        transform: [{ translateY: -anchorOffset }, { rotate: '45deg' }]
       };
     case 'bottom':
       return {
         [start]: offset,
-        transform: [
-          { translateY: anchorOffset },
-          { rotate: '45deg' },
-        ],
+        transform: [{ translateY: anchorOffset }, { rotate: '45deg' }]
       };
   }
-}
+};
 
 export const styles = StyleSheet.create({
   animated: {
     padding: popoverPadding,
     backgroundColor: 'transparent',
     position: 'absolute',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   options: {
     borderRadius: 2,
@@ -389,12 +341,12 @@ export const styles = StyleSheet.create({
     shadowRadius: 4,
 
     // This will elevate the view on Android, causing shadow to be drawn.
-    elevation: 5,
+    elevation: 5
   },
   anchor: {
     width: anchorSize,
     height: anchorSize,
     backgroundColor: 'white',
-    elevation: 5,
-  },
+    elevation: 5
+  }
 });

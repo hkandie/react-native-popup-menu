@@ -8,7 +8,7 @@ export function withContext(Context: any, propName = 'context') {
         const { forwardedRef, ...rest } = this.props;
 
         return (
-                    <Context.Consumer>
+          <Context.Consumer>
             {(value: any) => {
               const custom = {
                 [propName]: value,
@@ -16,7 +16,7 @@ export function withContext(Context: any, propName = 'context') {
               };
 
               return (
-                                <Component
+                <Component
                   {...custom}
                   {...rest}
                 />
@@ -32,7 +32,7 @@ export function withContext(Context: any, propName = 'context') {
 
     function enhanceForwardRef(props: any, ref: any) {
       return (
-                <EnhanceContext
+        <EnhanceContext
           {...props}
           forwardedRef={ref}
         />

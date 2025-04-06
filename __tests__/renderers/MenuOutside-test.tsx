@@ -13,28 +13,28 @@ describe('MenuOutside', () => {
     optionsLayout: { width: 200, height: 100 }
   };
 
-    describe('renderer', () => {
-        it('should render component', () => {
-            const { output } = render(
-                <MenuOutside layouts={defaultLayouts}>
-                    <Text>Some text</Text>
+  describe('renderer', () => {
+    it('should render component', () => {
+      const { output } = render(
+        <MenuOutside layouts={defaultLayouts}>
+          <Text>Some text</Text>
 
-                    <Text>Other text</Text>
+          <Text>Other text</Text>
         </MenuOutside>
       );
 
-            expect(output.type).toEqual(View);
+      expect(output.type).toEqual(View);
 
-            expect(output.props.children).toEqual([<Text>Some text</Text>, <Text>Other text</Text>]);
+      expect(output.props.children).toEqual([<Text>Some text</Text>, <Text>Other text</Text>]);
     });
   });
 
-    describe('computePosition', () => {
-        it('should compute position outside of the screen', () => {
+  describe('computePosition', () => {
+    it('should compute position outside of the screen', () => {
       const windowLayout = { width: 400, height: 600 };
       const layouts = { windowLayout };
 
-            expect(computePosition(layouts)).toEqual({
+      expect(computePosition(layouts)).toEqual({
         top: 600,
         left: 400
       });

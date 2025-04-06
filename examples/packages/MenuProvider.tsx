@@ -10,7 +10,7 @@ import makeMenuRegistry from './menuRegistry';
 import MenuPlaceholder from './MenuPlaceholder';
 
 import { measure, isClassComponent } from './helpers';
-import { debug } from './logger.js';
+import { debug } from './logger';
 
 import MenuOutside from './renderers/MenuOutside';
 
@@ -122,7 +122,7 @@ export default class MenuProvider extends Component {
     }
     menu.instance._setOpened(true);
 
-        return this._notify();
+    return this._notify();
   }
 
   closeMenu() {
@@ -133,7 +133,7 @@ export default class MenuProvider extends Component {
       .filter((menu: any) => menu.instance._getOpened())
       .forEach((menu: any) => menu.instance._setOpened(false));
 
-        return this._notify();
+    return this._notify();
   }
 
   _invalidateTriggerLayouts() {
@@ -231,27 +231,27 @@ export default class MenuProvider extends Component {
     const { style, customStyles } = this.props;
     debug('render menu', this.isMenuOpen(), this._ownLayout);
     return (
-            <PopupMenuContext.Provider value={this.menuCtx}>
-                <View
+      <PopupMenuContext.Provider value={this.menuCtx}>
+        <View
           style={styles.flex1}
           onLayout={this._onLayout}
         >
-                    <View style={[styles.flex1, customStyles.menuContextWrapper, customStyles.menuProviderWrapper, style]}>
+          <View style={[styles.flex1, customStyles.menuContextWrapper, customStyles.menuProviderWrapper, style]}>
             {this.props.children}
           </View>
 
-                    <SafeAreaView
+          <SafeAreaView
             style={styles.safeArea}
             pointerEvents='box-none'
           >
-                        <View
+            <View
               style={styles.flex1}
               collapsable={false}
               pointerEvents='box-none'
               onLayout={this._onSafeAreaLayout}
             />
 
-                        <MenuPlaceholder
+            <MenuPlaceholder
               ctx={this}
               backdropStyles={customStyles.backdrop}
               ref={this._onPlaceholderRef}
@@ -300,7 +300,7 @@ export default class MenuProvider extends Component {
       this._menuRegistry.updateLayoutInfo(menu.name, { triggerLayout });
       this.backdropRef && this.backdropRef.open();
 
-            this._notify();
+      this._notify();
     });
   }
 
@@ -310,7 +310,7 @@ export default class MenuProvider extends Component {
     debug('got options layout', optionsLayout);
     this._menuRegistry.updateLayoutInfo(name, { optionsLayout });
 
-        this._notify();
+    this._notify();
   }
 
   _makeOptions() {

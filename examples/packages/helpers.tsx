@@ -62,7 +62,7 @@ export function lo(object: any, ...excluding: any[]) {
     for (var property in obj) {
       if (obj.hasOwnProperty(property)) {
         if (!property.startsWith('_') && !includes(exc, property)) {
-                    res[property] = withoutPrivate(obj[property]);
+          res[property] = withoutPrivate(obj[property]);
         }
       }
     }
@@ -103,13 +103,13 @@ export function deprecatedComponent(message: any, methods = []) {
         methods.forEach((name) => {
           // delegate methods to the component
 
-                    this[name] = (...args: any[]) => this.ref && this.ref[name](...args);
+          this[name] = (...args: any[]) => this.ref && this.ref[name](...args);
         });
       }
 
       render() {
         return (
-                    <Component
+          <Component
             {...this.props}
             ref={this.onRef}
           />

@@ -6,25 +6,25 @@ const data = new Array(100).fill(0).map((a, i) => ({ key: '' + i, value: 'item' 
 
 const MemuInFlatListExample = () => {
   return (
-        <MenuProvider style={styles.container}>
-            <FlatList
+    <MenuProvider style={styles.container}>
+      <FlatList
         data={data}
         renderItem={({ item }) => (
-                    <Menu onSelect={(value) => Alert.alert(value)}>
-                        <MenuTrigger text={'Select option ' + item.value} />
+          <Menu onSelect={(value) => Alert.alert(value)}>
+            <MenuTrigger text={'Select option ' + item.value} />
 
-                        <MenuOptions>
-                            <MenuOption
+            <MenuOptions>
+              <MenuOption
                 value='A'
                 text='A'
               />
 
-                            <MenuOption
+              <MenuOption
                 value='B'
                 text='B'
               />
 
-                            <MenuOption
+              <MenuOption
                 value='C'
                 text='C'
               />

@@ -12,32 +12,32 @@ describe('menuRegistry tests', () => {
     getName: () => 'menu2'
   };
 
-    it('should export function', () => {
+  it('should export function', () => {
     expect(makeMenuRegistry).to.be.a('function');
   });
 
-    it('should create an object', () => {
+  it('should create an object', () => {
     expect(makeMenuRegistry(new Map())).to.be.an('object');
   });
 
-    describe('getMenu', () => {
-        it('should return menu', () => {
+  describe('getMenu', () => {
+    it('should return menu', () => {
       const menus = new Map([['menu1', { instance: menu1 }]]);
       const registry = makeMenuRegistry(menus);
       expect(registry.getMenu('menu1').instance).to.eql(menu1);
     });
   });
 
-    describe('subscribe', () => {
-        it('should subscribe menu', () => {
+  describe('subscribe', () => {
+    it('should subscribe menu', () => {
       const registry = makeMenuRegistry();
       registry.subscribe(menu1);
       expect(registry.getMenu('menu1')).to.eql({ name: 'menu1', instance: menu1 });
     });
   });
 
-    describe('unsubscribe', () => {
-        it('should unsubscribe menu', () => {
+  describe('unsubscribe', () => {
+    it('should unsubscribe menu', () => {
       const menus = new Map([
         ['menu1', { name: 'menu1', instance: menu1 }],
         ['menu2', { name: 'menu2', instance: menu2 }]
@@ -49,8 +49,8 @@ describe('menuRegistry tests', () => {
     });
   });
 
-    describe('updateLayoutInfo', () => {
-        it('should update only optionsLayout', () => {
+  describe('updateLayoutInfo', () => {
+    it('should update only optionsLayout', () => {
       const menus = new Map([
         [
           'menu1',
@@ -72,7 +72,7 @@ describe('menuRegistry tests', () => {
       });
     });
 
-        it('should update only triggerLayout', () => {
+    it('should update only triggerLayout', () => {
       const menus = new Map([
         [
           'menu1',
@@ -94,7 +94,7 @@ describe('menuRegistry tests', () => {
       });
     });
 
-        it('should invalidate triggerLayout', () => {
+    it('should invalidate triggerLayout', () => {
       const menus = new Map([
         [
           'menu1',
@@ -115,8 +115,8 @@ describe('menuRegistry tests', () => {
     });
   });
 
-    describe('getAll', () => {
-        it('should return all registered menus with its associated data', () => {
+  describe('getAll', () => {
+    it('should return all registered menus with its associated data', () => {
       const menus = new Map([
         ['menu1', { name: 'menu1', instance: menu1 }],
         ['menu2', { name: 'menu2', instance: menu2, triggerLayout: 5 }]

@@ -1,4 +1,3 @@
-import './polyfills';
 
 import { deprecatedComponent } from './helpers';
 
@@ -24,7 +23,7 @@ const renderers = { ContextMenu, SlideInMenu, NotAnimatedContextMenu, Popover };
 const MenuContext = deprecatedComponent(
   'MenuContext is deprecated and it might be removed in future releases, use MenuProvider instead.',
 
-    ['openMenu', 'toggleMenu', 'closeMenu', 'isMenuOpen']
+  ['openMenu', 'toggleMenu', 'closeMenu', 'isMenuOpen']
 )(MenuProvider);
 
 export {

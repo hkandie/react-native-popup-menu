@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 
 import Backdrop from './Backdrop';
-import { debug } from './logger.js';
+import { debug } from './logger';
 
 export default class MenuPlaceholder extends Component {
   props: any;
@@ -26,8 +26,8 @@ export default class MenuPlaceholder extends Component {
       return null;
     }
     return (
-            <View style={styles.placeholder}>
-                <Backdrop
+      <View style={styles.placeholder}>
+        <Backdrop
           onPress={ctx._onBackdropPress}
           style={backdropStyles}
           ref={ctx.onBackdropRef}

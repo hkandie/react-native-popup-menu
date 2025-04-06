@@ -12,27 +12,27 @@ describe('SlideInMenu', () => {
     optionsLayout: { width: 50, height: 100 }
   };
 
-    it('should render component', () => {
-        const { output } = render(
-            <SlideInMenu layouts={defaultLayouts}>
-                <Text>Some text</Text>
+  it('should render component', () => {
+    const { output } = render(
+      <SlideInMenu layouts={defaultLayouts}>
+        <Text>Some text</Text>
 
-                <Text>Other text</Text>
+        <Text>Other text</Text>
       </SlideInMenu>
     );
 
-        expect(output.type).toEqual(Animated.View);
+    expect(output.type).toEqual(Animated.View);
 
-        expect(output.props.children).toEqual([<Text>Some text</Text>, <Text>Other text</Text>]);
+    expect(output.props.children).toEqual([<Text>Some text</Text>, <Text>Other text</Text>]);
   });
 
-    describe('computePosition', () => {
-        it('should compute position at the bottom', () => {
+  describe('computePosition', () => {
+    it('should compute position at the bottom', () => {
       const windowLayout = { width: 400, height: 600 };
       const optionsLayout = { width: 400, height: 100 };
       const layouts = { windowLayout, optionsLayout };
 
-            expect(computePosition(layouts)).toEqual({
+      expect(computePosition(layouts)).toEqual({
         top: 500,
         left: 0,
         right: 0

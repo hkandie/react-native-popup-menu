@@ -45,15 +45,15 @@ const ToolbarAndroid = () => false;
 const Image = () => false;
 const ScrollView = () => false;
 const Platform = {
-    select: jest.fn((o: any) => o.ios)
+  select: jest.fn((o: any) => o.ios)
 };
 const PixelRatio = {
   roundToNearestPixel: (n: any) => n
 };
 const BackHandler = {
-    addEventListener: jest.fn(),
+  addEventListener: jest.fn(),
 
-    removeEventListener: jest.fn()
+  removeEventListener: jest.fn()
 };
 
 ReactNative.View = View;

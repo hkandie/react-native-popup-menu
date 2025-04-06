@@ -9,25 +9,25 @@ const Backdrop = require('../src/Backdrop').default;
 const { createSpy } = jasmine;
 
 describe('Backdrop', () => {
-    it('should render component', () => {
-        const { output } = render(<Backdrop onPress={createSpy()} />);
+  it('should render component', () => {
+    const { output } = render(<Backdrop onPress={createSpy()} />);
 
-        expect(output.type).toEqual(TouchableWithoutFeedback);
+    expect(output.type).toEqual(TouchableWithoutFeedback);
     const view = output.props.children;
 
-        expect(view.type).toEqual(View);
+    expect(view.type).toEqual(View);
   });
 
-    it('should trigger on press event', () => {
+  it('should trigger on press event', () => {
     const onPressSpy = createSpy();
 
-        const { output } = render(<Backdrop onPress={onPressSpy} />);
+    const { output } = render(<Backdrop onPress={onPressSpy} />);
 
-        expect(output.type).toEqual(TouchableWithoutFeedback);
+    expect(output.type).toEqual(TouchableWithoutFeedback);
 
-        expect(typeof output.props.onPress).toEqual('function');
+    expect(typeof output.props.onPress).toEqual('function');
     output.props.onPress();
 
-        expect(onPressSpy).toHaveBeenCalled();
+    expect(onPressSpy).toHaveBeenCalled();
   });
 });

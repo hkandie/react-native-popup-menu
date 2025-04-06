@@ -46,14 +46,14 @@ export class MenuOption extends Component {
     if (disabled) {
       const disabledStyles = [defaultStyles.optionTextDisabled, customStyles.optionText];
       return (
-                <View style={[defaultStyles.option, customStyles.optionWrapper, style]}>
-                    {text ? <Text style={disabledStyles}>{text}</Text> : children}
+        <View style={[defaultStyles.option, customStyles.optionWrapper, style]}>
+          {text ? <Text style={disabledStyles}>{text}</Text> : children}
         </View>
       );
     }
     const rendered = (
-            <View style={[defaultStyles.option, customStyles.optionWrapper, style]}>
-                {text ? <Text style={customStyles.optionText}>{text}</Text> : children}
+      <View style={[defaultStyles.option, customStyles.optionWrapper, style]}>
+        {text ? <Text style={customStyles.optionText}>{text}</Text> : children}
       </View>
     );
     if (disableTouchable) {
@@ -61,7 +61,7 @@ export class MenuOption extends Component {
     } else {
       const { Touchable, defaultTouchableProps } = makeTouchable(customStyles.OptionTouchableComponent);
       return (
-                <Touchable
+        <Touchable
           testID={testID}
           onPress={() => this._onSelect()}
           {...defaultTouchableProps}

@@ -16,72 +16,72 @@ describe('MenuOptions', () => {
         })
       },
       menuRegistry: {
-                setOptionsCustomStyles: jest.fn()
+        setOptionsCustomStyles: jest.fn()
       }
     };
   }
 
-    it('should render component', () => {
+  it('should render component', () => {
     const { output } = render(
-            <MenuOptions>
-                <MenuOption />
+      <MenuOptions>
+        <MenuOption />
 
-                <MenuOption />
+        <MenuOption />
 
-                <MenuOption />
+        <MenuOption />
       </MenuOptions>,
       mockCtx()
     );
 
-        expect(output.type).toEqual(View);
+    expect(output.type).toEqual(View);
     const children = output.props.children;
 
-        expect(children.length).toEqual(3);
+    expect(children.length).toEqual(3);
     children.forEach((ch: any) => {
-            expect(ch.type).toBe(MenuOption);
+      expect(ch.type).toBe(MenuOption);
     });
   });
 
-    it('should accept optional (null) options', () => {
+  it('should accept optional (null) options', () => {
     const option = false;
     const { output } = render(
-            <MenuOptions>
-                <MenuOption />
+      <MenuOptions>
+        <MenuOption />
 
-                {option ? <MenuOption /> : null}
+        {option ? <MenuOption /> : null}
 
-                <MenuOption />
+        <MenuOption />
       </MenuOptions>,
       mockCtx()
     );
 
-        expect(output.type).toEqual(View);
+    expect(output.type).toEqual(View);
     const children = output.props.children;
 
-        expect(children.length).toEqual(3);
+    expect(children.length).toEqual(3);
   });
 
-    it('should work with user defined options', () => {
+  it('should work with user defined options', () => {
     const UserOption = (props: any) => (
-            <MenuOption
+      <MenuOption
         {...props}
         text='user-defined'
       />
     );
     const { output } = render(
-            <MenuOptions>
-                <UserOption />
+      <MenuOptions>
+        <UserOption />
       </MenuOptions>,
       mockCtx()
     );
 
-        expect(output.type).toEqual(View);
+    expect(output.type).toEqual(View);
     const children = output.props.children;
 
-        expect(children.type).toBe(UserOption);
+    expect(children.type).toBe(UserOption);
   });
 
-    it('should register custom styles', () => {
+  it('should register custom styles', () => {
     const customStyles = {
       optionsWrapper: { backgroundColor: 'red' },
       optionText: { color: 'blue' }
@@ -90,19 +90,19 @@ describe('MenuOptions', () => {
       optionsWrapper: { backgroundColor: 'blue' }
     };
     const ctx = mockCtx();
-        const { instance, renderer } = render(<MenuOptions customStyles={customStyles} />, ctx);
+    const { instance, renderer } = render(<MenuOptions customStyles={customStyles} />, ctx);
     instance.componentDidMount();
 
-        expect(ctx.menuRegistry.setOptionsCustomStyles).toHaveBeenLastCalledWith('menu1', customStyles);
+    expect(ctx.menuRegistry.setOptionsCustomStyles).toHaveBeenLastCalledWith('menu1', customStyles);
 
     renderer.render(
-            <MenuOptions
+      <MenuOptions
         customStyles={customStyles2}
         ctx={ctx}
       />
     );
     instance.componentDidUpdate();
 
-        expect(ctx.menuRegistry.setOptionsCustomStyles).toHaveBeenLastCalledWith('menu1', customStyles2);
+    expect(ctx.menuRegistry.setOptionsCustomStyles).toHaveBeenLastCalledWith('menu1', customStyles2);
   });
 });

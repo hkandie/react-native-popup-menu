@@ -54,15 +54,15 @@ const Demo = () => {
 
   if (selected) {
     return (
-            <View>
-                <View>
-                    <Pressable
+      <View>
+        <View>
+          <Pressable
             onPress={() => {
               setSelected(undefined);
             }}
             style={{ padding: 10, backgroundColor: '#ddd', marginBottom: 10 }}
           >
-                        <Text style={{ fontSize: 16, color: 'blue' }}>Back to selection</Text>
+            <Text style={{ fontSize: 16, color: 'blue' }}>Back to selection</Text>
           </Pressable>
         </View>
         {selected}
@@ -71,14 +71,14 @@ const Demo = () => {
   }
 
   return (
-        <View style={styles.container}>
-            <View>
-                <Text>Select example:</Text>
+    <View style={styles.container}>
+      <View>
+        <Text>Select example:</Text>
         {demos.map((demo, idx) => {
           const { Component, name } = demo;
           const url: string = name.replace(/\s+/g, '-').toLowerCase(); // Normalize the name for URL
           return (
-                        <Link
+            <Link
               key={idx}
               href={url} // This is just a placeholder, you can use a real route if needed
             >

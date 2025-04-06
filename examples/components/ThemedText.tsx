@@ -12,7 +12,7 @@ export function ThemedText({ style, lightColor, darkColor, type = 'default', ...
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
 
   return (
-        <Text
+    <Text
       style={[
         { color },
         type === 'default' ? styles.default : undefined,

@@ -5,51 +5,51 @@ import Menu, { MenuProvider, MenuOptions, MenuOption, MenuTrigger } from 'react-
 const TouchableExample = () => {
   const [Touchable, setTouchable] = React.useState<
     Button | typeof TouchableOpacity | typeof TouchableHighlight | typeof TouchableWithoutFeedback
-    >(Button);
+  >(Button);
   const buttonText = 'Select ' + (Touchable ? getDisplayName(Touchable) : 'default');
 
   return (
-        <MenuProvider style={{ flexDirection: 'column', padding: 30 }}>
-            <Menu onSelect={(Touchable: any) => setTouchable(Touchable)}>
-                <MenuTrigger
+    <MenuProvider style={{ flexDirection: 'column', padding: 30 }}>
+      <Menu onSelect={(Touchable: any) => setTouchable(Touchable)}>
+        <MenuTrigger
           customStyles={{
             TriggerTouchableComponent: Button,
             triggerTouchable: { title: 'Select (Custom Touchables)' }
           }}
         />
 
-                <MenuOptions>
-                    <MenuOption text='Default' />
+        <MenuOptions>
+          <MenuOption text='Default' />
 
-                    <MenuOption
+          <MenuOption
             text='TouchableOpacity'
             customStyles={{
-                            OptionTouchableComponent: TouchableOpacity,
+              OptionTouchableComponent: TouchableOpacity,
               optionTouchable: touchableOpacityProps
             }}
             value={TouchableOpacity}
           />
 
-                    <MenuOption
+          <MenuOption
             text='TouchableHighlight'
             customStyles={{
-                            OptionTouchableComponent: TouchableHighlight,
+              OptionTouchableComponent: TouchableHighlight,
               optionTouchable: touchableHighlightProps
             }}
             value={TouchableHighlight}
           />
 
-                    <MenuOption
+          <MenuOption
             text='TouchableWithoutFeedback'
             customStyles={{
-                            OptionTouchableComponent: TouchableWithoutFeedback
+              OptionTouchableComponent: TouchableWithoutFeedback
             }}
             value={TouchableWithoutFeedback}
           />
 
-                    <MenuOption
+          <MenuOption
             customStyles={{
-                            OptionTouchableComponent: Button,
+              OptionTouchableComponent: Button,
               optionTouchable: { title: 'Button' }
             }}
             value={Button}
@@ -57,28 +57,28 @@ const TouchableExample = () => {
         </MenuOptions>
       </Menu>
 
-            <Menu style={{ paddingTop: 30 }}>
-                <MenuTrigger
+      <Menu style={{ paddingTop: 30 }}>
+        <MenuTrigger
           customStyles={{
-                        TriggerTouchableComponent: Touchable,
+            TriggerTouchableComponent: Touchable,
             triggerTouchable: { title: buttonText }
           }}
           text={buttonText}
         />
 
-                <MenuOptions
+        <MenuOptions
           customStyles={{
-                        OptionTouchableComponent: TouchableOpacity,
+            OptionTouchableComponent: TouchableOpacity,
             optionTouchable: touchableOpacityProps
           }}
         >
-                    <MenuOption text='Option 1' />
+          <MenuOption text='Option 1' />
 
-                    <MenuOption text='Option 2' />
+          <MenuOption text='Option 2' />
 
-                    <MenuOption text='Option 3' />
+          <MenuOption text='Option 3' />
 
-                    <MenuOption text='Option 4' />
+          <MenuOption text='Option 4' />
         </MenuOptions>
       </Menu>
     </MenuProvider>

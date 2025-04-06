@@ -38,10 +38,10 @@ export default function makeMenuRegistry(menus = new Map()) {
     }
     const menu = Object.assign({}, menus.get(name));
     if (layouts.hasOwnProperty('triggerLayout')) {
-            menu.triggerLayout = layouts.triggerLayout;
+      menu.triggerLayout = layouts.triggerLayout;
     }
     if (layouts.hasOwnProperty('optionsLayout')) {
-            menu.optionsLayout = layouts.optionsLayout;
+      menu.optionsLayout = layouts.optionsLayout;
     }
     menus.set(name, menu);
   }

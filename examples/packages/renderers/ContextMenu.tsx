@@ -16,7 +16,7 @@ const axisPosition = (oDim: any, wDim: any, tPos: any, tDim: any) => {
     return tPos + tDim - oDim;
   }
   // compute center position
-  let pos = Math.round(tPos + (tDim / 2) - (oDim / 2));
+  let pos = Math.round(tPos + tDim / 2 - oDim / 2);
   // check top boundary
   if (pos < 0) {
     return 0;
@@ -52,10 +52,10 @@ export const fitPositionIntoSafeArea = (position: any, layouts: any) => {
   const { width: wWidth } = windowLayout;
   let { top, left, right } = position;
   top = fit(top, oHeight, saY, saY + saHeight);
-  left = fit(left, oWidth, saX, saX + saWidth)
-  right = fit(right, oWidth, wWidth - saX - saWidth, saX)
+  left = fit(left, oWidth, saX, saX + saWidth);
+  right = fit(right, oWidth, wWidth - saX - saWidth, saX);
   return { top, left, right };
-}
+};
 
 export const computePosition = (layouts: any, isRTL: any) => {
   const { windowLayout, triggerLayout, optionsLayout } = layouts;
@@ -76,7 +76,7 @@ export default class ContextMenu extends React.Component {
   constructor(props: any) {
     super(props);
     this.state = {
-      scaleAnim: new Animated.Value(0.1),
+      scaleAnim: new Animated.Value(0.1)
     };
   }
 
@@ -85,17 +85,17 @@ export default class ContextMenu extends React.Component {
       duration: OPEN_ANIM_DURATION,
       toValue: 1,
       easing: Easing.out(Easing.cubic),
-      useNativeDriver: USE_NATIVE_DRIVER,
+      useNativeDriver: USE_NATIVE_DRIVER
     }).start();
   }
 
   close() {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       Animated.timing(this.state.scaleAnim, {
         duration: CLOSE_ANIM_DURATION,
         toValue: 0,
         easing: Easing.in(Easing.cubic),
-        useNativeDriver: USE_NATIVE_DRIVER,
+        useNativeDriver: USE_NATIVE_DRIVER
       }).start(resolve);
     });
   }
@@ -103,12 +103,15 @@ export default class ContextMenu extends React.Component {
   render() {
     const { style, children, layouts, ...other } = this.props;
     const animation = {
-      transform: [ { scale: this.state.scaleAnim } ],
-      opacity: this.state.scaleAnim,
+      transform: [{ scale: this.state.scaleAnim }],
+      opacity: this.state.scaleAnim
     };
     const position = computePosition(layouts, I18nManager.isRTL);
     return (
-            <Animated.View {...other} style={[styles.options, style, animation, position]}>
+      <Animated.View
+        {...other}
+        style={[styles.options, style, animation, position]}
+      >
         {children}
       </Animated.View>
     );
@@ -133,6 +136,6 @@ export const styles = StyleSheet.create({
     shadowRadius: 4,
 
     // This will elevate the view on Android, causing shadow to be drawn.
-    elevation: 5,
-  },
+    elevation: 5
+  }
 });

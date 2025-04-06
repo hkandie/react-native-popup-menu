@@ -13,19 +13,19 @@ describe('NotAnimatedContextMenu', () => {
     optionsLayout: { width: 200, height: 100 }
   };
 
-    describe('renderer', () => {
-        it('should render component', () => {
-            const { output } = render(
-                <NotAnimatedContextMenu layouts={defaultLayouts}>
-                    <Text>Some text</Text>
+  describe('renderer', () => {
+    it('should render component', () => {
+      const { output } = render(
+        <NotAnimatedContextMenu layouts={defaultLayouts}>
+          <Text>Some text</Text>
 
-                    <Text>Other text</Text>
+          <Text>Other text</Text>
         </NotAnimatedContextMenu>
       );
 
-            expect(output.type).toEqual(View);
+      expect(output.type).toEqual(View);
 
-            expect(output.props.children).toEqual([<Text>Some text</Text>, <Text>Other text</Text>]);
+      expect(output.props.children).toEqual([<Text>Some text</Text>, <Text>Other text</Text>]);
     });
   });
 });

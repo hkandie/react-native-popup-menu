@@ -12,40 +12,40 @@ class BasicExampleComponent extends Component {
 
   render() {
     return (
-            <Menu
-                renderer={this.state.renderer}
+      <Menu
+        renderer={this.state.renderer}
         rendererProps={{ anchorStyle: styles.anchorStyle }}
         style={{ height: 50 }}
       >
-                <MenuTrigger
+        <MenuTrigger
           text='Select option'
-                    customStyles={triggerStyles}
+          customStyles={triggerStyles}
         />
 
-                <MenuOptions customStyles={optionsStyles}>
-                    <MenuOption
+        <MenuOptions customStyles={optionsStyles}>
+          <MenuOption
             text='Context Menu'
             onSelect={() => this.setState({ renderer: ContextMenu })}
           />
 
-                    <MenuOption
+          <MenuOption
             text='Slide-in Menu'
             onSelect={() => this.setState({ renderer: SlideInMenu })}
           />
 
-                    <MenuOption
+          <MenuOption
             text='Popover'
             onSelect={() => this.setState({ renderer: Popover })}
           />
 
-                    <MenuOption
+          <MenuOption
             text='Three (custom)'
             customStyles={optionStyles}
             onSelect={() => alert('Selected custom styled option')}
           />
 
-                    <MenuOption disabled={true}>
-                        <Text style={{ color: '#ccc' }}>Four (disabled)</Text>
+          <MenuOption disabled={true}>
+            <Text style={{ color: '#ccc' }}>Four (disabled)</Text>
           </MenuOption>
         </MenuOptions>
       </Menu>
@@ -54,8 +54,8 @@ class BasicExampleComponent extends Component {
 }
 
 const BasicExample = () => (
-    <MenuProvider customStyles={menuProviderStyles}>
-        <BasicExampleComponent />
+  <MenuProvider customStyles={menuProviderStyles}>
+    <BasicExampleComponent />
   </MenuProvider>
 );
 
