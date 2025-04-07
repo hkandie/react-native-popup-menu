@@ -4,6 +4,6 @@ export const CFG = {
 /**
  * Debug logger depending on `Menu.debug` static porperty.
  */
-export const debug = (...args: any[]) => {
+export const debug = (...args: object[]) => {
   CFG.debug && console.log('react-native-popup-menu', ...args);
 };

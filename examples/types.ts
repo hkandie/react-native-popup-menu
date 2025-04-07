@@ -55,7 +55,7 @@ declare module 'react-native-popup-menu' {
     children?: React.ReactNode;
   }
 
-  export class Menu extends React.Component<MenuProps> {
+  export class MenuInstance extends React.Component<MenuProps> {
     static debug: boolean;
     static setDefaultRenderer(renderer: Function): void;
     static setDefaultRendererProps(defaultRendererProps: any): void;
