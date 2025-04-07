@@ -1,7 +1,7 @@
 import React from 'react';
 
 export function withContext(Context: any, propName = 'context') {
-  return function wrap(Component: any) {
+  return function wrap(Component: React.ComponentType<any>) {
     class EnhanceContext extends React.Component {
       props: any;
       render() {
@@ -30,7 +30,7 @@ export function withContext(Context: any, propName = 'context') {
     const name = Component.displayName || Component.name || 'Component';
     const consumerName = Context.Consumer.displayName || Context.Consumer.name || 'Context.Consumer';
 
-    function enhanceForwardRef(props: any, ref: any) {
+    function enhanceForwardRef(props: any, ref: React.Ref<any>) {
       return (
         <EnhanceContext
           {...props}

@@ -1,12 +1,6 @@
 import React, { Component, useState } from 'react';
 import { Text, StyleSheet } from 'react-native';
-import Menu, {
-  MenuProvider,
-  MenuOptions,
-  MenuOption,
-  MenuTrigger,
-  renderers,
-} from 'react-native-popup-menu';
+import Menu, { MenuProvider, MenuOptions, MenuOption, MenuTrigger, renderers } from 'react-native-popup-menu';
 
 const { ContextMenu, SlideInMenu, Popover } = renderers;
 
@@ -69,26 +63,26 @@ export default BasicExample;
 
 const triggerStyles = {
   triggerText: {
-    color: 'white',
+    color: 'white'
   },
   triggerOuterWrapper: {
     backgroundColor: 'orange',
     padding: 5,
-    flex: 1,
+    flex: 1
   },
   triggerWrapper: {
     backgroundColor: 'blue',
     alignItems: 'center',
     justifyContent: 'center',
-    flex: 1,
+    flex: 1
   },
   triggerTouchable: {
     underlayColor: 'darkblue',
     activeOpacity: 70,
     style: {
-      flex: 1,
-    },
-  },
+      flex: 1
+    }
+  }
 };
 
 const optionsStyles = {
@@ -97,7 +91,7 @@ const optionsStyles = {
     padding: 5
   },
   optionsWrapper: {
-    backgroundColor: 'purple',
+    backgroundColor: 'purple'
   },
   optionWrapper: {
     backgroundColor: 'yellow',
@@ -105,42 +99,42 @@ const optionsStyles = {
   },
   optionTouchable: {
     underlayColor: 'gold',
-    activeOpacity: 70,
+    activeOpacity: 70
   },
   optionText: {
-    color: 'brown',
-  },
+    color: 'brown'
+  }
 };
 
 const optionStyles = {
   optionTouchable: {
     underlayColor: 'red',
-    activeOpacity: 40,
+    activeOpacity: 40
   },
   optionWrapper: {
     backgroundColor: 'pink',
-    margin: 5,
+    margin: 5
   },
   optionText: {
-    color: 'black',
-  },
+    color: 'black'
+  }
 };
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
-    padding: 30,
+    padding: 30
   },
   backdrop: {
     backgroundColor: 'red',
-    opacity: 0.5,
+    opacity: 0.5
   },
   anchorStyle: {
-    backgroundColor: 'blue',
-  },
+    backgroundColor: 'blue'
+  }
 });
 
 const menuProviderStyles = {
   menuProviderWrapper: styles.container,
-  backdrop: styles.backdrop,
+  backdrop: styles.backdrop
 };

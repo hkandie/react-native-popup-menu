@@ -69,7 +69,18 @@ export const computePosition = (layouts: any, isRTL: any) => {
   return fitPositionIntoSafeArea(position, layouts);
 };
 
-const ContextMenu = (props) => {
+interface ContextMenuProps {
+  style?: any;
+  children?: React.ReactNode;
+  layouts: {
+    windowLayout: { width: number; height: number; x: number; y: number };
+    triggerLayout: { width: number; height: number; x: number; y: number };
+    optionsLayout: { width: number; height: number; x: number; y: number };
+    safeAreaLayout?: { width: number; height: number; x: number; y: number };
+  };
+}
+
+const ContextMenu = (props: ContextMenuProps) => {
   const [scaleAnim, setScaleAnim] = React.useState(new Animated.Value(0.1));
   useEffect(() => {
     Animated.timing(scaleAnim, {
