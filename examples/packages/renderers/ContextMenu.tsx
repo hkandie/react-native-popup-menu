@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { I18nManager, Animated, Easing, StyleSheet, PixelRatio } from 'react-native';
 import { OPEN_ANIM_DURATION, CLOSE_ANIM_DURATION, USE_NATIVE_DRIVER } from '../constants';
 
@@ -69,55 +69,56 @@ export const computePosition = (layouts: any, isRTL: any) => {
   return fitPositionIntoSafeArea(position, layouts);
 };
 
-export default class ContextMenu extends React.Component {
-  props: any;
-  state: any;
+interface ContextMenuProps {
+  style?: any;
+  children?: React.ReactNode;
+  layouts: {
+    windowLayout: { width: number; height: number; x: number; y: number };
+    triggerLayout: { width: number; height: number; x: number; y: number };
+    optionsLayout: { width: number; height: number; x: number; y: number };
+    safeAreaLayout?: { width: number; height: number; x: number; y: number };
+  };
+}
 
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      scaleAnim: new Animated.Value(0.1)
-    };
-  }
-
-  componentDidMount() {
-    Animated.timing(this.state.scaleAnim, {
+const ContextMenu = (props: ContextMenuProps) => {
+  const [scaleAnim, setScaleAnim] = React.useState(new Animated.Value(0.1));
+  useEffect(() => {
+    Animated.timing(scaleAnim, {
       duration: OPEN_ANIM_DURATION,
       toValue: 1,
       easing: Easing.out(Easing.cubic),
       useNativeDriver: USE_NATIVE_DRIVER
     }).start();
-  }
+  }, []);
 
-  close() {
+  const close = () => {
     return new Promise((resolve) => {
-      Animated.timing(this.state.scaleAnim, {
+      Animated.timing(scaleAnim, {
         duration: CLOSE_ANIM_DURATION,
         toValue: 0,
         easing: Easing.in(Easing.cubic),
         useNativeDriver: USE_NATIVE_DRIVER
       }).start(resolve);
     });
-  }
+  };
+  const { style = {}, children, layouts, ...other } = props;
 
-  render() {
-    const { style, children, layouts, ...other } = this.props;
-    const animation = {
-      transform: [{ scale: this.state.scaleAnim }],
-      opacity: this.state.scaleAnim
-    };
-    const position = computePosition(layouts, I18nManager.isRTL);
-    return (
-      <Animated.View
-        {...other}
-        style={[styles.options, style, animation, position]}
-      >
-        {children}
-      </Animated.View>
-    );
-  }
-}
+  const animation = {
+    transform: [{ scale: scaleAnim }],
+    opacity: scaleAnim
+  };
+  const position = computePosition(layouts, I18nManager.isRTL);
+  return (
+    <Animated.View
+      {...other}
+      style={[styles.options, style, animation, position]}
+    >
+      {children}
+    </Animated.View>
+  );
+};
 
+export default ContextMenu;
 // public exports
 ContextMenu.computePosition = computePosition;
 ContextMenu.fitPositionIntoSafeArea = fitPositionIntoSafeArea;

@@ -1,4 +1,3 @@
-
 import { deprecatedComponent } from './helpers';
 
 import Menu from './Menu';

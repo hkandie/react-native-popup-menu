@@ -57,7 +57,7 @@ export default function makeMenuRegistry(menus = new Map()) {
   /**
    * Get `menu data` by name.
    */
-  function getMenu(name: any) {
+  function getMenu(name: string) {
     return menus.get(name);
   }
 

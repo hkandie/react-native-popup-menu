@@ -9,70 +9,78 @@ import { makeTouchable } from './helpers';
 
 import { withCtx } from './MenuProvider';
 
-export class MenuOption extends Component {
-  props: any;
+interface MenuOptionProps {
+  disabled?: boolean;
+  disableTouchable?: boolean;
+  onSelect?: (value: any) => boolean | void;
+  text?: string;
+  value?: any;
+  customStyles?: any;
+  testID?: string;
+  ctx?: any; // injected by withCtx
+  style?: any;
+  children?: React.ReactNode;
+}
 
-  _onSelect() {
-    const { value } = this.props;
-    const onSelect = this.props.onSelect || this._getMenusOnSelect();
+const MenuOption = (props: MenuOptionProps) => {
+  const onSelect = () => {
+    const { value, ctx } = props;
+    const onSelect = props.onSelect || ctx.menuActions._getOpenedMenu().instance.props.onSelect;
     const shouldClose = onSelect(value) !== false;
     debug('select option', value, shouldClose);
     if (shouldClose) {
-      this.props.ctx.menuActions.closeMenu();
+      ctx.menuActions.closeMenu();
     }
-  }
+  };
 
-  _getMenusOnSelect() {
-    const menu = this.props.ctx.menuActions._getOpenedMenu();
+  const _getMenusOnSelect = () => {
+    const menu = props.ctx.menuActions._getOpenedMenu();
     return menu.instance.props.onSelect;
-  }
+  };
 
-  _getCustomStyles() {
+  const getCustomStyles = () => {
     // FIXME react 16.3 workaround for ControlledExample!
-    const menu = this.props.ctx.menuActions._getOpenedMenu() || {};
+    const menu = props.ctx.menuActions._getOpenedMenu() || {};
     const { optionsCustomStyles } = menu;
     return {
       ...optionsCustomStyles,
-      ...this.props.customStyles
+      ...props.customStyles
     };
+  };
+  const { text, disabled, disableTouchable, children, style, testID } = props;
+  const customStyles = getCustomStyles();
+  if (text && React.Children.count(children) > 0) {
+    console.warn("MenuOption: Please don't use text property together with explicit children. Children are ignored.");
   }
-
-  render() {
-    const { text, disabled, disableTouchable, children, style, testID } = this.props;
-    const customStyles = this._getCustomStyles();
-    if (text && React.Children.count(children) > 0) {
-      console.warn("MenuOption: Please don't use text property together with explicit children. Children are ignored.");
-    }
-    if (disabled) {
-      const disabledStyles = [defaultStyles.optionTextDisabled, customStyles.optionText];
-      return (
-        <View style={[defaultStyles.option, customStyles.optionWrapper, style]}>
-          {text ? <Text style={disabledStyles}>{text}</Text> : children}
-        </View>
-      );
-    }
-    const rendered = (
+  if (disabled) {
+    const disabledStyles = [defaultStyles.optionTextDisabled, customStyles.optionText];
+    return (
       <View style={[defaultStyles.option, customStyles.optionWrapper, style]}>
-        {text ? <Text style={customStyles.optionText}>{text}</Text> : children}
+        {text ? <Text style={disabledStyles}>{text}</Text> : children}
       </View>
     );
-    if (disableTouchable) {
-      return rendered;
-    } else {
-      const { Touchable, defaultTouchableProps } = makeTouchable(customStyles.OptionTouchableComponent);
-      return (
-        <Touchable
-          testID={testID}
-          onPress={() => this._onSelect()}
-          {...defaultTouchableProps}
-          {...customStyles.optionTouchable}
-        >
-          {rendered}
-        </Touchable>
-      );
-    }
   }
-}
+  const rendered = (
+    <View style={[defaultStyles.option, customStyles.optionWrapper, style]}>
+      {text ? <Text style={customStyles.optionText}>{text}</Text> : children}
+    </View>
+  );
+  if (disableTouchable) {
+    return rendered;
+  } else {
+    const { Touchable, defaultTouchableProps } = makeTouchable(customStyles.OptionTouchableComponent);
+    return (
+      <Touchable
+        testID={testID}
+        onPress={() => onSelect()}
+        {...defaultTouchableProps}
+        {...customStyles.optionTouchable}
+      >
+        {rendered}
+      </Touchable>
+    );
+  }
+};
 
 MenuOption.propTypes = {
   disabled: PropTypes.bool,

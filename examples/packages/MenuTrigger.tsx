@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
 import { debug } from './logger';
 import { makeTouchable } from './helpers';
@@ -64,22 +63,6 @@ const MenuTrigger = ({
       </Touchable>
     </View>
   );
-};
-
-MenuTrigger.propTypes = {
-  disabled: PropTypes.bool,
-  text: PropTypes.string,
-  onPress: PropTypes.func,
-  onAlternativeAction: PropTypes.func,
-  customStyles: PropTypes.object,
-  triggerOnLongPress: PropTypes.bool,
-  testID: PropTypes.string
-};
-
-MenuTrigger.defaultProps = {
-  disabled: false,
-  customStyles: {},
-  testID: undefined
 };
 
 export default withCtx(MenuTrigger);
